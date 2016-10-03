@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">YeutSen</string>
+    <string name="skip">SKIP</string>
+    <string name="start">START</string>
+    <string name="begin">GOT IT</string>
+
+
+    <string name="slide_1_title">Hello Food!</string>
+    <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
+
+    <string name="slide_2_title">Movie Tickets</string>
+    <string name="slide_2_desc">Book movie tickets for your family and friends!</string>
+
+    <string name="slide_3_title">Great Discounts</string>
+    <string name="slide_3_desc">Best discounts on every single service we offer!</string>
+
+    <string name="slide_4_title">World Travel</string>
+    <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+
+
+
+
+    <!--Register-->
+    <string name="morning_time">MORNING WORK TIME</string>
+    <string name="afternoon_time">AFTERNOON WORK TIME</string>
+    <string name="morning_on">START TIME</string>
+    <string name="morning_off">END TIME</string>
+
+    <!--checkbox in day-->
+    <string name="text_sunday">Sunday</string>
+    <string name="text_monday">Monday</string>
+    <string name="text_tuesday">Tuesday</string>
+    <string name="text_wednesday">Wednesday</string>
+    <string name="text_thursday">Thursday</string>
+    <string name="text_friday">Friday</string>
+    <string name="text_saturday">Saturday</string>
+
+    <string name="working_day">Working Day</string>
+    <string name="confirm">SAVE</string>
+    <string name="Text">TEXT</string>
+
+
+    <!--Notification-->
+    <string name="new_message_notification">new message notification</string>
+    <string name="Ringtone">Ringtone</string>
+    <string name="Time_Notification">Time Notification</string>
+    <string name="vibrate">Vibrate</string>
+
+    <!--Button-->
+    <string name="Select">Select</string>
+    <string name="Cancel">Cancel</string>
+
+
+    <string name="Name">Name</string>
+
+
+</resources>
