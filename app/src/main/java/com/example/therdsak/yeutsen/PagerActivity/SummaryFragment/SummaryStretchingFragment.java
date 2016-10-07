@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.SettingFragment;
+package com.example.therdsak.yeutsen.PagerActivity.SummaryFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,13 +12,13 @@ import com.example.therdsak.yeutsen.R;
 /**
  * Created by Therdsak on 9/29/2016.
  */
-public class SettingSummaryFragment extends Fragment {
+public class SummaryStretchingFragment extends Fragment {
 
-    public static SettingSummaryFragment newInstance() {
+    public static SummaryStretchingFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        SettingSummaryFragment fragment = new SettingSummaryFragment();
+        SummaryStretchingFragment fragment = new SummaryStretchingFragment();
         fragment.setArguments(args);
         return fragment;
     }

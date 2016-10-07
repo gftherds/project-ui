@@ -28,7 +28,7 @@ public class ChoiceDialogFragment extends DialogFragment{
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
 
         dialog.setTitle("Please Select");
-        //    dialog.setPositiveButton("Cancel", new PositiveButtonClickListener());
+
 
         List<String> list = (List<String>)bundle.get(DATA);
         int position = bundle.getInt(SELECTED);
@@ -39,14 +39,7 @@ public class ChoiceDialogFragment extends DialogFragment{
         return dialog.create();
     }
 
-//    class PositiveButtonClickListener implements DialogInterface.OnClickListener
-//    {
-//        @Override
-//        public void onClick(DialogInterface dialog, int which)
-//        {
-//            dialog.dismiss();
-//        }
-//    }
+
 
     DialogInterface.OnClickListener selectItemListener = new DialogInterface.OnClickListener()
     {

@@ -30,7 +30,7 @@ import com.example.therdsak.yeutsen.R;
  * Created by Therdsak on 9/28/2016.
  */
 public class TutorialFragment extends Fragment {
-private static final String TAG = "TutorialFragment";
+    private static final String TAG = "TutorialFragment";
 
     public static TutorialFragment newInstance() {
 
@@ -40,11 +40,7 @@ private static final String TAG = "TutorialFragment";
         return fragment;
     }
 
-//    interface CallBack{
-//        void sendSignal();
-//    }
- //
-//    private CallBack callBack;
+
     private MyViewPageAdapter myViewPagerAdapter;
     PrefManagerTutorial prefManager;
     ImagePageAdapter mAdapter;
@@ -62,20 +58,20 @@ private static final String TAG = "TutorialFragment";
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            if(mAdapter.getCount() == page){
+            if (mAdapter.getCount() == page) {
 
-            }else{
+            } else {
                 page++;
             }
-            viewPager.setCurrentItem(page,true);
-            handler.postDelayed(this,delay);
+            viewPager.setCurrentItem(page, true);
+            handler.postDelayed(this, delay);
         }
     };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG,getActivity().toString());
+        Log.d(TAG, getActivity().toString());
         fm = getActivity().getSupportFragmentManager();
 
     }
@@ -88,26 +84,22 @@ private static final String TAG = "TutorialFragment";
         prefManager = new PrefManagerTutorial(getActivity());
 
         if (!prefManager.isFirstTimeLaunch()) {
-//            launchHomeScreen();
-//            getActivity().finish();
+
         }
-        // Making notification bar transparent
+
         if (Build.VERSION.SDK_INT >= 21) {
             getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN);
         }
 
-        getActivity().setContentView(R.layout.tutorial);
+//        getActivity().setContentView(R.layout.tutorial);
 
-        viewPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
-        dotsLayout = (LinearLayout) getActivity().findViewById(R.id.layoutDots);
-        btnSkip = (Button) getActivity().findViewById(R.id.btn_skip);
-        btnStart = (Button) getActivity().findViewById(R.id.btn_start);
+        viewPager = (ViewPager) view.findViewById(R.id.view_pager);
+        dotsLayout = (LinearLayout) view.findViewById(R.id.layoutDots);
+        btnSkip = (Button) view.findViewById(R.id.btn_skip);
+        btnStart = (Button) view.findViewById(R.id.btn_start);
 
         btnSkip.setVisibility(View.INVISIBLE);
 
-
-        //layouts of all welcome sliders
-        //add few more layouts if you want
         layouts = new int[]{
                 R.layout.slide1,
                 R.layout.slide2,
@@ -133,21 +125,14 @@ private static final String TAG = "TutorialFragment";
                     viewPager.setCurrentItem(layouts.length - 1);
                 } else {
                     launchHomeScreen();
-//                    FragmentManager fm = getFragmentManager();
-//                    Fragment f = RegisterFragment.newInstance();
-//                    fm.beginTransaction().replace(R.id.fragment_container,f).commit();
                 }
             }
-
         });
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 launchHomeScreen();
-//                callBack.sendSignal();
-//                Fragment f = RegisterFragment.newInstance();
-//                fm.beginTransaction().replace(R.id.fragment_container,f).commit();
             }
         });
 
@@ -195,25 +180,13 @@ private static final String TAG = "TutorialFragment";
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-
-
         Fragment f = RegisterFragment.newInstance();
-               fm.beginTransaction().replace(R.id.fragment_container1,f).commit();
-
-//        fm = getFragmentManager();
-//        Fragment OldFragment = fm.findFragmentByTag("transaction");
-//        Fragment NewFragment = RegisterFragment.newInstance();
-//
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.remove(OldFragment);
-//        ft.add(R.id.fragment_container,NewFragment,"stats");
-//        ft.commit();
-
-//        startActivity(new );
-
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, f)
+                .commit();
     }
 
-    //viewpager change listener
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
@@ -264,7 +237,7 @@ private static final String TAG = "TutorialFragment";
     @Override
     public void onResume() {
         super.onResume();
-        handler.postDelayed(runnable,delay );
+        handler.postDelayed(runnable, delay);
 
     }
 

@@ -18,10 +18,6 @@ import com.example.therdsak.yeutsen.R;
  */
 public class SplashFragment extends Fragment {
 
-//    private static long SPLASH_TIME_OUT = 3000;
-//    Handler handler;
-//    Runnable runnable;
- //   long delay_time;
 
     public static SplashFragment newInstance() {
         
@@ -44,21 +40,12 @@ public class SplashFragment extends Fragment {
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
                             View.SYSTEM_UI_FLAG_FULLSCREEN
             );
-            // Set status bar color
-            // ! Can also be set in style resource (/res/values-v21/styles.xml)
-            // <item name="android:statusBarColor">@android:color/transparent</item>
+
             window.setStatusBarColor(Color.TRANSPARENT);
         }
 
-//        handler = new Handler();
-//        runnable = new Runnable() {
-//
-//            @Override
-//            public void run() {
-//
-//            }
-//        };
-//
+
+
     }
 
     @Nullable
@@ -69,21 +56,8 @@ public class SplashFragment extends Fragment {
 
         return view;
     }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        delay_time = SPLASH_TIME_OUT;
-//        handler.postDelayed(runnable,delay_time);
-//        SPLASH_TIME_OUT = System.currentTimeMillis();
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        handler.removeCallbacks(runnable);
-//        SPLASH_TIME_OUT = delay_time - (System.currentTimeMillis() - SPLASH_TIME_OUT);
-//    }
+
+
 }
 
 

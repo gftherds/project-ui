@@ -2,14 +2,12 @@ package com.example.therdsak.yeutsen.MainActivity;
 
 import android.graphics.Color;
 import android.os.Build;
-import android.os.CountDownTimer;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -45,68 +43,23 @@ public class MainActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
 
-//        fm = getSupportFragmentManager();
+
         Log.d(TAG, "onCreate: fragment manager: " + fm);
-
-        Fragment f = SplashFragment.newInstance();
+         Fragment f = SplashFragment.newInstance();
         fm.beginTransaction().add(R.id.fragment_container, f).commit();
-
-
-
+        test();
+    }
+    private void test() {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                //Second fragment after 5 seconds appears
                 Fragment f1 = TutorialFragment.newInstance();
-                fm.beginTransaction().replace(R.id.fragment_container,f1).commit();
+                fm.beginTransaction().replace(R.id.fragment_container, f1).commit();
             }
         }, 5000);
 
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                //Second fragment after 5 seconds appears
-//                Fragment f1 = TutorialFragment.newInstance();
-//                gm.beginTransaction().add(R.id.fragment_container, f1).commit();
-//            }
-//        }, 5000);
-//        test();
-//
-
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//        f = TutorialFragment.newInstance();
-//        fm.beginTransaction().replace(R.id.fragment_container,f).commit();
-
-//        f = RegisterFragment.newInstance();
-//        fm.beginTransaction().replace(R.id.fragment_container,f).commit();
-
     }
-
-
-//    @Override
-//    public void sendSignal() {
-//        Fragment f1 = RegisterFragment.newInstance();
-//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f1).commit();
-//    }
-//
-//    private void test() {
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                //Second fragment after 5 seconds appears
-//                Fragment f1 = RegisterFragment.newInstance();
-//                fm.beginTransaction().replace(R.id.fragment_container, f1).commit();
-//            }
-//        }, 5000);
-
-    }
-//}
-
+}
 

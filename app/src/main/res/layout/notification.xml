@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/notification_id"
 
     >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_notification"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        style="@style/Widget.MyApp.ActionBar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal">
 
     <TextView
         android:id="@+id/setting_stretching_text_message"
@@ -63,6 +78,6 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/setting_stretching_text_time_style_ring_tone"/>
 
-
-
 </RelativeLayout>
+
+</LinearLayout>

@@ -1,33 +1,27 @@
-package com.example.therdsak.yeutsen.PagerActivity.SettingFragment;
+package com.example.therdsak.yeutsen.PagerActivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.support.v4.app.FragmentManager;
 
-import com.example.therdsak.yeutsen.PagerActivity.ChoiceDialogFragment;
 import com.example.therdsak.yeutsen.R;
 
 import java.util.ArrayList;
 
 /**
- * Created by Therdsak on 9/29/2016.
+ * Created by Therdsak on 10/5/2016.
  */
-public class SettingNotificationFragment extends Fragment{
+public class SettingNotificationFragment extends Fragment {
 
-
-
-    private static final String TAG = "Notification" ;
-    TextView TimeText;
-    TextView Ringtone;
-
-
-
-
+    Toolbar toolbarNotification;
     public static SettingNotificationFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -36,6 +30,13 @@ public class SettingNotificationFragment extends Fragment{
         fragment.setArguments(args);
         return fragment;
     }
+    private static final String TAG = "Notification" ;
+    TextView TimeText;
+    TextView Ringtone;
+
+
+
+
 
     @Nullable
     @Override
@@ -43,11 +44,17 @@ public class SettingNotificationFragment extends Fragment{
         Log.d(TAG, "onCreateView: ");
         View view = inflater.inflate(R.layout.notification,container,false);
 
+        toolbarNotification = (Toolbar) view.findViewById(R.id.toolbar_notification);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbarNotification);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Notification");
+
+
+
         TimeText = (TextView) view.findViewById(R.id.setting_stretching_text_time_style_ring_tone);
         TimeText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                android.support.v4.app.FragmentManager manager = getFragmentManager();
+                FragmentManager manager = getFragmentManager();
                 ChoiceDialogFragment dialog = new ChoiceDialogFragment();
 
                 Bundle bundle = new Bundle();
@@ -63,7 +70,7 @@ public class SettingNotificationFragment extends Fragment{
         Ringtone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                android.support.v4.app.FragmentManager manager = getFragmentManager();
+                FragmentManager manager = getFragmentManager();
                 ChoiceDialogFragment dialog = new ChoiceDialogFragment();
 
                 Bundle bundle = new Bundle();
@@ -106,5 +113,8 @@ public class SettingNotificationFragment extends Fragment{
         ret_val.add("45 min");
         return ret_val;
     }
-}
 
+
+
+
+}

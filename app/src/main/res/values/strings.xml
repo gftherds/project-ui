@@ -56,6 +56,17 @@
 
 
     <string name="Name">Name</string>
+    <string name="set_time">Set Time</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="notification">Notification</string>
+    <string name="about">About</string>
+    <string name="summary">Summary</string>
+    <string name="pirates">15 minutes</string>
+    <string name="ninjas">30 minutes</string>
+    <string name="notification_name">Time Alert</string>
+    <string name="jaja">45 minutes</string>
+    <string name="Slove">Slove</string>
+    <string name="Solve">Solve</string>
 
 
 </resources>
