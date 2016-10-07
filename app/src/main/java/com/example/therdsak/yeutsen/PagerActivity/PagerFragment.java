@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import com.example.therdsak.yeutsen.MainActivity.TutorialFragment;
 import com.example.therdsak.yeutsen.PagerActivity.ListFragment.ListStretchingFragment;
 import com.example.therdsak.yeutsen.PagerActivity.ShowFragment.ShowStretchingFragment;
+import com.example.therdsak.yeutsen.PagerActivity.StretchListFragment.StretchListFragment;
 import com.example.therdsak.yeutsen.PagerActivity.SummaryFragment.SummaryStretchingFragment;
 import com.example.therdsak.yeutsen.R;
 
@@ -150,7 +151,8 @@ public class PagerFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
         adapter.addFragment(new ShowStretchingFragment(), "ONE");
-        adapter.addFragment(new ListStretchingFragment(), "TWO");
+//        adapter.addFragment(new ListStretchingFragment(), "TWO");
+        adapter.addFragment(new StretchListFragment(), "TWO");
         adapter.addFragment(new SummaryStretchingFragment(), "THREE");
         viewPager.setAdapter(adapter);
 
