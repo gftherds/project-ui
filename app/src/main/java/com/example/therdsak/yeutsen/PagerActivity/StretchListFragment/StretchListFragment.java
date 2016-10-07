@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class StretchListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private ArrayList<HashMap<String, String>> stretchList;
+    private StretchAdapter mStretchAdapter;
 
     private int gridSize = 2;
     private String stretchPhotoFolder = "test_photo";
@@ -68,6 +70,7 @@ public class StretchListFragment extends Fragment {
         }
     }
 
+
     private String jsonFileToString(String jsonFileName){
         String jsonString;
         try{
@@ -87,7 +90,7 @@ public class StretchListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         stretchList = new ArrayList<>();
-
+        mStretchAdapter =  new StretchAdapter(stretchList);
         jsonStringToList(jsonFileToString(jsonFileName));
     }
 
@@ -98,7 +101,7 @@ public class StretchListFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.stretch_recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), gridSize));
-        mRecyclerView.setAdapter(new StretchAdapter(stretchList));
+        mRecyclerView.setAdapter(mStretchAdapter);
         return view;
     }
 
@@ -117,7 +120,7 @@ public class StretchListFragment extends Fragment {
                     StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.tabs, fragment)
+                            .replace(R.id.fragment_container5 ,fragment)
                             .addToBackStack(null)
                             .commit();
                 }

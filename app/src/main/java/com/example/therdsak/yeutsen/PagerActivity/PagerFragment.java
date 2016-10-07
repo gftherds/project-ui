@@ -32,7 +32,9 @@ import java.util.List;
  */
 public class PagerFragment extends Fragment {
 
-    public static PagerFragment newInstance() {
+
+
+   public static PagerFragment newInstance() {
 
         Bundle args = new Bundle();
 
@@ -109,6 +111,7 @@ public class PagerFragment extends Fragment {
                         tabLayout.getTabAt(1).setIcon(R.drawable.list_white);
                         tabLayout.getTabAt(2).setIcon(R.drawable.summary_color);
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ListItem");
+
 //                        getSupportActionBar().setTitle("ListItem");
                         break;
                     case 2:
@@ -190,8 +193,7 @@ public class PagerFragment extends Fragment {
     }
 
 
-
-        @Override
+    @Override
     public void onCreateOptionsMenu(Menu menu , MenuInflater inflater) {
         super.onCreateOptionsMenu(menu,inflater);
             inflater.inflate(R.menu.menu_main,menu);
