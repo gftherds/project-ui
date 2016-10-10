@@ -2,6 +2,7 @@ package com.example.therdsak.yeutsen.PagerActivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 
 import com.example.therdsak.yeutsen.MainActivity.TutorialFragment;
 import com.example.therdsak.yeutsen.PagerActivity.ListFragment.ListStretchingFragment;
@@ -48,6 +50,7 @@ public class PagerFragment extends Fragment {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private AppBarLayout appBarLayout;
     FragmentManager fm;
 
     private int[] tabIcons = {
@@ -78,6 +81,8 @@ public class PagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.maintabbar,container,false);
 
+        appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar_layout);
+
 //        fm = getSupportFragmentManager();
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -104,14 +109,16 @@ public class PagerFragment extends Fragment {
                         tabLayout.getTabAt(0).setIcon(R.drawable.home_selected);
                         tabLayout.getTabAt(1).setIcon(R.drawable.list_unselected);
                         tabLayout.getTabAt(2).setIcon(R.drawable.summary_unselected);
+                        appBarLayout.setExpanded(true);
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Title");
+
                         break;
                     case 1:
                         tabLayout.getTabAt(0).setIcon(R.drawable.home_unselected);
                         tabLayout.getTabAt(1).setIcon(R.drawable.list_selected);
                         tabLayout.getTabAt(2).setIcon(R.drawable.summary_unselected);
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ListItem");
-
+                        appBarLayout.setExpanded(true);
 //                        getSupportActionBar().setTitle("ListItem");
                         break;
                     case 2:
@@ -120,6 +127,7 @@ public class PagerFragment extends Fragment {
                         tabLayout.getTabAt(1).setIcon(R.drawable.list_unselected);
                         tabLayout.getTabAt(2).setIcon(R.drawable.summary_selected);
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Summary");
+                        appBarLayout.setExpanded(true);
 //                        getSupportActionBar().setTitle("Summary");
                         break;
                 }

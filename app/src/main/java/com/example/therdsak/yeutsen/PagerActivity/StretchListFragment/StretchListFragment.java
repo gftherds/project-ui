@@ -1,5 +1,6 @@
 package com.example.therdsak.yeutsen.PagerActivity.StretchListFragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -117,12 +118,15 @@ public class StretchListFragment extends Fragment {
             mStretchPhoto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container5 ,fragment)
-                            .addToBackStack(null)
-                            .commit();
+//                    StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname);
+//                    FragmentManager fragmentManager = getFragmentManager();
+//                    fragmentManager.beginTransaction()
+//                            .replace(R.id.fragment_container5 ,fragment)
+//                            .addToBackStack(null)
+//                            .commit();
+
+                    Intent intent = StretchInfoActivity.newIntent(getActivity(), sname);
+                    getActivity().startActivity(intent);
                 }
             });
         }

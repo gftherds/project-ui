@@ -3,6 +3,8 @@ package com.example.therdsak.yeutsen.PagerActivity.StretchListFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import com.example.therdsak.yeutsen.R;
  */
 
 public class StretchInfoFragment extends Fragment {
+    private Toolbar stretchToolbar;
     private ImageView stretchPhoto;
     private TextView stretchName;
     private TextView stretchInfo;
@@ -34,6 +37,7 @@ public class StretchInfoFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         stretchNameString = getArguments().getString("sname");
+
     }
 
     @Nullable
@@ -45,6 +49,8 @@ public class StretchInfoFragment extends Fragment {
         stretchName = (TextView) view.findViewById(R.id.stretch_info_name);
         stretchName.setText(stretchNameString);
         stretchInfo = (TextView) view.findViewById(R.id.stretch_info);
+        stretchToolbar = (Toolbar) view.findViewById(R.id.toolbar_notification);
+        stretchToolbar.setTitle(stretchNameString);
 
         Glide.with(getActivity()).load(R.drawable.giphy).asGif().into(stretchPhoto);
 
