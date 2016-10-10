@@ -101,24 +101,24 @@ public class PagerFragment extends Fragment {
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        tabLayout.getTabAt(0).setIcon(R.drawable.home_white);
-                        tabLayout.getTabAt(1).setIcon(R.drawable.list_color);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.summary_color);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.home_selected);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.list_unselected);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.summary_unselected);
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Title");
                         break;
                     case 1:
-                        tabLayout.getTabAt(0).setIcon(R.drawable.home_color);
-                        tabLayout.getTabAt(1).setIcon(R.drawable.list_white);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.summary_color);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.home_unselected);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.list_selected);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.summary_unselected);
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ListItem");
 
 //                        getSupportActionBar().setTitle("ListItem");
                         break;
                     case 2:
 
-                        tabLayout.getTabAt(0).setIcon(R.drawable.home_color);
-                        tabLayout.getTabAt(1).setIcon(R.drawable.list_color);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.summary_white);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.home_unselected);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.list_unselected);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.summary_selected);
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Summary");
 //                        getSupportActionBar().setTitle("Summary");
                         break;
