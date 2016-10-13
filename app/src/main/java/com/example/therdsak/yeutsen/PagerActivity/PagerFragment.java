@@ -89,7 +89,7 @@ public class PagerFragment extends Fragment {
 
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-
+        viewPager.setOffscreenPageLimit(3);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();

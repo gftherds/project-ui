@@ -6,6 +6,7 @@ import android.database.CursorWrapper;
 import com.example.therdsak.yeutsen.Database.StretchLogDBSchama.*;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by Noppharat on 10/10/2016.
@@ -18,13 +19,12 @@ public class StretchLogCursorWrapper extends CursorWrapper {
     }
 
     public StretchLog getStretchLog(){
-        int id = getInt(getColumnIndex(StretchLogTable.Cols.ID));
+        String id = getString(getColumnIndex(StretchLogTable.Cols.ID));
         String userid = getString(getColumnIndex(StretchLogTable.Cols.USERID));
         long date = getLong(getColumnIndex(StretchLogTable.Cols.DATE));
         int stretchId = getInt(getColumnIndex(StretchLogTable.Cols.STRETCHID));
 
-        StretchLog stretchLog = new StretchLog();
-        stretchLog.setId(id);
+        StretchLog stretchLog = new StretchLog(UUID.fromString(id));
         stretchLog.setUserid(userid);
         stretchLog.setDate(new Date(date));
         stretchLog.setStretchid(stretchId);

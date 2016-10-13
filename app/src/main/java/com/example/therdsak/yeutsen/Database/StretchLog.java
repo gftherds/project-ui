@@ -1,22 +1,32 @@
 package com.example.therdsak.yeutsen.Database;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by Noppharat on 10/10/2016.
  */
 
 public class StretchLog {
-    private Integer id;
+    private UUID id;
     private String userid;
     private Date date;
     private Integer stretchid;
 
-    public Integer getId() {
+    public StretchLog(){
+        this.id = UUID.randomUUID();
+    }
+
+    public StretchLog(UUID id){
+        this.id = id;
+        date = new Date();
+    }
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

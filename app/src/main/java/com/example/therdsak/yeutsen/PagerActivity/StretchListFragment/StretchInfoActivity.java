@@ -14,15 +14,17 @@ import com.example.therdsak.yeutsen.PagerActivity.SingleFragmentActivity;
 
 public class StretchInfoActivity extends SingleFragmentActivity {
 
-    public static Intent newIntent(Context context, String sname){
+    public static Intent newIntent(Context context, String sname, String spath){
         Intent intent = new Intent(context, StretchInfoActivity.class);
         intent.putExtra("sname", sname);
+        intent.putExtra("spath", spath);
         return intent;
     }
 
     protected Fragment onCreateFragment() {
         String sname = (String) getIntent().getSerializableExtra("sname");
-        Fragment fragment = StretchInfoFragment.newInstance(sname);
+        String spath = (String) getIntent().getSerializableExtra("spath");
+        Fragment fragment = StretchInfoFragment.newInstance(sname, spath);
         return fragment;
     }
 }

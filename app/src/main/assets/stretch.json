@@ -2,45 +2,87 @@
     "stretch":[
         {
             "sid":0,
-            "sname":"Test0",
+            "sname":"stretch_01",
             "sinfo":"",
-            "spath":"test_0.jpg"
+            "spath":"stretch_01.gif"
         },
         {
             "sid":1,
-            "sname":"Test1",
+            "sname":"stretch_02",
             "sinfo":"",
-            "spath":"test_1.jpg"
+            "spath":"stretch_02.gif"
         },
         {
             "sid":2,
-            "sname":"Test2",
+            "sname":"stretch_03",
             "sinfo":"",
-            "spath":"test_2.jpg"
+            "spath":"stretch_03.gif"
         },
         {
             "sid":3,
-            "sname":"Test3",
+            "sname":"stretch_04",
             "sinfo":"",
-            "spath":"test_3.jpg"
+            "spath":"stretch_04.gif"
         },
         {
             "sid":4,
-            "sname":"Test4",
+            "sname":"stretch_05",
             "sinfo":"",
-            "spath":"test_4.jpg"
+            "spath":"stretch_05.gif"
         },
         {
             "sid":5,
-            "sname":"Test5",
+            "sname":"stretch_06",
             "sinfo":"",
-            "spath":"test_5.jpg"
+            "spath":"stretch_06.gif"
         },
         {
             "sid":6,
-            "sname":"Test6",
+            "sname":"stretch_07",
             "sinfo":"",
-            "spath":"test_6.jpg"
+            "spath":"stretch_07.gif"
+        },
+        {
+            "sid":7,
+            "sname":"stretch_08",
+            "sinfo":"",
+            "spath":"stretch_08.gif"
+        },
+        {
+            "sid":8,
+            "sname":"stretch_09",
+            "sinfo":"",
+            "spath":"stretch_09.gif"
+        },
+        {
+            "sid":9,
+            "sname":"stretch_10",
+            "sinfo":"",
+            "spath":"stretch_10.gif"
+        },
+        {
+            "sid":10,
+            "sname":"stretch_11",
+            "sinfo":"",
+            "spath":"stretch_11.gif"
+        },
+        {
+            "sid":11,
+            "sname":"stretch_12",
+            "sinfo":"",
+            "spath":"stretch_12.gif"
+        },
+        {
+            "sid":12,
+            "sname":"stretch_13",
+            "sinfo":"",
+            "spath":"stretch_13.gif"
+        },
+        {
+            "sid":13,
+            "sname":"stretch_14",
+            "sinfo":"",
+            "spath":"stretch_14.gif"
         }
     ],
     "version":"1.0"

@@ -23,6 +23,10 @@
 
         </activity>
 
+        <activity android:name=".PagerActivity.GraphFragment.GraphActivity" android:screenOrientation="landscape">
+
+        </activity>
+
     </application>
 
 </manifest>

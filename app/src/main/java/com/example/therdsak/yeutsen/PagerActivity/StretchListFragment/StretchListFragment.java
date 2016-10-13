@@ -7,11 +7,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +37,7 @@ public class StretchListFragment extends Fragment {
     private StretchAdapter mStretchAdapter;
 
     private int gridSize = 2;
-    private String stretchPhotoFolder = "test_photo";
+    private String stretchPhotoFolder = "stretch";
     private String jsonFileName = "stretch.json";
 
     public static StretchListFragment newInstance(){
@@ -110,6 +108,7 @@ public class StretchListFragment extends Fragment {
         private ImageView mStretchPhoto;
         private TextView mStretchName;
         private String sname;
+        private String spath;
 
         public StretchHolder(View itemView) {
             super(itemView);
@@ -125,7 +124,7 @@ public class StretchListFragment extends Fragment {
 //                            .addToBackStack(null)
 //                            .commit();
 
-                    Intent intent = StretchInfoActivity.newIntent(getActivity(), sname);
+                    Intent intent = StretchInfoActivity.newIntent(getActivity(), sname , spath);
                     getActivity().startActivity(intent);
                 }
             });
@@ -142,8 +141,9 @@ public class StretchListFragment extends Fragment {
             mStretchName.setText(stringName);
         }
 
-        protected void setSName(String sname){
+        protected void setStretch(String sname, String spath){
             this.sname = sname;
+            this.spath = spath;
         }
     }
 
@@ -171,7 +171,7 @@ public class StretchListFragment extends Fragment {
                 holder.bindDrawable(drawable);
             }
             holder.setStretchName(_stretchList.get(position).get("sname"));
-            holder.setSName(_stretchList.get(position).get("sname"));
+            holder.setStretch(_stretchList.get(position).get("sname"), _stretchList.get(position).get("spath"));
         }
 
         @Override
