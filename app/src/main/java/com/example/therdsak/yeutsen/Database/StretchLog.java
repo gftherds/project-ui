@@ -11,7 +11,7 @@ public class StretchLog {
     private UUID id;
     private String userid;
     private Date date;
-    private Integer stretchid;
+    private int stretchid;
 
     public StretchLog(){
         this.id = UUID.randomUUID();
@@ -46,7 +46,7 @@ public class StretchLog {
         this.date = date;
     }
 
-    public Integer getStretchid() {
+    public int getStretchid() {
         return stretchid;
     }
 

@@ -26,6 +26,8 @@ public class ShowStretchingFragment extends Fragment{
 
     private Button addButton;
 
+    private StretchLog stretchLog;
+
 
     public static ShowStretchingFragment newInstance() {
 
@@ -34,6 +36,15 @@ public class ShowStretchingFragment extends Fragment{
         ShowStretchingFragment fragment = new ShowStretchingFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        stretchLog = new StretchLog();
+        stretchLog.setUserid("0");
+        stretchLog.setStretchid(1);
+        stretchLog.setDate(new Date());
     }
 
     @Nullable
@@ -45,10 +56,7 @@ public class ShowStretchingFragment extends Fragment{
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StretchLog stretchLog = new StretchLog();
-                stretchLog.setUserid("0");
-                stretchLog.setStretchid(1);
-                stretchLog.setDate(new Date());
+
 
                 StretchLogLab.getInstance(getActivity()).insertStretchLog(stretchLog);
                 Log.d(TAG, "onClick: ID : " + stretchLog.getId() + " USERID :  " + stretchLog.getUserid() + " DATE : " + stretchLog.getDate() + " STRETCHID : "  + stretchLog.getStretchid());
