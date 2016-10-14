@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity;
+package com.example.therdsak.yeutsen.pageractivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

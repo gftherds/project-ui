@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity;
+package com.example.therdsak.yeutsen.pageractivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
-import com.example.therdsak.yeutsen.MainActivity.RegisterFragment;
+import com.example.therdsak.yeutsen.mainactivity.RegisterFragment;
 import com.example.therdsak.yeutsen.R;
 
 /**
@@ -60,14 +60,10 @@ public class SettingSetTimeFragment extends Fragment {
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment f6 = PagerFragment.newInstance();
+                Fragment f6 = new PagerFragment();
                 fm.beginTransaction().replace(R.id.fragment_container5,f6).commit();
-
-
             }
         });
-
-
         return view;
     }
 }

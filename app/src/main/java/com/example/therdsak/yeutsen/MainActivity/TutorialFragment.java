@@ -1,7 +1,6 @@
-package com.example.therdsak.yeutsen.MainActivity;
+package com.example.therdsak.yeutsen.mainactivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
@@ -178,11 +176,10 @@ public class TutorialFragment extends Fragment {
             dots[currentPage].setTextColor(colorActive[currentPage]);
     }
 
-    private void launchHomeScreen() {
+    public void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
         Fragment f = RegisterFragment.newInstance();
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
+        fm.beginTransaction()
                 .replace(R.id.fragment_container, f)
                 .commit();
     }

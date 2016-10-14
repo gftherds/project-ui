@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchListFragment;
+package com.example.therdsak.yeutsen.pageractivity.stretchlistfragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,10 +15,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.pageractivity.PagerFragment;
+import com.example.therdsak.yeutsen.pageractivity.VisibleFragment;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,6 +39,7 @@ import java.util.HashMap;
  */
 
 public class StretchListFragment extends Fragment {
+    private static final String TAG = "StretchListFragment";
 
     private RecyclerView mRecyclerView;
     private ArrayList<HashMap<String, String>> stretchList;
@@ -91,18 +98,43 @@ public class StretchListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         stretchList = new ArrayList<>();
+        Log.d(TAG, "onCreate: ");
         mStretchAdapter =  new StretchAdapter(stretchList);
         jsonStringToList(jsonFileToString(jsonFileName));
+
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.stretch_recycler, container, false);
+        Log.d(TAG, "onCreateView: ");
+        AnimationSet set = new AnimationSet(true);
+        Animation ani = new AlphaAnimation(0.0f,0.5f);
+        ani.setDuration(700);
+        set.addAnimation(ani);
+        LayoutAnimationController con = new LayoutAnimationController(set,0.5f);
+
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.stretch_recycler_view);
+        mRecyclerView.setLayoutAnimation(con);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), gridSize));
         mRecyclerView.setAdapter(mStretchAdapter);
+
         return view;
     }
 
@@ -118,15 +150,16 @@ public class StretchListFragment extends Fragment {
             mStretchPhoto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname);
-//                    FragmentManager fragmentManager = getFragmentManager();
-//                    fragmentManager.beginTransaction()
-//                            .replace(R.id.fragment_container5 ,fragment)
-//                            .addToBackStack(null)
-//                            .commit();
 
-                    Intent intent = StretchInfoActivity.newIntent(getActivity(), sname);
-                    getActivity().startActivity(intent);
+                    StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container5 ,fragment)
+                            .addToBackStack(null)
+                            .commit();
+
+//                    Intent intent = StretchInfoActivity.newIntent(getActivity(), sname);
+//                    getActivity().startActivity(intent);
                 }
             });
         }

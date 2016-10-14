@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.MainActivity;
+package com.example.therdsak.yeutsen.mainactivity;
 
 import android.app.Activity;
 import android.app.Dialog;

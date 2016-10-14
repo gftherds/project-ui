@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.SummaryFragment;
+package com.example.therdsak.yeutsen.pageractivity.summaryfragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -54,6 +54,9 @@
     <string name="Select">Select</string>
     <string name="Cancel">Cancel</string>
 
+    <!--TextView Moving-->
+    <string name="text_moving">ยินดีตอนรับเข้าสู่แอพพลิเคชัน ยืดเส้น</string>
+
 
     <string name="Name">Name</string>
     <string name="set_time">Set Time</string>
@@ -67,6 +70,7 @@
     <string name="jaja">45 minutes</string>
     <string name="Slove">Slove</string>
     <string name="Solve">Solve</string>
+    <string name="btn_finish">Finish</string>
 
 
 </resources>

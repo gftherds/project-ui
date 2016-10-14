@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.ShowFragment;
+package com.example.therdsak.yeutsen.pageractivity.showfragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

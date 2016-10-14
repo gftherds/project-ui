@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity;
+package com.example.therdsak.yeutsen.pageractivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,14 +17,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 
-import com.example.therdsak.yeutsen.MainActivity.TutorialFragment;
-import com.example.therdsak.yeutsen.PagerActivity.ListFragment.ListStretchingFragment;
-import com.example.therdsak.yeutsen.PagerActivity.ShowFragment.ShowStretchingFragment;
-import com.example.therdsak.yeutsen.PagerActivity.StretchListFragment.StretchListFragment;
-import com.example.therdsak.yeutsen.PagerActivity.SummaryFragment.SummaryStretchingFragment;
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.mainactivity.TutorialFragment;
+import com.example.therdsak.yeutsen.pageractivity.showfragment.ShowStretchingFragment;
+import com.example.therdsak.yeutsen.pageractivity.stretchlistfragment.StretchListFragment;
+import com.example.therdsak.yeutsen.pageractivity.summaryfragment.SummaryStretchingFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,25 +30,20 @@ import java.util.List;
 /**
  * Created by Therdsak on 10/6/2016.
  */
-public class PagerFragment extends Fragment {
-
-
-
-   public static PagerFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        PagerFragment fragment = new PagerFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-
-    private static final String TAG = "PagerActivity";
+public class PagerFragment extends VisibleFragment {
+    private static final String TAG = "PagerFragment";
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private AppBarLayout appBarLayout;
+    boolean checkTemp ;
+
+    public boolean isCheckTemp(boolean ct) {
+        checkTemp = ct;
+        Log.d(TAG, "isCheckTemp: "+ ct + " : " +checkTemp);
+        return checkTemp;
+    }
+
     FragmentManager fm;
 
     private int[] tabIcons = {
@@ -69,16 +62,36 @@ public class PagerFragment extends Fragment {
     };
 
     @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
+
+    }
+
+    @Override
+    public void onStop() {
+        Log.d(TAG, "onStop: ");
+        super.onStop();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: ");
+    }
+    public static PagerFragment newInstance() {
 
-
+        Bundle args = new Bundle();
+        PagerFragment fragment = new PagerFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ");
         View view = inflater.inflate(R.layout.maintabbar,container,false);
 
         appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar_layout);
@@ -87,12 +100,16 @@ public class PagerFragment extends Fragment {
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
+
+
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(3);
 
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
+
 
         setHasOptionsMenu(true);
 
@@ -122,7 +139,6 @@ public class PagerFragment extends Fragment {
 //                        getSupportActionBar().setTitle("ListItem");
                         break;
                     case 2:
-
                         tabLayout.getTabAt(0).setIcon(R.drawable.home_unselected);
                         tabLayout.getTabAt(1).setIcon(R.drawable.list_unselected);
                         tabLayout.getTabAt(2).setIcon(R.drawable.summary_selected);
@@ -141,13 +157,7 @@ public class PagerFragment extends Fragment {
 
             }
         });
-
-
-
-
-
-
-
+        setRetainInstance(true);
         return view;
     }
 
@@ -155,16 +165,14 @@ public class PagerFragment extends Fragment {
         tabLayout.getTabAt(0).setIcon(R.drawable.home_white);
         tabLayout.getTabAt(1).setIcon(R.drawable.list_color);
         tabLayout.getTabAt(2).setIcon(R.drawable.summary_color);
-
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFragment(new ShowStretchingFragment(), "ONE");
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFragment( ShowStretchingFragment.newInstance(), "ONE");
 //        adapter.addFragment(new ListStretchingFragment(), "TWO");
-        adapter.addFragment(new StretchListFragment(), "TWO");
-        adapter.addFragment(new SummaryStretchingFragment(), "THREE");
+        adapter.addFragment( StretchListFragment.newInstance(), "TWO");
+        adapter.addFragment( SummaryStretchingFragment.newInstance(), "THREE");
         viewPager.setAdapter(adapter);
 
     }
@@ -208,6 +216,7 @@ public class PagerFragment extends Fragment {
 
             Log.d(TAG, "onCreateOptionsMenu: ");
 
+
         }
 
     @Override
@@ -215,12 +224,12 @@ public class PagerFragment extends Fragment {
         switch (item.getItemId()){
             case R.id.mnu_set_time :
                 Fragment fragment = SettingSetTimeFragment.newInstance();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment).addToBackStack(null).commit();
                 Log.d(TAG, " set time : " + R.id.mnu_set_time);
                 return true;
             case R.id.mnu_tutorial :
                 Fragment fragment1 = TutorialFragment.newInstance();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment1).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment1).addToBackStack(null).commit();
                 Log.d(TAG, " tutorial : " + R.id.mnu_tutorial);
                 return true;
             case R.id.mnu_notification :
@@ -236,5 +245,7 @@ public class PagerFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
 

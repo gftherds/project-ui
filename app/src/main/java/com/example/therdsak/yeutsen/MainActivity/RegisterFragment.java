@@ -1,11 +1,10 @@
-package com.example.therdsak.yeutsen.MainActivity;
+package com.example.therdsak.yeutsen.mainactivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,13 +17,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import com.example.therdsak.yeutsen.PagerActivity.PagerActivity;
+import com.example.therdsak.yeutsen.pageractivity.PagerActivity;
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Therdsak on 9/28/2016.
@@ -48,7 +49,7 @@ public class RegisterFragment extends Fragment {
     private static final int THIRD_BTN = 3;
     private static final int FORTH_BTN = 4;
 
-    CheckBox Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
+    CheckBox  Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
     RadioGroup radioGroup;
     RadioButton radioButton;
     Button buttonFirstTime;
@@ -57,6 +58,7 @@ public class RegisterFragment extends Fragment {
     Button buttonFourTime;
     Button buttonEnter;
 
+    List<Boolean> listBooleanDay = new ArrayList<>();
 
     private TimeLab time = new TimeLab();
 
@@ -150,15 +152,28 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
-                StringBuffer result = new StringBuffer();
-                result.append("monday : ").append(Monday.isChecked());
-                result.append("\ntuesday : ").append(Tuesday.isChecked());
-                result.append("\nwednesday : ").append(Wednesday.isChecked());
-                result.append("\nthursday : ").append(Thursday.isChecked());
-                result.append("\nfriday : ").append(Friday.isChecked());
-                result.append("\nsaturday : ").append(Saturday.isChecked());
-                result.append("\nsunday : ").append(Sunday.isChecked());
 
+                listBooleanDay.add(Sunday.isChecked());
+                listBooleanDay.add(Monday.isChecked());
+                listBooleanDay.add(Tuesday.isChecked());
+                listBooleanDay.add(Wednesday.isChecked());
+                listBooleanDay.add(Thursday.isChecked());
+                listBooleanDay.add(Friday.isChecked());
+                listBooleanDay.add(Saturday.isChecked());
+
+
+                StringBuffer result = new StringBuffer();
+                result.append(Sunday.isChecked());
+                result.append(",").append(Monday.isChecked());
+                result.append(",").append(Tuesday.isChecked());
+                result.append(",").append(Wednesday.isChecked());
+                result.append(",").append(Thursday.isChecked());
+                result.append(",").append(Friday.isChecked());
+                result.append(",").append(Saturday.isChecked());
+
+                Log.d(TAG, "onClick: " +result);
+
+                YeutSenPreference.setDayOfWeek(getActivity(),result.toString());
 
                 int selected_id = radioGroup.getCheckedRadioButtonId();
                 radioButton = (RadioButton) getActivity().findViewById(selected_id);
