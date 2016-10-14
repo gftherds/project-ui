@@ -50,7 +50,7 @@ public class StretchLog {
         return stretchid;
     }
 
-    public void setStretchid(Integer stretchid) {
+    public void setStretchid(int stretchid) {
         this.stretchid = stretchid;
     }
 }

@@ -29,8 +29,8 @@ public class StretchLogLab {
         ContentValues contentValues = new ContentValues();
         contentValues.put(StretchLogTable.Cols.ID, stretchLog.getId().toString());
         contentValues.put(StretchLogTable.Cols.USERID, stretchLog.getUserid().toString());
-        contentValues.put(StretchLogTable.Cols.DATE, stretchLog.getDate().getTime());
-        contentValues.put(StretchLogTable.Cols.STRETCHID, stretchLog.getStretchid().toString());
+        contentValues.put(StretchLogTable.Cols.STRETCHDATE, stretchLog.getDate().getTime());
+        contentValues.put(StretchLogTable.Cols.STRETCHID, stretchLog.getStretchid());
         return contentValues;
     }
 
@@ -39,6 +39,8 @@ public class StretchLogLab {
 
     private StretchLogLab(Context context){
         this.context = context.getApplicationContext();
+        StretchLogDB stretchLogDB = new StretchLogDB(context);
+        database = stretchLogDB.getWritableDatabase();
     }
 
     public StretchLogCursorWrapper queryStretchLog(String whereCause, String[] whereArgs){

@@ -36,7 +36,8 @@ public class StretchInfoFragment extends Fragment {
 
     private String stretchNameString;
     private String stretchFileName;
-    private String assetPath = "file:///android_asset/stretch";
+    private String assetPath = "file:///android_asset";
+    private String stretchPhotoFolder = "stretch";
 
     public static StretchInfoFragment newInstance(String sname, String spath){
         Bundle args = new Bundle();
@@ -67,7 +68,7 @@ public class StretchInfoFragment extends Fragment {
         stretchToolbar = (Toolbar) view.findViewById(R.id.toolbar_notification);
         stretchToolbar.setTitle(stretchNameString);
 
-        stretchWebView.loadUrl(assetPath + File.separator + stretchFileName);
+        stretchWebView.loadUrl(assetPath + File.separator + stretchPhotoFolder + File.separator + stretchFileName);
         Log.d(TAG, "onCreateView: " + assetPath + File.separator + stretchFileName);
 
         return view;

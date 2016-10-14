@@ -21,7 +21,7 @@ public class StretchLogCursorWrapper extends CursorWrapper {
     public StretchLog getStretchLog(){
         String id = getString(getColumnIndex(StretchLogTable.Cols.ID));
         String userid = getString(getColumnIndex(StretchLogTable.Cols.USERID));
-        long date = getLong(getColumnIndex(StretchLogTable.Cols.DATE));
+        long date = getLong(getColumnIndex(StretchLogTable.Cols.STRETCHDATE));
         int stretchId = getInt(getColumnIndex(StretchLogTable.Cols.STRETCHID));
 
         StretchLog stretchLog = new StretchLog(UUID.fromString(id));

@@ -10,7 +10,7 @@ public class StretchLogDBSchama {
         public static final class Cols{
             public static final String ID = "id";
             public static final String USERID = "userid";
-            public static final String DATE = "date";
+            public static final String STRETCHDATE = "stretchdate";
             public static final String STRETCHID = "stretchid";
         }
     }

@@ -21,13 +21,14 @@ public class StretchLogDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table" + StretchLogTable.NAME
+        sqLiteDatabase.execSQL("create table " + StretchLogTable.NAME
             + "("
-            + StretchLogTable.Cols.ID + " integer primary key autoincrement, "
+            + StretchLogTable.Cols.ID + " primary key, "
             + StretchLogTable.Cols.USERID + ", "
-            + StretchLogTable.Cols.DATE + ", "
+            + StretchLogTable.Cols.STRETCHDATE + ", "
             + StretchLogTable.Cols.STRETCHID + ")"
         );
+
     }
 
     @Override

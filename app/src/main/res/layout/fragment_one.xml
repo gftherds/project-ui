@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context=".MainActivity.MainActivity">
 
+    <WebView
+        android:layout_width="320dp"
+        android:layout_height="240dp"
+        android:id="@+id/random_stretch_gif">
 
-    <ImageView
-        android:id="@+id/show_stretching_image_view"
-        android:layout_width="280sp"
-        android:layout_height="280sp"
-        android:background="@android:color/darker_gray"
-        android:scaleType="centerInside"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    </WebView>
 
 
     <Button
+        android:layout_marginTop="20dp"
         android:id="@+id/show_stretching_button"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/colorAccent"/>
 
-</RelativeLayout>
+</LinearLayout>
