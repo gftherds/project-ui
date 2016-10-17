@@ -17,12 +17,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 
 import com.example.therdsak.yeutsen.MainActivity.TutorialFragment;
-import com.example.therdsak.yeutsen.PagerActivity.ListFragment.ListStretchingFragment;
 import com.example.therdsak.yeutsen.PagerActivity.ShowFragment.ShowStretchingFragment;
 import com.example.therdsak.yeutsen.PagerActivity.StretchListFragment.StretchListFragment;
+import com.example.therdsak.yeutsen.PagerActivity.StretchSettingFragment.SettingAboutFragment.SettingAboutFragment;
+import com.example.therdsak.yeutsen.PagerActivity.StretchSettingFragment.SettingNotificationFragment.SettingNotificationFragment;
+import com.example.therdsak.yeutsen.PagerActivity.StretchSettingFragment.SettingSetTimeFragment.SettingSetTimeFragment;
 import com.example.therdsak.yeutsen.PagerActivity.SummaryFragment.SummaryStretchingFragment;
 import com.example.therdsak.yeutsen.R;
 
@@ -56,16 +57,16 @@ public class PagerFragment extends Fragment {
     private int[] tabIcons = {
 
             //icon color black
-            R.drawable.home_color,
-            R.drawable.list_color,
-            R.drawable.summary_color
+            R.drawable.home_selected,
+            R.drawable.list_selected,
+            R.drawable.summary_selected
     };
 
     private int[] tabBlackIcons = {
             //icon color white
-            R.drawable.home_white,
-            R.drawable.list_white,
-            R.drawable.summary_white
+            R.drawable.home_unselected,
+            R.drawable.list_unselected,
+            R.drawable.summary_unselected
     };
 
     @Override
@@ -79,7 +80,7 @@ public class PagerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.maintabbar,container,false);
+        View view = inflater.inflate(R.layout.main_tab_bar,container,false);
 
         appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar_layout);
 
@@ -152,15 +153,15 @@ public class PagerFragment extends Fragment {
     }
 
     private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(R.drawable.home_white);
-        tabLayout.getTabAt(1).setIcon(R.drawable.list_color);
-        tabLayout.getTabAt(2).setIcon(R.drawable.summary_color);
+        tabLayout.getTabAt(0).setIcon(R.drawable.home_selected);
+        tabLayout.getTabAt(1).setIcon(R.drawable.list_unselected);
+        tabLayout.getTabAt(2).setIcon(R.drawable.summary_unselected);
 
 
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new ShowStretchingFragment(), "ONE");
 //        adapter.addFragment(new ListStretchingFragment(), "TWO");
         adapter.addFragment(new StretchListFragment(), "TWO");
@@ -214,24 +215,24 @@ public class PagerFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.mnu_set_time :
-                Fragment fragment = SettingSetTimeFragment.newInstance();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment).commit();
+                Fragment fragmentSetTime = SettingSetTimeFragment.newInstance();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2,fragmentSetTime).commit();
                 Log.d(TAG, " set time : " + R.id.mnu_set_time);
                 return true;
             case R.id.mnu_tutorial :
-                Fragment fragment1 = TutorialFragment.newInstance();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment1).commit();
+                Fragment fragmentTutorial = TutorialFragment.newInstance();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2,fragmentTutorial).commit();
                 Log.d(TAG, " tutorial : " + R.id.mnu_tutorial);
                 return true;
             case R.id.mnu_notification :
-                Fragment fragment2 = SettingNotificationFragment.newInstance();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment2).addToBackStack(null).commit();
+                Fragment fragmentNotification = SettingNotificationFragment.newInstance();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2,fragmentNotification).addToBackStack(null).commit();
                 Log.d(TAG, " notification : " + R.id.mnu_notification);
                 return true;
             case R.id.mnu_about :
-                Fragment fragment3 = SettingAboutFragment.newInstance();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment3).addToBackStack(null).commit();
-                Log.d(TAG, " setting : " + R.id.mnu_about);
+                Fragment fragmentAbout = SettingAboutFragment.newInstance();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2,fragmentAbout).addToBackStack(null).commit();
+                Log.d(TAG, " about : " + R.id.mnu_about);
                 return true;
         }
         return super.onOptionsItemSelected(item);

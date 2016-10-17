@@ -16,11 +16,18 @@
         </activity>
 
         <activity android:name=".PagerActivity.PagerActivity">
-
         </activity>
 
         <activity android:name=".PagerActivity.StretchListFragment.StretchInfoActivity">
+        </activity>
 
+        <activity android:name=".PagerActivity.ShowFragment.ShowListStretchActivity">
+        </activity>
+
+        <activity android:name=".PagerActivity.StretchSettingFragment.SettingAboutFragment.SettingAboutActivity">
+        </activity>
+
+        <activity android:name=".PagerActivity.StretchSettingFragment.SettingNotificationFragment.SettingNotificationActivity">
         </activity>
 
     </application>

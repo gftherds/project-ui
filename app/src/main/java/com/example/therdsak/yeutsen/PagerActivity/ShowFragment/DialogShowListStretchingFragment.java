@@ -1,28 +1,28 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchListFragment;
+package com.example.therdsak.yeutsen.PagerActivity.ShowFragment;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.therdsak.yeutsen.MainActivity.RegisterFragment;
+import com.example.therdsak.yeutsen.PagerActivity.PagerFragment;
 import com.example.therdsak.yeutsen.R;
 
 import org.json.JSONArray;
@@ -34,31 +34,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Noppharat on 10/7/2016.
+ * Created by Therdsak on 10/16/2016.
  */
+public class DialogShowListStretchingFragment extends DialogFragment {
 
-public class StretchListFragment extends Fragment {
 
-
-    private RecyclerView mRecyclerView;
-    private ArrayList<HashMap<String, String>> stretchList;
-    private StretchAdapter mStretchAdapter;
+    private Button buttonCancel;
     private FragmentManager fm;
-
-    private int gridSize = 2;
-    private String stretchPhotoFolder = "test_photo";
+    private RecyclerView mRecyclerView;
+    private StretchAdapter mAdapter;
     private String jsonFileName = "stretch.json";
+    private String stretchPhotoFolder = "test.photosgg";
+    private ArrayList<HashMap<String, String>> stretchShowList;
 
 
+    public static DialogShowListStretchingFragment newInstance() {
 
-    public static StretchListFragment newInstance(){
         Bundle args = new Bundle();
-        StretchListFragment fragment = new StretchListFragment();
+
+        DialogShowListStretchingFragment fragment = new DialogShowListStretchingFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
-
 
     private void jsonStringToList(String jsonString){
         try{
@@ -75,13 +72,12 @@ public class StretchListFragment extends Fragment {
                 hashMapList.put("sname", stretchName);
                 hashMapList.put("spath", stretchPath);
 
-                stretchList.add(hashMapList);
+                stretchShowList.add(hashMapList);
             }
         }catch(Exception e){
 
         }
     }
-
 
     private String jsonFileToString(String jsonFileName){
         String jsonString;
@@ -101,65 +97,66 @@ public class StretchListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        stretchList = new ArrayList<>();
-        mStretchAdapter = new StretchAdapter(stretchList);
+        stretchShowList = new ArrayList<>();
+        mAdapter = new StretchAdapter(stretchShowList);
         jsonStringToList(jsonFileToString(jsonFileName));
-        fm = getActivity().getSupportFragmentManager();
-
-
-
-
     }
 
-    @Nullable
+    @NonNull
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.stretch_recycler, container, false);
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.stretch_recycler_view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), gridSize));
-        mRecyclerView.setAdapter(mStretchAdapter);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 
+        fm = getActivity().getSupportFragmentManager();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.show_recycler_view,null);
+        builder.setView(view);
+        builder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.setNegativeButton("Cancel",null);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.show_stretching_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mAdapter);
 
 
-        return view;
+        return builder.show();
     }
-
-    private class StretchHolder extends RecyclerView.ViewHolder{
-        private ImageView mStretchPhoto;
-        private TextView mStretchName;
+    private class StretchHolder extends RecyclerView.ViewHolder {
+        private TextView mName;
+        private TextView mDetail;
+        private ImageView mShow;
         private String sname;
+
 
         public StretchHolder(View itemView) {
             super(itemView);
-            mStretchPhoto = (ImageView) itemView.findViewById(R.id.stretch_photo);
-            mStretchName = (TextView) itemView.findViewById(R.id.stretch_name);
-            mStretchPhoto.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                Intent intent = new Intent(getActivity(),StretchInfoActivity.class);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),mStretchPhoto,"transitionName");
-                getActivity().startActivity(intent,options.toBundle());
-//                    Fragment fragmentStretchList = StretchInfoFragment.newInstance(sname);
-//                    fm.beginTransaction().replace(R.id.fragment_container2,fragmentStretchList).addToBackStack(null).addSharedElement(mStretchPhoto,"Photo").commit();
-
-
-
-                }
-            });
+            mName = (TextView) itemView.findViewById(R.id.show_holder_title_text_view);
+            mDetail = (TextView) itemView.findViewById(R.id.show_holder_detail_text_view);
+            mShow = (ImageView) itemView.findViewById(R.id.show_holder_image_view);
         }
+
+
         protected void bindBitmap(Bitmap bitmap){
-            mStretchPhoto.setImageBitmap(bitmap);
+            mShow.setImageBitmap(bitmap);
         }
 
         protected void bindDrawable(Drawable drawable){
-            mStretchPhoto.setImageDrawable(drawable);
+            mShow.setImageDrawable(drawable);
         }
 
+        protected void setStretchDetail(String stringDetail){
+            mDetail.setText(stringDetail);
+        }
+
+
         protected void setStretchName(String stringName){
-            mStretchName.setText(stringName);
+            mName.setText(stringName);
         }
 
         protected void setSName(String sname){
@@ -167,37 +164,42 @@ public class StretchListFragment extends Fragment {
         }
     }
 
-    private class StretchAdapter extends RecyclerView.Adapter<StretchHolder>{
-        ArrayList<HashMap<String, String>> _stretchList;
 
-        protected StretchAdapter(ArrayList<HashMap<String, String>> stretchList){
-            _stretchList = stretchList;
+    private class StretchAdapter extends RecyclerView.Adapter<StretchHolder>{
+        ArrayList<HashMap<String, String>> _stretchShowList;
+
+        protected StretchAdapter(ArrayList<HashMap<String, String>> stretchShowList){
+            _stretchShowList = stretchShowList;
         }
 
         @Override
         public StretchHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(getContext()).inflate(R.layout.item_stretch, parent, false);
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            View view = layoutInflater.inflate(R.layout.holder_show,parent,false);
             return new StretchHolder(view);
         }
 
         @Override
         public void onBindViewHolder(StretchHolder holder, int position) {
             try {
-                InputStream inputStream = getActivity().getAssets().open(stretchPhotoFolder + File.separator + _stretchList.get(position).get("spath"));
+
+                InputStream inputStream = getActivity().getAssets().open(stretchPhotoFolder + File.separator + _stretchShowList.get(position).get("spath"));
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 holder.bindBitmap(bitmap);
             }catch(Exception e){
                 Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.giphy, null);
                 holder.bindDrawable(drawable);
             }
-            holder.setStretchName(_stretchList.get(position).get("sname"));
-            holder.setSName(_stretchList.get(position).get("sname"));
+            holder.setStretchName(_stretchShowList.get(position).get("sname"));
+            holder.setStretchDetail(_stretchShowList.get(position).get("sname"));
+            holder.setSName(_stretchShowList.get(position).get("sname"));
         }
+
 
         @Override
         public int getItemCount() {
-            return _stretchList.size();
+            return _stretchShowList.size();
         }
     }
-
 }
+

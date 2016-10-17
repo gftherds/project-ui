@@ -16,8 +16,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.therdsak.yeutsen.PagerActivity.PagerActivity;
@@ -31,6 +35,8 @@ import java.util.Date;
  */
 public class RegisterFragment extends Fragment {
 
+
+    private boolean isChecked = true;
 
     public static RegisterFragment newInstance() {
 
@@ -48,14 +54,26 @@ public class RegisterFragment extends Fragment {
     private static final int THIRD_BTN = 3;
     private static final int FORTH_BTN = 4;
 
-    CheckBox Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
-    RadioGroup radioGroup;
-    RadioButton radioButton;
-    Button buttonFirstTime;
-    Button buttonSecondTime;
-    Button buttonThirdTime;
-    Button buttonFourTime;
+    TextView buttonFirstTime;
+    TextView buttonSecondTime;
+    TextView buttonThirdTime;
+    TextView buttonFourTime;
     Button buttonEnter;
+
+    CheckBox checkBox_week;
+    CheckBox checkBox_time_alert;
+
+
+    ImageView Sunday;
+    ImageView Monday;
+    ImageView Tuesday;
+    ImageView Wednesday;
+    ImageView Thursday;
+    ImageView Friday;
+    ImageView Saturday;
+    SeekBar TimeSeekBar;
+
+    boolean flag = false;
 
 
     private TimeLab time = new TimeLab();
@@ -65,12 +83,13 @@ public class RegisterFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register, container, false);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -86,17 +105,153 @@ public class RegisterFragment extends Fragment {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
 
-        Monday = (CheckBox) view.findViewById(R.id.checkBox_monday);
-        Tuesday = (CheckBox) view.findViewById(R.id.checkBox_tuesday);
-        Wednesday = (CheckBox) view.findViewById(R.id.checkBox_wednesday);
-        Thursday = (CheckBox) view.findViewById(R.id.checkBox_thursday);
-        Friday = (CheckBox) view.findViewById(R.id.checkBox_friday);
-        Saturday = (CheckBox) view.findViewById(R.id.checkBox_saturday);
-        Sunday = (CheckBox) view.findViewById(R.id.checkBox_sunday);
 
-        radioGroup = (RadioGroup) view.findViewById(R.id.radio_group);
 
-        buttonFirstTime = (Button) view.findViewById(R.id.button1);
+
+
+        Sunday = (ImageView) view.findViewById(R.id.sunday);
+        Sunday.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (!flag) {
+                    Sunday.setImageResource(R.drawable.color_sunday);
+                    checkBox_week.setChecked(!isChecked);
+                    checkBox_week.setEnabled(true);
+                    flag = true;
+//                    Monday.setImageResource(R.drawable.color_monday);
+//                    Tuesday.setImageResource(R.drawable.color_tuesday);
+//                    Wednesday.setImageResource(R.drawable.color_wednesday);
+//                    Thursday.setImageResource(R.drawable.color_thursday);
+//                    Friday.setImageResource(R.drawable.color_friday);
+                } else {
+                    Sunday.setImageResource(R.drawable.white_sunday);
+                    flag = false;
+
+                }
+            }
+        });
+
+        Monday = (ImageView) view.findViewById(R.id.monday);
+        Monday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!flag) {
+                    Monday.setImageResource(R.drawable.color_monday);
+                    checkBox_week.setChecked(!isChecked);
+                    checkBox_week.setEnabled(true);
+                    flag = true;
+                } else {
+                    Monday.setImageResource(R.drawable.white_monday);
+
+                    flag = false;
+                }
+            }
+        });
+
+        Tuesday = (ImageView) view.findViewById(R.id.tuesday);
+        Tuesday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!flag) {
+                    Tuesday.setImageResource(R.drawable.color_tuesday);
+                    checkBox_week.setChecked(!isChecked);
+                    checkBox_week.setEnabled(true);
+                    flag = true;
+                } else {
+                    Tuesday.setImageResource(R.drawable.white_tuesday);
+                    flag = false;
+                }
+            }
+        });
+
+        Wednesday = (ImageView) view.findViewById(R.id.wednesday);
+        Wednesday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!flag) {
+                    Wednesday.setImageResource(R.drawable.color_wednesday);
+                    checkBox_week.setChecked(!isChecked);
+                    checkBox_week.setEnabled(true);
+                    flag = true;
+                } else {
+                    Wednesday.setImageResource(R.drawable.white_wednesday);
+                    flag = false;
+                }
+            }
+        });
+
+        Thursday = (ImageView) view.findViewById(R.id.thursday);
+        Thursday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!flag) {
+                    Thursday.setImageResource(R.drawable.color_thursday);
+                    checkBox_week.setChecked(!isChecked);
+                    checkBox_week.setEnabled(true);
+                    flag = true;
+                } else {
+                    Thursday.setImageResource(R.drawable.white_thursday);
+                    flag = false;
+                }
+            }
+        });
+
+        Friday = (ImageView) view.findViewById(R.id.friday);
+        Friday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!flag) {
+                    Friday.setImageResource(R.drawable.color_friday);
+                    checkBox_week.setChecked(!isChecked);
+                    checkBox_week.setEnabled(true);
+                    flag = true;
+                } else {
+                    Friday.setImageResource(R.drawable.white_friday);
+                    flag = false;
+                }
+            }
+        });
+
+        Saturday = (ImageView) view.findViewById(R.id.saturday);
+        Saturday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!flag) {
+                    Saturday.setImageResource(R.drawable.color_saturday);
+                    checkBox_week.setChecked(!isChecked);
+                    checkBox_week.setEnabled(true);
+                    flag = true;
+                } else {
+                    Saturday.setImageResource(R.drawable.white_saturday);
+
+                    flag = false;
+                }
+            }
+        });
+
+
+        checkBox_week = (CheckBox) view.findViewById(R.id.check_week);
+        checkBox_week.setChecked(isChecked);
+        checkBox_week.setEnabled(false);
+        checkBox_week.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked == true) {
+                    Monday.setImageResource(R.drawable.color_monday);
+                    Tuesday.setImageResource(R.drawable.color_tuesday);
+                    Wednesday.setImageResource(R.drawable.color_wednesday);
+                    Thursday.setImageResource(R.drawable.color_thursday);
+                    Friday.setImageResource(R.drawable.color_friday);
+
+                }else{
+                }
+            }
+        });
+
+
+
+        buttonFirstTime = (TextView) view.findViewById(R.id.button1);
         buttonFirstTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +263,7 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        buttonSecondTime = (Button) view.findViewById(R.id.button2);
+        buttonSecondTime = (TextView) view.findViewById(R.id.button3);
         buttonSecondTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,7 +276,7 @@ public class RegisterFragment extends Fragment {
         });
 
 
-        buttonThirdTime = (Button) view.findViewById(R.id.button3);
+        buttonThirdTime = (TextView) view.findViewById(R.id.button3);
         buttonThirdTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,7 +288,7 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        buttonFourTime = (Button) view.findViewById(R.id.button4);
+        buttonFourTime = (TextView) view.findViewById(R.id.button6);
         buttonFourTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,27 +305,71 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
-                StringBuffer result = new StringBuffer();
-                result.append("monday : ").append(Monday.isChecked());
-                result.append("\ntuesday : ").append(Tuesday.isChecked());
-                result.append("\nwednesday : ").append(Wednesday.isChecked());
-                result.append("\nthursday : ").append(Thursday.isChecked());
-                result.append("\nfriday : ").append(Friday.isChecked());
-                result.append("\nsaturday : ").append(Saturday.isChecked());
-                result.append("\nsunday : ").append(Sunday.isChecked());
-
-
-                int selected_id = radioGroup.getCheckedRadioButtonId();
-                radioButton = (RadioButton) getActivity().findViewById(selected_id);
-
                 Intent i = new Intent(getActivity(), PagerActivity.class);
                 startActivity(i);
                 getActivity().finish();
+            }
+        });
+
+
+
+        TimeSeekBar = (SeekBar) view.findViewById(R.id.SeekBar_time_alert);
+        TimeSeekBar.setProgress(50);
+        TimeSeekBar.setEnabled(false);
+        TimeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int position, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
         });
 
+
+
+        checkBox_time_alert = (CheckBox) view.findViewById(R.id.checkbox_time_alert);
+        checkBox_time_alert.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(!flag){
+                    TimeSeekBar.setEnabled(true);
+                    flag = true;
+                }else {
+                    TimeSeekBar.setEnabled(false);
+                    flag = false;
+                }
+
+
+            }
+        });
+
+
+
+
+
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Monday.setImageResource(R.drawable.color_monday);
+        Tuesday.setImageResource(R.drawable.color_tuesday);
+        Wednesday.setImageResource(R.drawable.color_wednesday);
+        Thursday.setImageResource(R.drawable.color_thursday);
+        Friday.setImageResource(R.drawable.color_friday);
+        checkBox_week.setChecked(isChecked);
+        checkBox_week.setEnabled(false);
+
     }
 
     private String getFormattedTime(Date date) {

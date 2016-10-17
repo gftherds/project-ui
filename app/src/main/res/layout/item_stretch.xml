@@ -11,6 +11,8 @@
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:id="@+id/stretch_photo"
+        android:scaleType="centerCrop"
+        android:transitionName="transitionName"
         android:background="@color/colorAccent"/>
 
     <TextView

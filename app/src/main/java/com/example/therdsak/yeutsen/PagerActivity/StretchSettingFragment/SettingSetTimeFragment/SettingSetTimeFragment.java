@@ -1,11 +1,14 @@
-package com.example.therdsak.yeutsen.PagerActivity;
+package com.example.therdsak.yeutsen.PagerActivity.StretchSettingFragment.SettingSetTimeFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,8 @@ import android.widget.Button;
 
 
 import com.example.therdsak.yeutsen.MainActivity.RegisterFragment;
+import com.example.therdsak.yeutsen.PagerActivity.PagerActivity;
+import com.example.therdsak.yeutsen.PagerActivity.PagerFragment;
 import com.example.therdsak.yeutsen.R;
 
 /**
@@ -44,15 +49,17 @@ public class SettingSetTimeFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Set Time");
 
 
-
         fm = getActivity().getSupportFragmentManager();
 
         buttonSolve = (Button) view.findViewById(R.id.button_solve);
         buttonSolve.setOnClickListener(new View.OnClickListener() {
+            public static final String TAG = "SettingSetTimeFragment";
+
             @Override
             public void onClick(View view) {
-                Fragment f5 = RegisterFragment.newInstance();
-                fm.beginTransaction().replace(R.id.fragment_container5,f5).commit();
+                Log.d(TAG, "onClick: " );
+                Fragment fragmentSolve = RegisterFragment.newInstance();
+                fm.beginTransaction().replace(R.id.fragment_container2,fragmentSolve).commit();
             }
         });
 
@@ -60,8 +67,9 @@ public class SettingSetTimeFragment extends Fragment {
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment f6 = PagerFragment.newInstance();
-                fm.beginTransaction().replace(R.id.fragment_container5,f6).commit();
+
+                Fragment fragmentCancel = PagerFragment.newInstance();
+                fm.beginTransaction().replace(R.id.fragment_container2,fragmentCancel).commit();
 
 
             }

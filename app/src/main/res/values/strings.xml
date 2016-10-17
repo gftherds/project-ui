@@ -25,10 +25,10 @@
 
 
     <!--Register-->
-    <string name="morning_time">MORNING WORK TIME</string>
-    <string name="afternoon_time">AFTERNOON WORK TIME</string>
-    <string name="morning_on">START TIME</string>
-    <string name="morning_off">END TIME</string>
+    <string name="morning_time">MORNING TIME</string>
+    <string name="afternoon_time">AFTERNOON TIME</string>
+    <string name="morning_on">START </string>
+    <string name="morning_off">FINISH</string>
 
     <!--checkbox in day-->
     <string name="text_sunday">Sunday</string>
@@ -67,6 +67,24 @@
     <string name="jaja">45 minutes</string>
     <string name="Slove">Slove</string>
     <string name="Solve">Solve</string>
+    <string name="current">Current Version</string>
+    <string name="version">1.0.0</string>
+    <string name="current_detail">About Us</string>
+    <string name="time_frist">30 minutes</string>
+    <string name="time_first">30 minutes</string>
+    <string name="time_second">45 minutes</string>
+    <string name="time_third">60 minutes</string>
+    <string name="name_yuetsen">Register Set Time</string>
+    <string name="set_edit_time">Edit Time Alert</string>
+    <string name="set_all_day">Set Working Day</string>
+    <string name="Topic">Detail</string>
+    <string name="Topic_Detail">Yuetsen is an application that helps you to stretch in the working time. The purpose is to prevent user sitting in front of a computer for a long time that can cause eye problems and office syndrome. This application will alert and show gesture to a user to follow how to stretch and the user can change gesture. This taking a little time to stretch for a good health.</string>
+    <string name="benefit">Benefit</string>
+    <string name="Topic_Benefit">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
+    <string name="origin">Origin</string>
+    <string name="Topic_origin">asdasdkkbkbibkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</string>
+    <string name="credit">Credit</string>
+    <string name="Topic_credit">Augmentis Company Thailand</string>
 
 
 </resources>

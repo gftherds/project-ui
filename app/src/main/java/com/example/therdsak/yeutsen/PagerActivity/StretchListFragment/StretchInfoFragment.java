@@ -19,11 +19,12 @@ import com.example.therdsak.yeutsen.R;
  */
 
 public class StretchInfoFragment extends Fragment {
-    private Toolbar stretchToolbar;
+    private Toolbar toolbarInfo;
     private ImageView stretchPhoto;
     private TextView stretchName;
     private TextView stretchInfo;
     private String stretchNameString;
+
 
     public static StretchInfoFragment newInstance(String sname){
         Bundle args = new Bundle();
@@ -45,12 +46,17 @@ public class StretchInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.stretch_info_fragment, container, false);
 
+        toolbarInfo = (Toolbar) view.findViewById(R.id.toolbar_notification);
+
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbarInfo);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Item");
+
         stretchPhoto = (ImageView) view.findViewById(R.id.stretch_info_gif);
         stretchName = (TextView) view.findViewById(R.id.stretch_info_name);
         stretchName.setText(stretchNameString);
         stretchInfo = (TextView) view.findViewById(R.id.stretch_info);
-        stretchToolbar = (Toolbar) view.findViewById(R.id.toolbar_notification);
-        stretchToolbar.setTitle(stretchNameString);
+
+//        toolbarInfo.setTitle(stretchNameString);
 
         Glide.with(getActivity()).load(R.drawable.giphy).asGif().into(stretchPhoto);
 
