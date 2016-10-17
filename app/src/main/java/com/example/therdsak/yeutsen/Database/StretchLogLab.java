@@ -4,11 +4,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.example.therdsak.yeutsen.Database.StretchLogDBSchama.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -17,6 +21,8 @@ import java.util.List;
 
 public class StretchLogLab {
     private static StretchLogLab instance;
+
+    private final String TAG = "StretchLogLab";
 
     public static StretchLogLab getInstance(Context context) {
         if(instance == null){
@@ -72,6 +78,52 @@ public class StretchLogLab {
     public void insertStretchLog(StretchLog stretchLog){
         ContentValues contentValues = getContentValues(stretchLog);
         database.insert(StretchLogTable.NAME, null, contentValues);
+    }
+
+    public String queryTotalStretch(){
+        String stringSQL = "SELECT COUNT(*) FROM stretches";
+        Cursor cursor = database.rawQuery(stringSQL, null);
+        cursor.moveToFirst();
+        String queryResult = cursor.getString(0);
+        cursor.close();
+        return queryResult;
+    }
+
+    public String queryMonthlyStretch(){
+        Calendar date = new GregorianCalendar();
+        String stringSQL = "select count(*) from stretches where strftime('%m', datetime(stretchdate/1000, 'unixepoch')) = '"
+                + String.valueOf(date.get(Calendar.MONTH) + 1)
+                + "' and strftime('%Y', datetime(stretchdate/1000, 'unixepoch')) = '"
+                + date.get(Calendar.YEAR)
+                + "' ";
+        Log.d(TAG, "queryMonthlyStretch: " + stringSQL);
+        Cursor cursor = database.rawQuery(stringSQL, null);
+        cursor.moveToFirst();
+        String queryResult = cursor.getString(0);
+        cursor.close();
+        return queryResult;
+    }
+
+    public String queryWeeklyStretch(){
+        return "";
+    }
+
+    public String queryTodayStretch(){
+        Calendar date = new GregorianCalendar();
+        String stringSQL = "select count(*) from stretches where strftime('%d', datetime(stretchdate/1000, 'unixepoch') = '"
+                + date.get(Calendar.DAY_OF_MONTH)
+                +"' and strftime('%m', datetime(stretchdate/1000, 'unixepoch')) = '"
+                + String.valueOf(date.get(Calendar.MONTH) + 1)
+                +"' and strftime('%Y', datetime(stretchdate/1000, 'unixepoch')) = '"
+                + date.get(Calendar.YEAR)
+                +"'";
+        Log.d(TAG, "queryTodayStretch: " + stringSQL);
+        Log.d(TAG, "queryTodayStretch: " + String.valueOf(date.get(Calendar.MONTH) + 1));
+        Cursor cursor = database.rawQuery(stringSQL, null);
+        cursor.moveToFirst();
+        String queryResult = cursor.getString(0);
+        cursor.close();
+        return queryResult;
     }
 
 }

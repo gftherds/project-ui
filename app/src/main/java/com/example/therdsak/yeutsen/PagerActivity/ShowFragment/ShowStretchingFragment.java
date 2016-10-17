@@ -124,4 +124,15 @@ public class ShowStretchingFragment extends Fragment{
 
         return view;
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            Log.d(TAG, "setUserVisibleHint: -----------------true-------------------");
+
+        }else {
+            Log.d(TAG, "setUserVisibleHint: -----------------false-------------------");
+        }
+    }
 }
