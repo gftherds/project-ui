@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -105,8 +106,9 @@ public class DialogShowStretchingFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         this.position = getArguments().getInt("position");
         stretchShowList = new ArrayList<>();
-        mAdapter = new StretchAdapter(stretchShowList, position);
         jsonStringToList(jsonFileToString(jsonFilename));
+        stretchShowList.get(position).put("isselect", "true");
+        mAdapter = new StretchAdapter(stretchShowList, position);
     }
 
     @NonNull
@@ -119,6 +121,7 @@ public class DialogShowStretchingFragment extends DialogFragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.show_stretching_recycler_view_dialog);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.invalidate();
 
         builder.setView(view);
         builder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
@@ -140,9 +143,10 @@ public class DialogShowStretchingFragment extends DialogFragment {
         private TextView mDetail;
         private ImageView mShow;
         private int sid;
+        private int tempPosition;
         private String sname;
 
-        public StretchHolder(View itemView) {
+        public StretchHolder(final View itemView) {
             super(itemView);
             mName = (TextView) itemView.findViewById(R.id.show_holder_title_text_view);
             mDetail = (TextView) itemView.findViewById(R.id.show_holder_detail_text_view);
@@ -152,7 +156,16 @@ public class DialogShowStretchingFragment extends DialogFragment {
                 @Override
                 public void onClick(View view) {
                     //send sid to DialogShowStretchingFragment.java to prepare before send to ShowStretchingFragment.java
+                    itemView.setBackgroundColor(Color.TRANSPARENT);
+                    Log.d(TAG, "onClick: Before old position : " + position + " : " + stretchShowList.get(position).get("isselect"));
+                    stretchShowList.get(position).put("isselect", "false");
+                    Log.d(TAG, "onClick: Before new position : " + position + " : " + stretchShowList.get(position).get("isselect"));
                     position = sid;
+                    Log.d(TAG, "onClick: After old  position : " + position + " : " + stretchShowList.get(position).get("isselect"));
+                    stretchShowList.get(position).put("isselect", "true");
+                    Log.d(TAG, "onClick: After newposition : " + position + " : " + stretchShowList.get(position).get("isselect"));
+                    itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
                 }
             });
 
@@ -185,15 +198,13 @@ public class DialogShowStretchingFragment extends DialogFragment {
 
         protected StretchAdapter(ArrayList<HashMap<String, String>> stretchShowList, int position){
             _stretchShowList = stretchShowList;
-            _stretchShowList.get(position).put("isselect", "true");
-
         }
 
         @Override
         public StretchHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.holder_show, parent, false);
-            return  new StretchHolder(view);
+            return new StretchHolder(view);
         }
 
         @Override
@@ -210,10 +221,15 @@ public class DialogShowStretchingFragment extends DialogFragment {
             holder.setStretchName(_stretchShowList.get(position).get("sname"));
             holder.setStretchDetail(_stretchShowList.get(position).get("sname"));
             holder.setSID(Integer.valueOf(_stretchShowList.get(position).get("sid")));
-            if(_stretchShowList.get(position).get("isselect") == "true"){
-                holder.itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            }
+
             Log.d(TAG, "onBindViewHolder: " + _stretchShowList.get(position).get("isselect"));
+            
+            if(stretchShowList.get(position).get("isselect").equals("true")){
+                holder.itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }else {
+                holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+            }
+
         }
 
         @Override
