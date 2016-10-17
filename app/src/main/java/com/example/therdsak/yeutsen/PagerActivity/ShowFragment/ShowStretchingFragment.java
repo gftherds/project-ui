@@ -192,6 +192,7 @@ public class ShowStretchingFragment extends Fragment{
         if(requestCode == FIRST_BTN){
             int backposition = data.getIntExtra("position", 0);
             randomStretch.loadUrl(assetPath + File.separator + stretchPhotoFolder + File.separator + stretchList.get(backposition).get("spath"));
+            randInt = backposition;
         }
     }
 }

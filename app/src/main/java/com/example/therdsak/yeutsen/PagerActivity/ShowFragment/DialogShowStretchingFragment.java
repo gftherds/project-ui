@@ -142,9 +142,6 @@ public class DialogShowStretchingFragment extends DialogFragment {
         private TextView mName;
         private TextView mDetail;
         private ImageView mShow;
-        private int sid;
-        private int tempPosition;
-        private String sname;
 
         public StretchHolder(final View itemView) {
             super(itemView);
@@ -152,22 +149,22 @@ public class DialogShowStretchingFragment extends DialogFragment {
             mDetail = (TextView) itemView.findViewById(R.id.show_holder_detail_text_view);
             mShow = (ImageView) itemView.findViewById(R.id.show_holder_image_view);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //send sid to DialogShowStretchingFragment.java to prepare before send to ShowStretchingFragment.java
-                    itemView.setBackgroundColor(Color.TRANSPARENT);
-                    Log.d(TAG, "onClick: Before old position : " + position + " : " + stretchShowList.get(position).get("isselect"));
-                    stretchShowList.get(position).put("isselect", "false");
-                    Log.d(TAG, "onClick: Before new position : " + position + " : " + stretchShowList.get(position).get("isselect"));
-                    position = sid;
-                    Log.d(TAG, "onClick: After old  position : " + position + " : " + stretchShowList.get(position).get("isselect"));
-                    stretchShowList.get(position).put("isselect", "true");
-                    Log.d(TAG, "onClick: After newposition : " + position + " : " + stretchShowList.get(position).get("isselect"));
-                    itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    //send sid to DialogShowStretchingFragment.java to prepare before send to ShowStretchingFragment.java
+//                    itemView.setBackgroundColor(Color.TRANSPARENT);
+//                    Log.d(TAG, "onClick: Before old position : " + position + " : " + stretchShowList.get(position).get("isselect"));
+//                    stretchShowList.get(position).put("isselect", "false");
+//                    Log.d(TAG, "onClick: Before new position : " + position + " : " + stretchShowList.get(position).get("isselect"));
+//                    position = sid;
+//                    Log.d(TAG, "onClick: After old  position : " + position + " : " + stretchShowList.get(position).get("isselect"));
+//                    stretchShowList.get(position).put("isselect", "true");
+//                    Log.d(TAG, "onClick: After newposition : " + position + " : " + stretchShowList.get(position).get("isselect"));
+//                    itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//
+//                }
+//            });
 
         }
 
@@ -187,17 +184,19 @@ public class DialogShowStretchingFragment extends DialogFragment {
             mName.setText(stretchName);
         }
 
-        protected void setSID(int id){
-            sid = id;
+        protected void setPosition(int bposition){
+            position = bposition;
         }
 
     }
 
     private class StretchAdapter extends RecyclerView.Adapter<StretchHolder>{
         ArrayList<HashMap<String, String>> _stretchShowList;
+        int selected_position;
 
         protected StretchAdapter(ArrayList<HashMap<String, String>> stretchShowList, int position){
             _stretchShowList = stretchShowList;
+            selected_position = position;
         }
 
         @Override
@@ -208,7 +207,7 @@ public class DialogShowStretchingFragment extends DialogFragment {
         }
 
         @Override
-        public void onBindViewHolder(StretchHolder holder,int position) {
+        public void onBindViewHolder(final StretchHolder holder, final int position) {
             try {
                 InputStream inputStream = getActivity().getAssets().open(stretchPhotoFolder + File.separator + _stretchShowList.get(position).get("spath"));
 
@@ -220,7 +219,6 @@ public class DialogShowStretchingFragment extends DialogFragment {
             }
             holder.setStretchName(_stretchShowList.get(position).get("sname"));
             holder.setStretchDetail(_stretchShowList.get(position).get("sname"));
-            holder.setSID(Integer.valueOf(_stretchShowList.get(position).get("sid")));
 
             Log.d(TAG, "onBindViewHolder: " + _stretchShowList.get(position).get("isselect"));
             
@@ -229,6 +227,18 @@ public class DialogShowStretchingFragment extends DialogFragment {
             }else {
                 holder.itemView.setBackgroundColor(Color.TRANSPARENT);
             }
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    stretchShowList.get(selected_position).put("isselect", "false");
+                    notifyItemChanged(selected_position);
+                    selected_position = Integer.valueOf(_stretchShowList.get(position).get("sid"));
+                    stretchShowList.get(selected_position).put("isselect", "true");
+                    notifyItemChanged(selected_position);
+                    holder.setPosition(selected_position);
+                }
+            });
 
         }
 
