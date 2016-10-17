@@ -14,7 +14,6 @@ import android.view.View;
 import com.example.therdsak.yeutsen.mainactivity.MainActivity;
 import com.example.therdsak.yeutsen.pageractivity.TimeCheck;
 import com.example.therdsak.yeutsen.pageractivity.showfragment.ShowStretchingFragment;
-import com.example.therdsak.yeutsen.service.TestOne;
 import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 
 import junit.framework.Test;
@@ -53,7 +52,6 @@ public class YeutSenDialogFragment extends DialogFragment {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                getActivity().stopService(TestOne.newIntent(getActivity()));
                 dialogInterface.cancel();
             }
         });
