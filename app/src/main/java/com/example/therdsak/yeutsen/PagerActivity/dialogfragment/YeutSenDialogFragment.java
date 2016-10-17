@@ -12,7 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.example.therdsak.yeutsen.mainactivity.MainActivity;
+import com.example.therdsak.yeutsen.pageractivity.TimeCheck;
+import com.example.therdsak.yeutsen.pageractivity.showfragment.ShowStretchingFragment;
 import com.example.therdsak.yeutsen.service.TestOne;
+import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 
 import junit.framework.Test;
 

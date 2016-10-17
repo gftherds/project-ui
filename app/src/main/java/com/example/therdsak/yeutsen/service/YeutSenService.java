@@ -9,14 +9,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.therdsak.yeutsen.pageractivity.PagerActivity;
+import com.example.therdsak.yeutsen.pageractivity.TimeCheck;
 import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 
+
+import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 /**
  * Created by Nutdanai on 10/11/2016.
@@ -26,8 +31,12 @@ public class YeutSenService extends IntentService {
     private static final String TAG = "YeutSenService";
     public static final String ACTION_SHOW_NOTIFICATION = "com.example.therdsak.yeutsen.ACTION_SHOW_NOTIFICATION";
     public static final String RECEIVER_SHOW_NOTIFICATION = "com.example.therdsak.yeutsen.RECEIVER_SHOW_NOTIFICATION";
-    public static final String REQUEST_CODE="request_code";
-    private static Context ctx;
+    private static final String REQUEST_CODE = "request_code";
+    public static final String REQUEST_STRING_CHECK = "REQUEST_STRING_CHECK";
+    private static final int REQUEST_CODE_ONE = 1;
+    private static final int REQUEST_CODE_TWO = 2;
+    private static Intent intentSetService;
+    static Context ctx;
 
 
     public YeutSenService() {
@@ -40,13 +49,29 @@ public class YeutSenService extends IntentService {
         return new Intent(context, YeutSenService.class);
     }
 
-    public static void setServiceAlarm(Context context) {
-        Intent i = YeutSenService.newIntent(context);
-        PendingIntent pi = PendingIntent.getService(context, 0, i, 0);
+    //    TODO : (DO d d) setServiceAlarm
+    public static void setServiceAlarm(Context context, int requestCode) {
+        intentSetService = YeutSenService.newIntent(context);
+        PendingIntent pi = PendingIntent.getService(context, 0, intentSetService, 0);
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager amTimeIn = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
+        switch (requestCode) {
+            case REQUEST_CODE_ONE:
+                Log.d(TAG, "setServiceAlarm: REQUEST_CODE_ONE " );
+                YeutSenPreference.setBtnOnStart(context, false);
+//                amTimeIn.setRepeating(AlarmManager.RTC_WAKEUP, YeutSenPreference.getDateTimeIn(context),60*1000, pi);
+                amTimeIn.set(AlarmManager.RTC_WAKEUP, YeutSenPreference.getDateTimeIn(context), pi);
+                Log.d(TAG, "setServiceAlarm: time1 " + new Date(YeutSenPreference.getDateTimeIn(context)));
 
-        am.set(AlarmManager.RTC_WAKEUP, YeutSenPreference.getDateToAlert(context), pi);
+                break;
+            case REQUEST_CODE_TWO:
+                Log.d(TAG, "setServiceAlarm: REQUEST_CODE_TWO ");
+                am.set(AlarmManager.RTC_WAKEUP, YeutSenPreference.getDateToAlert(context), pi);
+                Log.d(TAG, "setServiceAlarm: time2 " + new Date(YeutSenPreference.getDateToAlert(context)));
+                break;
+        }
+
     }
 
 
@@ -57,6 +82,7 @@ public class YeutSenService extends IntentService {
         PendingIntent pi = PendingIntent.getActivity(this, 0, i, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+
         builder.setTicker("Ticker!");
         builder.setContentTitle("Time Up !! ");
         builder.setContentText("Time = " + new SimpleDateFormat(" hh:mm:ss a").format(YeutSenPreference.getDateToAlert(this)));
@@ -68,22 +94,25 @@ public class YeutSenService extends IntentService {
         builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
         builder.setAutoCancel(true);
 
+
         Notification notification = builder.build();
 //        notification.flags |= Notification.FLAG_INSISTENT;
 
 //        NotificationManagerCompat nmc = NotificationManagerCompat.from(this);
 //        nmc.notify(0, notification);
 
-        sendBackgroundNotification(0,notification);
+
+        sendBackgroundNotification(0, notification);
         new Screen().on(YeutSenService.this);
+
     }
 
 
-    private void sendBackgroundNotification(int requestCode,Notification notification){
+    private void sendBackgroundNotification(int requestCode, Notification notification) {
         Intent intent = new Intent(ACTION_SHOW_NOTIFICATION);
-        intent.putExtra(REQUEST_CODE,requestCode);
-        intent.putExtra(RECEIVER_SHOW_NOTIFICATION,notification);
-        sendOrderedBroadcast(intent,RECEIVER_SHOW_NOTIFICATION,null,null, Activity.RESULT_OK,null,null);
+        intent.putExtra(REQUEST_CODE, requestCode);
+        intent.putExtra(RECEIVER_SHOW_NOTIFICATION, notification);
+        sendOrderedBroadcast(intent, RECEIVER_SHOW_NOTIFICATION, null, null, Activity.RESULT_OK, null, null);
 
     }
 }

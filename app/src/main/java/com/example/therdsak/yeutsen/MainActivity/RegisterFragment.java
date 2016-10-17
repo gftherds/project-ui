@@ -1,8 +1,10 @@
 package com.example.therdsak.yeutsen.mainactivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,12 +20,15 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.therdsak.yeutsen.pageractivity.PagerActivity;
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.pageractivity.PagerActivity;
+import com.example.therdsak.yeutsen.pageractivity.TimeCheck;
+import com.example.therdsak.yeutsen.service.YeutSenService;
 import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -42,21 +47,21 @@ public class RegisterFragment extends Fragment {
         return fragment;
     }
 
+    private static final String EXTRA_TIME = "TimeDialogFragment";
     private static final String DIALOG_TIME = "MainFragment";
     private static final String TAG = "MainFragment";
     private static final int FIRST_BTN = 1;
     private static final int SECOND_BTN = 2;
-    private static final int THIRD_BTN = 3;
-    private static final int FORTH_BTN = 4;
 
     CheckBox  Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
     RadioGroup radioGroup;
     RadioButton radioButton;
     Button buttonFirstTime;
     Button buttonSecondTime;
-    Button buttonThirdTime;
-    Button buttonFourTime;
     Button buttonEnter;
+
+    Calendar calStartTime, calEndTime;
+    Date startTimeDate, endTimeDate;
 
     List<Boolean> listBooleanDay = new ArrayList<>();
 
@@ -74,6 +79,8 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register, container, false);
+//        calStartTime = Calendar.getInstance(); // Time1 set to Compare
+//        calEndTime = Calendar.getInstance();  // Time2 set to Compare
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // Get Window
@@ -103,7 +110,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getFragmentManager();
-                TimeDialogFragment dialogFragment = TimeDialogFragment.newInstance(time.getTimeDate());
+                TimeDialogFragment dialogFragment = TimeDialogFragment.newInstance(startTimeDate);
                 dialogFragment.setTargetFragment(RegisterFragment.this, FIRST_BTN);
                 dialogFragment.show(fm, DIALOG_TIME);
                 Log.d(TAG, "Time 1: ");
@@ -115,37 +122,13 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getFragmentManager();
-                TimeDialogFragment dialogFragment = TimeDialogFragment.newInstance(time.getTimeDate());
+                TimeDialogFragment dialogFragment = TimeDialogFragment.newInstance(endTimeDate);
                 dialogFragment.setTargetFragment(RegisterFragment.this, SECOND_BTN);
                 dialogFragment.show(fm, DIALOG_TIME);
                 Log.d(TAG, "Time 2: ");
             }
         });
 
-
-        buttonThirdTime = (Button) view.findViewById(R.id.button3);
-        buttonThirdTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = getFragmentManager();
-                TimeDialogFragment dialogFragment = TimeDialogFragment.newInstance(time.getTimeDate());
-                dialogFragment.setTargetFragment(RegisterFragment.this, THIRD_BTN);
-                dialogFragment.show(fm, DIALOG_TIME);
-                Log.d(TAG, "Time 3: ");
-            }
-        });
-
-        buttonFourTime = (Button) view.findViewById(R.id.button4);
-        buttonFourTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = getFragmentManager();
-                TimeDialogFragment dialogFragment = TimeDialogFragment.newInstance(time.getTimeDate());
-                dialogFragment.setTargetFragment(RegisterFragment.this, FORTH_BTN);
-                dialogFragment.show(fm, DIALOG_TIME);
-                Log.d(TAG, "Time 4: ");
-            }
-        });
 
         buttonEnter = (Button) view.findViewById(R.id.enter_working);
         buttonEnter.setOnClickListener(new View.OnClickListener() {
@@ -172,44 +155,104 @@ public class RegisterFragment extends Fragment {
                 result.append(",").append(Saturday.isChecked());
 
                 Log.d(TAG, "onClick: " +result);
-
+                //Set Value in SharedPref.
                 YeutSenPreference.setDayOfWeek(getActivity(),result.toString());
+                YeutSenPreference.setDateTimeIn(getActivity(), startTimeDate.getTime());
+                YeutSenPreference.setDateTimeOut(getActivity(), endTimeDate.getTime());
+
+                Log.d(TAG, "onClick: Name Activity " + getActivity());
+                Log.d(TAG, "onClick: setDateTimeIn" + new Date(YeutSenPreference.getDateTimeIn(getActivity())));
+
+                TimeCheck.newInstance(getContext()).setDayOfWeek();
+                if(!TimeCheck.newInstance(getActivity()).isDayOfWeekFunction(Calendar.getInstance().get(Calendar.DAY_OF_WEEK))) {
+                    TimeCheck.newInstance(getContext()).setTimeToAlertNextDay(); //set another day
+                }else{
+                    YeutSenService.setServiceAlarm(getActivity(),1);
+                }
+
 
                 int selected_id = radioGroup.getCheckedRadioButtonId();
                 radioButton = (RadioButton) getActivity().findViewById(selected_id);
 
-                Intent i = new Intent(getActivity(), PagerActivity.class);
-                startActivity(i);
-                getActivity().finish();
+                new AsyncTask<Integer, Long, Boolean>()
+                {
+                    ProgressDialog pd = new ProgressDialog(getActivity());
+                    Intent myIntent = new Intent(getActivity(), PagerActivity.class);
 
+                    @Override
+                    protected Boolean doInBackground(Integer... params)
+                    {
+                        pd.setTitle("Loading Activity");
+                        pd.setMessage("Please Wait ...");
+                        pd.setMax(params[0]);
+                        pd.setIndeterminate(false);
+                        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+
+                        publishProgress(0L);
+
+                        long start = System.currentTimeMillis();
+                        long waitTime = params[0] * 1000;
+                        try
+                        {
+                            while (System.currentTimeMillis() - start < waitTime)
+                            {
+                                Thread.sleep(200);
+                                publishProgress(System.currentTimeMillis() - start);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            return false;
+                        }
+
+                        return true;
+                    }
+
+                    @Override
+                    protected void onProgressUpdate(Long... values)
+                    {
+                        if (values[0] == 0)
+                        {
+                            pd.show();
+                        }
+                        else
+                        {
+                            pd.setProgress((int) (values[0] / 1000));
+                        }
+                    }
+
+                    @Override
+                    protected void onPostExecute(Boolean result)
+                    {
+                        pd.dismiss();
+                        startActivity(myIntent);
+                        getActivity().finish();
+
+                    }
+                }.execute(3);
             }
         });
-
         return view;
     }
 
     private String getFormattedTime(Date date) {
-        return new SimpleDateFormat("h:mm a").format(date);
+        return new SimpleDateFormat("hh:mm a").format(date);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            Date date = (Date) data.getSerializableExtra(TimeDialogFragment.EXTRA_TIME);
 
-            time.setTimeDate(date);
             switch (requestCode) {
                 case FIRST_BTN:
-                    buttonFirstTime.setText(getFormattedTime(time.getTimeDate()));
+                    startTimeDate = (Date) data.getSerializableExtra(EXTRA_TIME);
+                    Log.d(TAG, "onActivityResult: Cal1 " + startTimeDate ) ;
+                    buttonFirstTime.setText(getFormattedTime(startTimeDate));
                     break;
                 case SECOND_BTN:
-                    buttonSecondTime.setText(getFormattedTime(time.getTimeDate()));
-                    break;
-                case THIRD_BTN:
-                    buttonThirdTime.setText(getFormattedTime(time.getTimeDate()));
-                    break;
-                case FORTH_BTN:
-                    buttonFourTime.setText(getFormattedTime(time.getTimeDate()));
+                    endTimeDate = (Date) data.getSerializableExtra(EXTRA_TIME);
+                    Log.d(TAG, "onActivityResult: Cal2 "+ endTimeDate );
+                    buttonSecondTime.setText(getFormattedTime(endTimeDate));
                     break;
             }
         }

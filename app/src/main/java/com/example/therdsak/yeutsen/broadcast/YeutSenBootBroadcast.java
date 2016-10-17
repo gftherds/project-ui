@@ -20,8 +20,10 @@ public class YeutSenBootBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "onReceive: YeutSenBootBroadcast");
+
+//        TODO:(DO d d) if else
         if(Calendar.getInstance().getTime().getTime() < YeutSenPreference.getDateToAlert(context)){
-            YeutSenService.setServiceAlarm(context);
+            YeutSenService.setServiceAlarm(context,2);
         }
     }
 }

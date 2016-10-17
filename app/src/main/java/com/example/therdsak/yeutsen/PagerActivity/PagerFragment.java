@@ -80,7 +80,6 @@ public class PagerFragment extends VisibleFragment {
         Log.d(TAG, "onCreate: ");
     }
     public static PagerFragment newInstance() {
-
         Bundle args = new Bundle();
         PagerFragment fragment = new PagerFragment();
         fragment.setArguments(args);

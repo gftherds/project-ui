@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.therdsak.yeutsen.R;
 import com.example.therdsak.yeutsen.pageractivity.dialogfragment.YeutSenDialogFragment;
 import com.example.therdsak.yeutsen.pageractivity.showfragment.ShowStretchingFragment;
+import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 
 /**
  * Created by Therdsak on 10/6/2016.

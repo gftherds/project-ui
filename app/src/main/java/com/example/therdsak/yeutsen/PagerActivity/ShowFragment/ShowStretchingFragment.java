@@ -1,6 +1,7 @@
 package com.example.therdsak.yeutsen.pageractivity.showfragment;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,10 +15,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.pageractivity.TimeCheck;
 import com.example.therdsak.yeutsen.service.YeutSenService;
 import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Therdsak on 9/29/2016.
@@ -25,20 +28,21 @@ import java.util.Calendar;
 public class ShowStretchingFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "ShowStretchingFragment";
     private static final String textFinish = "Finish";
+    private static final int REQUEST_CODE_TWO = 2;
+    private boolean REQUEST_CHECK_ALREADY_CREATE=false;
     private String output;
-    private Thread thread;
     private int tempLengthOfTime;
-    private int tempCount;
     private int seconds;
     private int hourEdit;
     private int minuteEdit;
     private int secondEdit;
-    private Button btnFinished;
+    private boolean isButton;
+    public Button btnFinished;
     private TextView mTextView;
 
+    private Thread thread;
     private Calendar calendar;
     private CallBack mCallBack;
-    private boolean REQUEST_CODE_IN_APP;
 
 
     public interface CallBack {
@@ -67,6 +71,7 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     Animation anim;
@@ -74,12 +79,15 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: isBtnStop " + YeutSenPreference.isBtnOnStop(getActivity()) + " isBtnStart: " + YeutSenPreference.isBtnOnStart(getActivity()));
         View view = inflater.inflate(R.layout.fragment_one, container, false);
         mTextView = (TextView) view.findViewById(R.id.txt_show_welcome);
 
         btnFinished = (Button) view.findViewById(R.id.show_stretching_button);
         btnFinished.setOnClickListener(this);
-        anim = AnimationUtils.loadAnimation(getActivity(), R.anim.left_to_right);
+        TimeCheck.newInstance(getActivity()).getLoopTime();
+        setColorBtn( YeutSenPreference.isBtnOnStop(getActivity()));
+        anim = AnimationUtils.loadAnimation(getContext(), R.anim.left_to_right);
         UpdateUI();
         return view;
     }
@@ -89,6 +97,7 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
     public void onStart() {
         super.onStart();
         Log.d(TAG, "onStart: ");
+        REQUEST_CHECK_ALREADY_CREATE=true;
         mTextView.setAnimation(anim);
     }
 
@@ -97,31 +106,31 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
     public void onStop() {
         super.onStop();
         Log.d(TAG, "onStop: ");
+        REQUEST_CHECK_ALREADY_CREATE =false;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         if (thread != null) {
             thread.interrupt();
         }
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.show_stretching_button:
-                setColorBtn(false);
+                setColorBtn(! YeutSenPreference.isBtnOnStop(getActivity()));
                 Log.d(TAG, "onClick: ");
                 callStartCount();
                 break;
         }
     }
 
-    private void setColorBtn(boolean isColorBtn){
+    public void setColorBtn(boolean isColorBtn) {
         btnFinished.setEnabled(isColorBtn);
-        int r ;
-        r = (isColorBtn)? R.color.colorAccent : R.color.grey;
+        int r = (isColorBtn) ? R.color.colorAccent : R.color.grey;
         btnFinished.setBackgroundColor(getResources().getColor(r));
     }
 
@@ -130,9 +139,10 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
 //        tempLengthOfTime = YeutSenPreference.getLengthTimeAlert(getActivity());
         tempLengthOfTime = 1; // Temp Test
         calTimeFinish();
-        YeutSenService.setServiceAlarm(getActivity());
+        YeutSenService.setServiceAlarm(getContext(), REQUEST_CODE_TWO);
         tempLengthOfTime = tempLengthOfTime * 60;
         callThreadCount();
+
     }
 
     public void calTimeFinish() {
@@ -141,7 +151,10 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
         calendar.set(Calendar.HOUR, hourEdit);
         calendar.set(Calendar.MINUTE, minuteEdit);
         calendar.set(Calendar.SECOND, secondEdit);
-        YeutSenPreference.setDateToAlert(getActivity(), calendar.getTime().getTime());
+
+        YeutSenPreference.setDateToAlert(getContext(), calendar.getTime().getTime());
+
+        Log.d(TAG, "calTimeFinish: " + new Date(YeutSenPreference.getDateToAlert(getContext())));
     }
 
     public void getTime(int hour, int minute, int second) {
@@ -151,12 +164,15 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
     }
 
 
+
+
+
     public void callThreadCount() {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
-                   // send value to set UI
+                    // send value to set UI
                     setTextBtnUI();
                     tempLengthOfTime--;
                     if (tempLengthOfTime == 0) {
@@ -170,7 +186,7 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
         thread.start();
     }
 
-    private void doFakeWork(){
+    private void doFakeWork() {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -178,13 +194,20 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
         }
     }
 
-    private void setTextBtnUI(){
+    private void setTextBtnUI() {
+
         btnFinished.post(new Runnable() {
             @Override
             public void run() {
                 String s;
                 s = (tempLengthOfTime != 0) ? formatTime(tempLengthOfTime) : textFinish;
-                if (s.equals(textFinish)) setColorBtn(true);
+                if (s.equals(textFinish)) {
+                    if(Calendar.getInstance().getTime().getTime() > YeutSenPreference.getDateTimeOut(getActivity())){
+                        setColorBtn(false);
+                    }else{
+                        setColorBtn(true);
+                    }
+                }
                 btnFinished.setText(s);
             }
         });
@@ -217,35 +240,53 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
         return output;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            Log.d(TAG, "setUserVisibleHint: " + isVisibleToUser);
+            if(REQUEST_CHECK_ALREADY_CREATE){
+                UpdateUI();
+            }
+        }
+    }
+
+
     public void UpdateUI() {
 
-        if (Calendar.getInstance().getTime().getTime() < YeutSenPreference.getDateToAlert(getActivity())) {
-            // Do setTime and callThread
-            Log.d(TAG, "UpdateUI: ");
-            setColorBtn(false);
-            Log.d(TAG, "UpdateUI Calendar: " + Calendar.getInstance().getTime().getTime());
-            Log.d(TAG, "UpdateUI Preference: " + YeutSenPreference.getDateToAlert(getActivity()));
-            final Calendar cal1 = Calendar.getInstance();
-            final Calendar cal2 = Calendar.getInstance();
-            cal1.setTimeInMillis(YeutSenPreference.getDateToAlert(getActivity()));
-            cal2.setTimeInMillis(Calendar.getInstance().getTime().getTime());
-            Log.d(TAG, "UpdateUI: " + cal1.getTime().toString());
-            Log.d(TAG, "UpdateUI cal 2 : " + cal2.getTime().toString());
+        if(!REQUEST_CHECK_ALREADY_CREATE) {
+            if (Calendar.getInstance().getTime().getTime() < YeutSenPreference.getDateToAlert(getContext())) {
+                // Do setTime and callThread
+                Log.d(TAG, "UpdateUI: InTime ");
+                setColorBtn(false);
+                Log.d(TAG, "UpdateUI Calendar: " + Calendar.getInstance().getTime().getTime());
+                Log.d(TAG, "UpdateUI Preference: " + YeutSenPreference.getDateToAlert(getContext()));
+                final Calendar cal1 = Calendar.getInstance();
+                final Calendar cal2 = Calendar.getInstance();
+                cal1.setTimeInMillis(YeutSenPreference.getDateToAlert(getContext()));
+                cal2.setTimeInMillis(Calendar.getInstance().getTime().getTime());
+                Log.d(TAG, "UpdateUI: " + cal1.getTime().toString());
+                Log.d(TAG, "UpdateUI cal 2 : " + cal2.getTime().toString());
 
-            int hourCal1 = cal1.get(Calendar.HOUR) * 60 * 60;
-            int minuteCal1 = cal1.get(Calendar.MINUTE) * 60;
-            int secondCal1 = cal1.get(Calendar.SECOND);
+                int hourCal1 = cal1.get(Calendar.HOUR) * 60 * 60;
+                int minuteCal1 = cal1.get(Calendar.MINUTE) * 60;
+                int secondCal1 = cal1.get(Calendar.SECOND);
 
-            int hourCal2 = cal2.get(Calendar.HOUR) * 60 * 60;
-            int minuteCal2 = cal2.get(Calendar.MINUTE) * 60;
-            int secondCal2 = cal2.get(Calendar.SECOND);
+                int hourCal2 = cal2.get(Calendar.HOUR) * 60 * 60;
+                int minuteCal2 = cal2.get(Calendar.MINUTE) * 60;
+                int secondCal2 = cal2.get(Calendar.SECOND);
 
-            tempLengthOfTime = (hourCal1 + minuteCal1 + secondCal1) - (hourCal2 + minuteCal2 + secondCal2);
-            if(thread == null) callThreadCount();
-            Log.d(TAG, "UpdateUI: thread Alive" + thread.isAlive());
-            Log.d(TAG, "UpdateUI The last: " + tempLengthOfTime);
+                tempLengthOfTime = (hourCal1 + minuteCal1 + secondCal1) - (hourCal2 + minuteCal2 + secondCal2);
+                if (thread == null) callThreadCount();
+
+                Log.d(TAG, "UpdateUI The last: " + tempLengthOfTime);
+            }
         }
-
+//        if(Calendar.getInstance().getTime().getTime() > YeutSenPreference.getDateTimeOut(getActivity())){
+//            Log.d(TAG, "UpdateUI: Time Out");
+//            TimeCheck.newInstance(getActivity()).getLoopTime();
+//            setColorBtn(YeutSenPreference.isBtnOnStop(getActivity()));
+//        }
     }
 
 

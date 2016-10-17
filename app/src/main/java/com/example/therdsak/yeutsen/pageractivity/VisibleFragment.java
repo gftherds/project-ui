@@ -26,6 +26,7 @@ public class VisibleFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "onReceive");
             setResultCode(Activity.RESULT_CANCELED);
+            Log.d(TAG, "onReceive: Finish");
         }
     };
 
