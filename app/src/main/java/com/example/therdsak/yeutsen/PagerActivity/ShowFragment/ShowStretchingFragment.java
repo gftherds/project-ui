@@ -1,5 +1,6 @@
 package com.example.therdsak.yeutsen.PagerActivity.ShowFragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -179,6 +180,18 @@ public class ShowStretchingFragment extends Fragment{
 
         }else {
             Log.d(TAG, "setUserVisibleHint: -----------------false-------------------");
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode != Activity.RESULT_OK){
+            return;
+        }
+
+        if(requestCode == FIRST_BTN){
+            int backposition = data.getIntExtra("position", 0);
+            randomStretch.loadUrl(assetPath + File.separator + stretchPhotoFolder + File.separator + stretchList.get(backposition).get("spath"));
         }
     }
 }

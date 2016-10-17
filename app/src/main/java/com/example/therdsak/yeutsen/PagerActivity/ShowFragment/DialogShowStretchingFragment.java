@@ -1,8 +1,10 @@
 package com.example.therdsak.yeutsen.PagerActivity.ShowFragment;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ClipData;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -68,11 +70,13 @@ public class DialogShowStretchingFragment extends DialogFragment {
                 String stretchName = jsonObjectInside.getString("sname");
                 String stretchPath = jsonObjectInside.getString("spath");
                 String stretchId = jsonObjectInside.getString("sid");
+                String isSelected = jsonObjectInside.getString("isselect");
 
                 hashMapList = new HashMap<>();
                 hashMapList.put("sname", stretchName);
                 hashMapList.put("spath", stretchPath);
                 hashMapList.put("sid", stretchId);
+                hashMapList.put("isselect", isSelected);
 
                 stretchShowList.add(hashMapList);
             }
@@ -121,6 +125,9 @@ public class DialogShowStretchingFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                //send position back to ShowStretchingFragment.java to change stretching in webview
+                Intent intent = new Intent();
+                intent.putExtra("position", position);
+                getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
             }
         });
         builder.setNegativeButton("Cancel", null);
@@ -145,6 +152,7 @@ public class DialogShowStretchingFragment extends DialogFragment {
                 @Override
                 public void onClick(View view) {
                     //send sid to DialogShowStretchingFragment.java to prepare before send to ShowStretchingFragment.java
+                    position = sid;
                 }
             });
 
@@ -177,6 +185,7 @@ public class DialogShowStretchingFragment extends DialogFragment {
 
         protected StretchAdapter(ArrayList<HashMap<String, String>> stretchShowList, int position){
             _stretchShowList = stretchShowList;
+            _stretchShowList.get(position).put("isselect", "true");
 
         }
 
@@ -201,7 +210,10 @@ public class DialogShowStretchingFragment extends DialogFragment {
             holder.setStretchName(_stretchShowList.get(position).get("sname"));
             holder.setStretchDetail(_stretchShowList.get(position).get("sname"));
             holder.setSID(Integer.valueOf(_stretchShowList.get(position).get("sid")));
-
+            if(_stretchShowList.get(position).get("isselect") == "true"){
+                holder.itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+            Log.d(TAG, "onBindViewHolder: " + _stretchShowList.get(position).get("isselect"));
         }
 
         @Override

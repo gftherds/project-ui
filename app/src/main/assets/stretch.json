@@ -4,85 +4,99 @@
             "sid":0,
             "sname":"stretch_01",
             "sinfo":"",
-            "spath":"stretch_01.gif"
+            "spath":"stretch_01.gif",
+            "isselect":"false"
         },
         {
             "sid":1,
             "sname":"stretch_02",
             "sinfo":"",
-            "spath":"stretch_02.gif"
+            "spath":"stretch_02.gif",
+            "isselect":"false"
         },
         {
             "sid":2,
             "sname":"stretch_03",
             "sinfo":"",
-            "spath":"stretch_03.gif"
+            "spath":"stretch_03.gif",
+            "isselect":"false"
         },
         {
             "sid":3,
             "sname":"stretch_04",
             "sinfo":"",
-            "spath":"stretch_04.gif"
+            "spath":"stretch_04.gif",
+            "isselect":"false"
         },
         {
             "sid":4,
             "sname":"stretch_05",
             "sinfo":"",
-            "spath":"stretch_05.gif"
+            "spath":"stretch_05.gif",
+            "isselect":"false"
         },
         {
             "sid":5,
             "sname":"stretch_06",
             "sinfo":"",
-            "spath":"stretch_06.gif"
+            "spath":"stretch_06.gif",
+            "isselect":"false"
         },
         {
             "sid":6,
             "sname":"stretch_07",
             "sinfo":"",
-            "spath":"stretch_07.gif"
+            "spath":"stretch_07.gif",
+            "isselect":"false"
         },
         {
             "sid":7,
             "sname":"stretch_08",
             "sinfo":"",
-            "spath":"stretch_08.gif"
+            "spath":"stretch_08.gif",
+            "isselect":"false"
         },
         {
             "sid":8,
             "sname":"stretch_09",
             "sinfo":"",
-            "spath":"stretch_09.gif"
+            "spath":"stretch_09.gif",
+            "isselect":"false"
         },
         {
             "sid":9,
             "sname":"stretch_10",
             "sinfo":"",
-            "spath":"stretch_10.gif"
+            "spath":"stretch_10.gif",
+            "isselect":"false"
         },
         {
             "sid":10,
             "sname":"stretch_11",
             "sinfo":"",
-            "spath":"stretch_11.gif"
+            "spath":"stretch_11.gif",
+            "isselect":"false"
         },
         {
             "sid":11,
             "sname":"stretch_12",
             "sinfo":"",
-            "spath":"stretch_12.gif"
+            "spath":"stretch_12.gif",
+            "isselect":"false"
         },
         {
             "sid":12,
             "sname":"stretch_13",
             "sinfo":"",
-            "spath":"stretch_13.gif"
+            "spath":"stretch_13.gif",
+            "isselect":"false"
         },
         {
             "sid":13,
             "sname":"stretch_14",
             "sinfo":"",
-            "spath":"stretch_14.gif"
+            "spath":"stretch_14.gif",
+            "isselect":"false"
         }
     ],
     "version":"1.0"
