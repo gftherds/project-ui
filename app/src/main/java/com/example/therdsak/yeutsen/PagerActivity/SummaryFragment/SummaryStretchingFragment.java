@@ -21,6 +21,8 @@ import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -46,16 +48,21 @@ public class SummaryStretchingFragment extends Fragment {
         return fragment;
     }
 
-    private BarGraphSeries<DataPoint> setWeeklyGraph(){
+    private BarGraphSeries<DataPoint> setWeeklyGraph(String[] weekday){
+        double[] weekdayDouble = new double[7];
+        for(int i = 0; i < weekday.length; i++)
+        {
+            weekdayDouble[i] = Double.parseDouble(weekday[i]);
+        }
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{
                 new DataPoint(0, 0), //set space
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6),
-                new DataPoint(5, 0),
-                new DataPoint(6, 0),
-                new DataPoint(7, 0),
+                new DataPoint(1, weekdayDouble[0]),
+                new DataPoint(2, weekdayDouble[1]),
+                new DataPoint(3, weekdayDouble[2]),
+                new DataPoint(4, weekdayDouble[3]),
+                new DataPoint(5, weekdayDouble[4]),
+                new DataPoint(6, weekdayDouble[5]),
+                new DataPoint(7, weekdayDouble[6]),
                 new DataPoint(8, 0) //set space
         });
         series.setSpacing(20);
@@ -106,11 +113,12 @@ public class SummaryStretchingFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         Log.d(TAG, "setUserVisibleHint: " + isVisibleToUser);
         if(isVisibleToUser == true){
-            weeklyGraphView.addSeries(setWeeklyGraph());
+            weeklyGraphView.addSeries(setWeeklyGraph(StretchLogLab.getInstance(getContext()).queryWeekdayStetch()));
             totalStretch.setText(StretchLogLab.getInstance(getContext()).queryTotalStretch());
             monthlyStretch.setText(StretchLogLab.getInstance(getContext()).queryMonthlyStretch());
-
+            weeklyStretch.setText(StretchLogLab.getInstance(getContext()).queryWeeklyStretch());
             todayStretch.setText(StretchLogLab.getInstance(getContext()).queryTodayStretch());
+
         }else{
             if(weeklyGraphView != null){
                 weeklyGraphView.removeAllSeries();

@@ -105,12 +105,22 @@ public class StretchLogLab {
     }
 
     public String queryWeeklyStretch(){
-        return "";
+        Calendar date = new GregorianCalendar();
+        String stringSQL = "select count(*) from stretches where strftime ('%W', datetime(stretchdate/1000, 'unixepoch')) = '"
+                + String.valueOf(date.get(Calendar.WEEK_OF_YEAR) - 1)
+                +"'";
+        Log.d(TAG, "queryWeeklyStretch: " + stringSQL);
+        Log.d(TAG, "queryWeeklyStretch: " + String.valueOf(date.get(Calendar.WEEK_OF_YEAR) - 1));
+        Cursor cursor = database.rawQuery(stringSQL, null);
+        cursor.moveToFirst();
+        String queryResult = cursor.getString(0);
+        cursor.close();
+        return queryResult;
     }
 
     public String queryTodayStretch(){
         Calendar date = new GregorianCalendar();
-        String stringSQL = "select count(*) from stretches where strftime('%d', datetime(stretchdate/1000, 'unixepoch') = '"
+        String stringSQL = "select count(*) from stretches where strftime('%d', datetime(stretchdate/1000, 'unixepoch')) = '"
                 + date.get(Calendar.DAY_OF_MONTH)
                 +"' and strftime('%m', datetime(stretchdate/1000, 'unixepoch')) = '"
                 + String.valueOf(date.get(Calendar.MONTH) + 1)
@@ -118,12 +128,32 @@ public class StretchLogLab {
                 + date.get(Calendar.YEAR)
                 +"'";
         Log.d(TAG, "queryTodayStretch: " + stringSQL);
-        Log.d(TAG, "queryTodayStretch: " + String.valueOf(date.get(Calendar.MONTH) + 1));
+        Log.d(TAG, "queryTodayStretch: " + date.get(Calendar.DAY_OF_WEEK));
         Cursor cursor = database.rawQuery(stringSQL, null);
         cursor.moveToFirst();
         String queryResult = cursor.getString(0);
         cursor.close();
         return queryResult;
+    }
+
+        public String[] queryWeekdayStetch(){
+            Calendar date = new GregorianCalendar();
+            String weekday[] = new String[7];
+
+            for(int i = 0; i < 7 ; i++){
+                String stringSQL = "select count(*) from stretches where strftime ('%W', datetime(stretchdate/1000, 'unixepoch')) = '"
+                        + String.valueOf(date.get(Calendar.WEEK_OF_YEAR) - 1)
+                        +"' and strftime('%w', datetime(stretchdate/1000, 'unixepoch')) = '"
+                        + i
+                        +"'";
+                Cursor cursor = database.rawQuery(stringSQL, null);
+                cursor.moveToFirst();
+                weekday[i] = cursor.getString(0);
+                Log.d(TAG, "queryWeekdayStetch: " + weekday[i] + "\n");
+                cursor.close();
+            }
+
+            return weekday;
     }
 
 }
