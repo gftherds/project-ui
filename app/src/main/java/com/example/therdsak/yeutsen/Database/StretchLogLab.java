@@ -1,17 +1,15 @@
-package com.example.therdsak.yeutsen.Database;
+package com.example.therdsak.yeutsen.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.LinearLayout;
 
-import com.example.therdsak.yeutsen.Database.StretchLogDBSchama.*;
+import com.example.therdsak.yeutsen.database.StretchLogDBSchama.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 

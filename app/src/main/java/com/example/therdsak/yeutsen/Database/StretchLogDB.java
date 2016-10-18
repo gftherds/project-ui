@@ -1,10 +1,10 @@
-package com.example.therdsak.yeutsen.Database;
+package com.example.therdsak.yeutsen.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.therdsak.yeutsen.Database.StretchLogDBSchama.*;
+import com.example.therdsak.yeutsen.database.StretchLogDBSchama.*;
 
 /**
  * Created by Noppharat on 10/10/2016.

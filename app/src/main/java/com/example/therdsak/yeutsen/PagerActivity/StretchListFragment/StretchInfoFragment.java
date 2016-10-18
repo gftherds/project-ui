@@ -1,18 +1,20 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchListFragment;
+package com.example.therdsak.yeutsen.pageractivity.stretchlistfragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.therdsak.yeutsen.R;
+
+import java.io.File;
 
 /**
  * Created by Noppharat on 10/7/2016.
@@ -29,6 +31,8 @@ public class StretchInfoFragment extends Fragment {
     private String stretchFileName;
     private String assetPath = "file:///android_asset";
     private String stretchPhotoFolder = "stretch";
+    
+    private static final String TAG = "StretchInfoFragment";
 
     public static StretchInfoFragment newInstance(String sname, String spath){
         Bundle args = new Bundle();

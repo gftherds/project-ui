@@ -1,8 +1,7 @@
-package com.example.therdsak.yeutsen.PagerActivity.ShowFragment;
+package com.example.therdsak.yeutsen.pageractivity.showfragment;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,7 +21,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 

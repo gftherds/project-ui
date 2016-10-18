@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchListFragment;
+package com.example.therdsak.yeutsen.pageractivity.stretchlistfragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,8 +23,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.therdsak.yeutsen.R;
-import com.example.therdsak.yeutsen.pageractivity.PagerFragment;
-import com.example.therdsak.yeutsen.pageractivity.VisibleFragment;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -157,9 +155,7 @@ public class StretchListFragment extends Fragment {
 //                            .addToBackStack(null)
 //                            .commit();
 
-                    Intent intent = StretchInfoActivity.newIntent(getActivity(), sname , spath);
-                    getActivity().startActivity(intent);
-                    StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname);
+                    StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname, spath);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     fragmentManager.beginTransaction()
                             .replace(R.id.fragment_container5 ,fragment)

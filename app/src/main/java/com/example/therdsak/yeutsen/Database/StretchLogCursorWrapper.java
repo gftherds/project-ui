@@ -1,9 +1,9 @@
-package com.example.therdsak.yeutsen.Database;
+package com.example.therdsak.yeutsen.database;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.example.therdsak.yeutsen.Database.StretchLogDBSchama.*;
+import com.example.therdsak.yeutsen.database.StretchLogDBSchama.*;
 
 import java.util.Date;
 import java.util.UUID;

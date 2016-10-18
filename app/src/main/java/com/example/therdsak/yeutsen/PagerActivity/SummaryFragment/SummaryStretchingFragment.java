@@ -8,22 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.therdsak.yeutsen.Database.StretchLog;
-import com.example.therdsak.yeutsen.Database.StretchLogLab;
+import com.example.therdsak.yeutsen.database.StretchLogLab;
 import com.example.therdsak.yeutsen.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Therdsak on 9/29/2016.

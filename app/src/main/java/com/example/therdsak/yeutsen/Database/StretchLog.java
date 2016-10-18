@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.Database;
+package com.example.therdsak.yeutsen.database;
 
 import java.util.Date;
 import java.util.UUID;

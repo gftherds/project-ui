@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.GraphFragment;
+package com.example.therdsak.yeutsen.pageractivity.graphfragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,11 +10,9 @@ import android.view.ViewGroup;
 
 import com.example.therdsak.yeutsen.R;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.GraphViewXML;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 /**
  * Created by Noppharat on 10/11/2016.

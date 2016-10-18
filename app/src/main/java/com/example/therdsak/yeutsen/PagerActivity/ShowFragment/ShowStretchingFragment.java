@@ -1,16 +1,29 @@
-package com.example.therdsak.yeutsen.PagerActivity.ShowFragment;
+package com.example.therdsak.yeutsen.pageractivity.showfragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.therdsak.yeutsen.database.StretchLog;
+import com.example.therdsak.yeutsen.database.StretchLogLab;
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.pageractivity.VisibleFragment;
+import com.example.therdsak.yeutsen.service.YeutSenService;
+import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,6 +31,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
@@ -25,26 +39,37 @@ import java.util.Random;
 /**
  * Created by Therdsak on 9/29/2016.
  */
-public class ShowStretchingFragment extends Fragment{
+public class ShowStretchingFragment extends Fragment implements View.OnClickListener{
 
     private static final String DIALOG_TIME = "ShowStretchListFragment";
+    private boolean REQUEST_CHECK_ALREADY_CREATE =false;
     private static final int FIRST_BTN = 1;
-
     private static final String TAG = "ShowStretchingFragment";
 
+    private TextView mTextView;
     private Button addButton;
+    private Button btnFinished;
     private WebView randomStretch;
 
+    private int tempLengthOfTime;
     private int randInt;
+    private int seconds;
+    private int hourEdit;
+    private int minuteEdit;
+    private int secondEdit;
+    private String output;
     private String assetPath = "file:///android_asset";
     private String stretchPhotoFolder = "stretch";
     private String jsonFileName = "stretch.json";
     private StretchLog stretchLog;
-    private ArrayList<HashMap<String, String>> stretchList;
 
+    private ArrayList<HashMap<String, String>> stretchList;
     private Thread thread;
     private Calendar calendar;
     private CallBack mCallBack;
+    private Animation anim;
+    private static final int REQUEST_CODE_TWO =2;
+    private static final String textFinish ="Finish";
 
 
     public interface CallBack {
@@ -125,6 +150,7 @@ public class ShowStretchingFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_one,container,false);
+        mTextView = (TextView) view.findViewById(R.id.txt_show_welcome);
 
         randomStretch = (WebView) view.findViewById(R.id.random_stretch_gif);
         randomStretch.loadUrl(assetPath + File.separator + stretchPhotoFolder + File.separator + stretchList.get(randInt).get("spath"));
@@ -169,38 +195,18 @@ public class ShowStretchingFragment extends Fragment{
                 return false;
             }
         });
-        addButton = (Button) view.findViewById(R.id.show_stretching_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                stretchLog = new StretchLog();
-                stretchLog.setUserid("0");
-                stretchLog.setStretchid(5);
-                stretchLog.setDate(new Date());
-                StretchLogLab.getInstance(getActivity()).insertStretchLog(stretchLog);
-                Log.d(TAG, "onClick: ID : " + stretchLog.getId() + " USERID :  " + stretchLog.getUserid() + " DATE : " + stretchLog.getDate() + " STRETCHID : "  + stretchLog.getStretchid());
-            }
-        });
 
         btnFinished = (Button) view.findViewById(R.id.show_stretching_button);
         btnFinished.setOnClickListener(this);
-        TimeCheck.newInstance(getActivity()).getLoopTime();
+
+
         setColorBtn( YeutSenPreference.isBtnOnStop(getActivity()));
         anim = AnimationUtils.loadAnimation(getContext(), R.anim.left_to_right);
         UpdateUI();
         return view;
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser){
-            Log.d(TAG, "setUserVisibleHint: -----------------true-------------------");
 
-        }else {
-            Log.d(TAG, "setUserVisibleHint: -----------------false-------------------");
-        }
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -242,11 +248,19 @@ public class ShowStretchingFragment extends Fragment{
 
     @Override
     public void onClick(View view) {
+
         switch (view.getId()) {
             case R.id.show_stretching_button:
                 setColorBtn(! YeutSenPreference.isBtnOnStop(getActivity()));
+                stretchLog = new StretchLog();
+                stretchLog.setUserid("0");
+                stretchLog.setStretchid(randInt);
+                stretchLog.setDate(new Date());
+                StretchLogLab.getInstance(getActivity()).insertStretchLog(stretchLog);
+                Log.d(TAG, "onClick: ID : " + stretchLog.getId() + " USERID :  " + stretchLog.getUserid() + " DATE : " + stretchLog.getDate() + " STRETCHID : "  + stretchLog.getStretchid());
                 Log.d(TAG, "onClick: ");
                 callStartCount();
+
                 break;
         }
     }

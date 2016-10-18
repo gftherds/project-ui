@@ -71,6 +71,7 @@
     <string name="Slove">Slove</string>
     <string name="Solve">Solve</string>
     <string name="btn_finish">Finish</string>
+    <string name="txt_moving">Welcome to YeutSen Application . . .</string>
 
 
 </resources>

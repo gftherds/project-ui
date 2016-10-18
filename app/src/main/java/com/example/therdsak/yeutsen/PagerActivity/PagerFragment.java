@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity;
+package com.example.therdsak.yeutsen.pageractivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,13 +17,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 
-import com.example.therdsak.yeutsen.MainActivity.TutorialFragment;
-import com.example.therdsak.yeutsen.PagerActivity.ListFragment.ListStretchingFragment;
-import com.example.therdsak.yeutsen.PagerActivity.ShowFragment.ShowStretchingFragment;
-import com.example.therdsak.yeutsen.PagerActivity.StretchListFragment.StretchListFragment;
-import com.example.therdsak.yeutsen.PagerActivity.SummaryFragment.SummaryStretchingFragment;
+import com.example.therdsak.yeutsen.mainactivity.TutorialFragment;
+import com.example.therdsak.yeutsen.pageractivity.showfragment.ShowStretchingFragment;
+import com.example.therdsak.yeutsen.pageractivity.stretchlistfragment.StretchListFragment;
+import com.example.therdsak.yeutsen.pageractivity.summaryfragment.SummaryStretchingFragment;
 import com.example.therdsak.yeutsen.R;
 
 import java.util.ArrayList;
