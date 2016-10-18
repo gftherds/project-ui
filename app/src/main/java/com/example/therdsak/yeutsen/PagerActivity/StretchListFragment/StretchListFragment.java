@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.pageractivity.stretchlistfragment;
+package com.example.therdsak.yeutsen.PagerActivity.StretchListFragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,10 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,14 +33,13 @@ import java.util.HashMap;
  */
 
 public class StretchListFragment extends Fragment {
-    private static final String TAG = "StretchListFragment";
 
     private RecyclerView mRecyclerView;
     private ArrayList<HashMap<String, String>> stretchList;
     private StretchAdapter mStretchAdapter;
 
     private int gridSize = 2;
-    private String stretchPhotoFolder = "stretch";
+    private String stretchPhotoFolder = "test_photo";
     private String jsonFileName = "stretch.json";
 
     public static StretchListFragment newInstance(){
@@ -114,6 +109,11 @@ public class StretchListFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Log.d(TAG, "onStart: ");
+        fm = getActivity().getSupportFragmentManager();
+
+
+
+
     }
 
     @Nullable
@@ -164,6 +164,14 @@ public class StretchListFragment extends Fragment {
 
 //                    Intent intent = StretchInfoActivity.newIntent(getActivity(), sname);
 //                    getActivity().startActivity(intent);
+                Intent intent = new Intent(getActivity(),StretchInfoActivity.class);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),mStretchPhoto,"transitionName");
+                getActivity().startActivity(intent,options.toBundle());
+//                    Fragment fragmentStretchList = StretchInfoFragment.newInstance(sname);
+//                    fm.beginTransaction().replace(R.id.fragment_container2,fragmentStretchList).addToBackStack(null).addSharedElement(mStretchPhoto,"Photo").commit();
+
+
+
                 }
             });
         }

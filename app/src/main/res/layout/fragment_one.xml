@@ -25,9 +25,12 @@
     <Button
         android:layout_marginTop="80dp"
         android:id="@+id/show_stretching_button"
-        android:layout_width="200sp"
+        android:layout_width="300sp"
         android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/button_shape"
         android:text="@string/btn_finish"
         android:textSize="24dp"
         android:textColor="@color/white"

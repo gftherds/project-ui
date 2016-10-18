@@ -1,8 +1,9 @@
-package com.example.therdsak.yeutsen.pageractivity.stretchlistfragment;
+package com.example.therdsak.yeutsen.PagerActivity.StretchListFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.therdsak.yeutsen.R;
 
 import java.io.File;
@@ -31,7 +33,7 @@ public class StretchInfoFragment extends Fragment {
     private String stretchFileName;
     private String assetPath = "file:///android_asset";
     private String stretchPhotoFolder = "stretch";
-    
+
     private static final String TAG = "StretchInfoFragment";
 
     public static StretchInfoFragment newInstance(String sname, String spath){
@@ -57,6 +59,12 @@ public class StretchInfoFragment extends Fragment {
         View view = inflater.inflate(R.layout.stretch_info_fragment, container, false);
 
         stretchWebView = (WebView) view.findViewById(R.id.stretch_info_webview);
+        toolbarInfo = (Toolbar) view.findViewById(R.id.toolbar_notification);
+
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbarInfo);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Item");
+
+        stretchPhoto = (ImageView) view.findViewById(R.id.stretch_info_gif);
         stretchName = (TextView) view.findViewById(R.id.stretch_info_name);
         stretchName.setText(stretchNameString);
         stretchInfo = (TextView) view.findViewById(R.id.stretch_info);

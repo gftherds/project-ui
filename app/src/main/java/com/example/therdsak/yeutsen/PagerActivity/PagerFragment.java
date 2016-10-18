@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.pageractivity;
+package com.example.therdsak.yeutsen.PagerActivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,11 +17,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 
-import com.example.therdsak.yeutsen.mainactivity.TutorialFragment;
-import com.example.therdsak.yeutsen.pageractivity.showfragment.ShowStretchingFragment;
-import com.example.therdsak.yeutsen.pageractivity.stretchlistfragment.StretchListFragment;
-import com.example.therdsak.yeutsen.pageractivity.summaryfragment.SummaryStretchingFragment;
+import com.example.therdsak.yeutsen.MainActivity.TutorialFragment;
+import com.example.therdsak.yeutsen.PagerActivity.ListFragment.ListStretchingFragment;
+import com.example.therdsak.yeutsen.PagerActivity.ShowFragment.ShowStretchingFragment;
+import com.example.therdsak.yeutsen.PagerActivity.StretchListFragment.StretchListFragment;
+import com.example.therdsak.yeutsen.PagerActivity.SummaryFragment.SummaryStretchingFragment;
 import com.example.therdsak.yeutsen.R;
 
 import java.util.ArrayList;
@@ -54,16 +56,16 @@ public class PagerFragment extends Fragment {
     private int[] tabIcons = {
 
             //icon color black
-            R.drawable.home_color,
-            R.drawable.list_color,
-            R.drawable.summary_color
+            R.drawable.home_selected,
+            R.drawable.list_selected,
+            R.drawable.summary_selected
     };
 
     private int[] tabBlackIcons = {
             //icon color white
-            R.drawable.home_white,
-            R.drawable.list_white,
-            R.drawable.summary_white
+            R.drawable.home_unselected,
+            R.drawable.list_unselected,
+            R.drawable.summary_unselected
     };
 
     @Override
@@ -90,7 +92,6 @@ public class PagerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: ");
         View view = inflater.inflate(R.layout.maintabbar,container,false);
 
         appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar_layout);
@@ -101,7 +102,6 @@ public class PagerFragment extends Fragment {
 
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-        viewPager.setOffscreenPageLimit(3);
 
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -159,9 +159,9 @@ public class PagerFragment extends Fragment {
     }
 
     private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(R.drawable.home_white);
-        tabLayout.getTabAt(1).setIcon(R.drawable.list_color);
-        tabLayout.getTabAt(2).setIcon(R.drawable.summary_color);
+        tabLayout.getTabAt(0).setIcon(R.drawable.home_selected);
+        tabLayout.getTabAt(1).setIcon(R.drawable.list_unselected);
+        tabLayout.getTabAt(2).setIcon(R.drawable.summary_unselected);
 
 
     }
@@ -231,14 +231,14 @@ public class PagerFragment extends Fragment {
                 Log.d(TAG, " tutorial : " + R.id.mnu_tutorial);
                 return true;
             case R.id.mnu_notification :
-                Fragment fragment2 = SettingNotificationFragment.newInstance();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment2).addToBackStack(null).commit();
+                Fragment fragmentNotification = SettingNotificationFragment.newInstance();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2,fragmentNotification).addToBackStack(null).commit();
                 Log.d(TAG, " notification : " + R.id.mnu_notification);
                 return true;
             case R.id.mnu_about :
-                Fragment fragment3 = SettingAboutFragment.newInstance();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment3).addToBackStack(null).commit();
-                Log.d(TAG, " setting : " + R.id.mnu_about);
+                Fragment fragmentAbout = SettingAboutFragment.newInstance();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2,fragmentAbout).addToBackStack(null).commit();
+                Log.d(TAG, " about : " + R.id.mnu_about);
                 return true;
         }
         return super.onOptionsItemSelected(item);

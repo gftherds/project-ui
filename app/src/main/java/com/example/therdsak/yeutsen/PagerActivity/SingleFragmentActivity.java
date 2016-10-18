@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.pageractivity;
+package com.example.therdsak.yeutsen.PagerActivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,20 +23,19 @@ public abstract class SingleFragmentActivity extends AppCompatActivity implement
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.single_activity_fragment);
+        setContentView(R.layout.activity_main_pager);
 
 
-        fm = getSupportFragmentManager();
-        fragment = fm.findFragmentById(R.id.fragment_container5);
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.fragment_container5);
 
         if(fragment == null){
             fragment = onCreateFragment();
 
-            fm.beginTransaction().add(R.id.fragment_container5,fragment).commit();
+            fm.beginTransaction().add(R.id.fragment_container2,fragment).commit();
+
 
         }
-
-    }
 
     @Override
     protected void onStart() {

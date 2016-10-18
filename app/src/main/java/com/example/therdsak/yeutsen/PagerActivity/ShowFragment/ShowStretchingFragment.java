@@ -1,7 +1,6 @@
-package com.example.therdsak.yeutsen.pageractivity.showfragment;
+package com.example.therdsak.yeutsen.PagerActivity.ShowFragment;
 
-import android.app.Activity;
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,11 +14,14 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.therdsak.yeutsen.database.StretchLog;
 import com.example.therdsak.yeutsen.database.StretchLogLab;
+import com.example.therdsak.yeutsen.MainActivity.TimeDialogFragment;
+import com.example.therdsak.yeutsen.PagerActivity.PagerFragment;
 import com.example.therdsak.yeutsen.R;
 import com.example.therdsak.yeutsen.pageractivity.VisibleFragment;
 import com.example.therdsak.yeutsen.service.YeutSenService;
