@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchSettingFragment.SettingAboutFragment;
+package com.example.therdsak.yeutsen.pageractivity.stretchsettingfragment.settingaboutfragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

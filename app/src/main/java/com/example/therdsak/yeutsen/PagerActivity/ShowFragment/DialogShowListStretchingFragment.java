@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.ShowFragment;
+package com.example.therdsak.yeutsen.pageractivity.showfragment;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
@@ -22,7 +21,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.therdsak.yeutsen.PagerActivity.PagerFragment;
 import com.example.therdsak.yeutsen.R;
 
 import org.json.JSONArray;

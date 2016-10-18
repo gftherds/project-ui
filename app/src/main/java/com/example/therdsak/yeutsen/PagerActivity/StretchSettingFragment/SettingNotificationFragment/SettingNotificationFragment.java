@@ -1,6 +1,5 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchSettingFragment.SettingNotificationFragment;
+package com.example.therdsak.yeutsen.pageractivity.stretchsettingfragment.settingnotificationfragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,21 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.example.therdsak.yeutsen.R;
 
-import java.text.BreakIterator;
 import java.util.List;
 
 /**

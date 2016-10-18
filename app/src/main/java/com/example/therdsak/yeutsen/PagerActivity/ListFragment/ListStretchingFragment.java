@@ -28,7 +28,7 @@ public class ListStretchingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_two,container,false);
+        View view =inflater.inflate(R.layout.stretch_recycler,container,false);
 
         return view;
 

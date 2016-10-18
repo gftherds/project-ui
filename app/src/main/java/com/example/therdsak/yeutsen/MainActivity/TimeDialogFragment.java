@@ -24,7 +24,8 @@ import java.util.Date;
  */
 public class TimeDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
     private static final String TAG = "TimeDialogFragment";
-    private static final String EXTRA_TIME = "TimeDialogFragment";
+    public static final String EXTRA_TIME = "TimeDialogFragment";
+
     private Date date;
     TimePicker _TimePicker;
 

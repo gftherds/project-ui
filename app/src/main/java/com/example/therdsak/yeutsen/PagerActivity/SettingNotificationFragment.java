@@ -50,20 +50,20 @@ public class SettingNotificationFragment extends Fragment {
 
 
 
-        TimeText = (TextView) view.findViewById(R.id.setting_stretching_text_time_style_ring_tone);
-        TimeText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager manager = getFragmentManager();
-                ChoiceDialogFragment dialog = new ChoiceDialogFragment();
-
-                Bundle bundle = new Bundle();
-                bundle.putStringArrayList(ChoiceDialogFragment.DATA, getItems());     // Require ArrayList
-                bundle.putInt(ChoiceDialogFragment.SELECTED, 0);
-                dialog.setArguments(bundle);
-                dialog.show(manager, "Dialog");
-            }
-        });
+//        TimeText = (TextView) view.findViewById(R.id.setting_stretching_text_time_style_ring_tone);
+//        TimeText.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                FragmentManager manager = getFragmentManager();
+//                ChoiceDialogFragment dialog = new ChoiceDialogFragment();
+//
+//                Bundle bundle = new Bundle();
+//                bundle.putStringArrayList(ChoiceDialogFragment.DATA, getItems());     // Require ArrayList
+//                bundle.putInt(ChoiceDialogFragment.SELECTED, 0);
+//                dialog.setArguments(bundle);
+//                dialog.show(manager, "Dialog");
+//            }
+//        });
 
 
         Ringtone = (TextView) view.findViewById(R.id.setting_stretching_text_ring_tone);

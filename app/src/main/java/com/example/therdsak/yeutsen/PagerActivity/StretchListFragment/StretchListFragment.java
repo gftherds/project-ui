@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchListFragment;
+package com.example.therdsak.yeutsen.pageractivity.stretchlistfragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.res.ResourcesCompat;
@@ -15,6 +16,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,9 +39,11 @@ import java.util.HashMap;
 
 public class StretchListFragment extends Fragment {
 
+    private static final String TAG = "StretchListFragment";
     private RecyclerView mRecyclerView;
     private ArrayList<HashMap<String, String>> stretchList;
     private StretchAdapter mStretchAdapter;
+    private FragmentManager fm;
 
     private int gridSize = 2;
     private String stretchPhotoFolder = "test_photo";
@@ -126,7 +133,7 @@ public class StretchListFragment extends Fragment {
         ani.setDuration(700);
         set.addAnimation(ani);
         LayoutAnimationController con = new LayoutAnimationController(set,0.5f);
-
+        fm = getFragmentManager();
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.stretch_recycler_view);
         mRecyclerView.setLayoutAnimation(con);
@@ -158,7 +165,7 @@ public class StretchListFragment extends Fragment {
                     StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname, spath);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container5 ,fragment)
+                            .replace(R.id.fragment_container2 ,fragment)
                             .addToBackStack(null)
                             .commit();
 

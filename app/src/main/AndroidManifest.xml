@@ -28,29 +28,24 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PagerActivity.PagerActivity">
         <activity android:name=".pageractivity.PagerActivity"
             android:theme="@style/AppTheme">
 
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-
         </activity>
 
-        <activity android:name=".PagerActivity.StretchListFragment.StretchInfoActivity">
+        <activity android:name=".pageractivity.stretchlistfragment.StretchInfoActivity">
         </activity>
         <service android:name=".service.YeutSenService"/>
 
-        <activity android:name=".PagerActivity.ShowFragment.ShowListStretchActivity">
-        </activity>
+        <!--<activity android:name=".pageractivity.showfragment.ShowListStretchActivity">-->
+        <!--</activity>-->
 
-        <activity android:name=".PagerActivity.StretchSettingFragment.SettingAboutFragment.SettingAboutActivity">
-        </activity>
+        <!--<activity android:name=".pageractivity.stretchsettingfragment.settingaboutfragment.SettingAboutActivity">-->
+        <!--</activity>-->
 
-        <activity android:name=".PagerActivity.StretchSettingFragment.SettingNotificationFragment.SettingNotificationActivity">
-        </activity>
+        <!--<activity android:name=".pageractivity.stretchsettingfragment.settingnotificationfragment.SettingNotificationActivity">-->
+        <!--</activity>-->
+
         <receiver android:name=".broadcast.YeutSenBootBroadcast"
             android:enabled="true"
             android:exported="true">

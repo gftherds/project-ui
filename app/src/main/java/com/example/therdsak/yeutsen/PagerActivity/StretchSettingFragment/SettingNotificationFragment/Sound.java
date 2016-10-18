@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchSettingFragment.SettingNotificationFragment;
+package com.example.therdsak.yeutsen.pageractivity.stretchsettingfragment.settingnotificationfragment;
 
 /**
  * Created by Therdsak on 10/16/2016.

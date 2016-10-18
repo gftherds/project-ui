@@ -1,10 +1,7 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchSettingFragment.SettingSetTimeFragment;
-package com.example.therdsak.yeutsen.pageractivity;
+package com.example.therdsak.yeutsen.pageractivity.stretchsettingfragment.settingsettimefragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,11 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
-import com.example.therdsak.yeutsen.mainactivity.RegisterFragment;
-import com.example.therdsak.yeutsen.MainActivity.RegisterFragment;
-import com.example.therdsak.yeutsen.PagerActivity.PagerActivity;
-import com.example.therdsak.yeutsen.PagerActivity.PagerFragment;
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.mainactivity.RegisterFragment;
+import com.example.therdsak.yeutsen.pageractivity.PagerFragment;
+
 
 /**
  * Created by Therdsak on 10/6/2016.
@@ -76,7 +72,7 @@ public class SettingSetTimeFragment extends Fragment {
 
 
                 Fragment f6 = new PagerFragment();
-                fm.beginTransaction().replace(R.id.fragment_container5,f6).commit();
+                fm.beginTransaction().replace(R.id.fragment_container2,f6).commit();
             }
         });
 

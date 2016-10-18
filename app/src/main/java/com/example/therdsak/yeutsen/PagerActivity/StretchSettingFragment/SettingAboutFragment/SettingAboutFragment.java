@@ -1,7 +1,5 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchSettingFragment.SettingAboutFragment;
+package com.example.therdsak.yeutsen.pageractivity.stretchsettingfragment.settingaboutfragment;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;

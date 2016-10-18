@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity;
+package com.example.therdsak.yeutsen.pageractivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,13 +17,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 
-import com.example.therdsak.yeutsen.MainActivity.TutorialFragment;
-import com.example.therdsak.yeutsen.PagerActivity.ListFragment.ListStretchingFragment;
-import com.example.therdsak.yeutsen.PagerActivity.ShowFragment.ShowStretchingFragment;
-import com.example.therdsak.yeutsen.PagerActivity.StretchListFragment.StretchListFragment;
-import com.example.therdsak.yeutsen.PagerActivity.SummaryFragment.SummaryStretchingFragment;
+import com.example.therdsak.yeutsen.mainactivity.TutorialFragment;
+import com.example.therdsak.yeutsen.pageractivity.showfragment.ShowStretchingFragment;
+import com.example.therdsak.yeutsen.pageractivity.stretchlistfragment.StretchListFragment;
+import com.example.therdsak.yeutsen.pageractivity.stretchsettingfragment.settingaboutfragment.SettingAboutFragment;
+import com.example.therdsak.yeutsen.pageractivity.stretchsettingfragment.settingsettimefragment.SettingSetTimeFragment;
+import com.example.therdsak.yeutsen.pageractivity.summaryfragment.SummaryStretchingFragment;
 import com.example.therdsak.yeutsen.R;
 
 import java.util.ArrayList;
@@ -68,18 +68,18 @@ public class PagerFragment extends Fragment {
             R.drawable.summary_unselected
     };
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart: ");
-
-    }
-
-    @Override
-    public void onStop() {
-        Log.d(TAG, "onStop: ");
-        super.onStop();
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        Log.d(TAG, "onStart: ");
+//
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        Log.d(TAG, "onStop: ");
+//        super.onStop();
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,7 +92,7 @@ public class PagerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.maintabbar,container,false);
+        View view = inflater.inflate(R.layout.main_tab_bar,container,false);
 
         appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar_layout);
 
@@ -154,7 +154,7 @@ public class PagerFragment extends Fragment {
 
             }
         });
-        setRetainInstance(true);
+      //  setRetainInstance(true);
         return view;
     }
 
@@ -222,12 +222,12 @@ public class PagerFragment extends Fragment {
         switch (item.getItemId()){
             case R.id.mnu_set_time :
                 Fragment fragment = SettingSetTimeFragment.newInstance();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2,fragment).commit();
                 Log.d(TAG, " set time : " + R.id.mnu_set_time);
                 return true;
             case R.id.mnu_tutorial :
                 Fragment fragment1 = TutorialFragment.newInstance();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container5,fragment1).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2,fragment1).commit();
                 Log.d(TAG, " tutorial : " + R.id.mnu_tutorial);
                 return true;
             case R.id.mnu_notification :

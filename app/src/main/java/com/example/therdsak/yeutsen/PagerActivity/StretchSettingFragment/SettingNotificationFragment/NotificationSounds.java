@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchSettingFragment.SettingNotificationFragment;
+package com.example.therdsak.yeutsen.pageractivity.stretchsettingfragment.settingnotificationfragment;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;

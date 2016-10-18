@@ -8,7 +8,7 @@ import com.example.therdsak.yeutsen.pageractivity.SingleFragmentActivity;
  * Created by Noppharat on 10/11/2016.
  */
 
-public class GraphActivity extends SingleFragmentActivity {
+public abstract class GraphActivity extends SingleFragmentActivity {
     @Override
     protected Fragment onCreateFragment() {
         return new GraphFragment();
