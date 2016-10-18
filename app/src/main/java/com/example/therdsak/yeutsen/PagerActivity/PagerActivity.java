@@ -21,10 +21,6 @@ public class PagerActivity extends SingleFragmentActivity {
         return new Intent(context,PagerActivity.class);
     }
 
-    @Override
-    public void getDialog() {
-
-    }
 }
 
 

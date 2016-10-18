@@ -16,29 +16,29 @@
         style="@style/Widget.MyApp.ActionBar" />
 
 
-    <!--<WebView-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:layout_marginBottom="20dp"-->
-        <!--android:layout_width="320dp"-->
-        <!--android:layout_height="240dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:id="@+id/stretch_info_gif"-->
-        <!--android:transitionName="transitionName"-->
-        <!--&gt;-->
-    <!--</WebView>-->
-
-    <ImageView
-        android:layout_width="320dp"
-        android:layout_height="240dp"
-        android:id="@+id/stretch_info_name"
-        android:layout_gravity="center"
-        android:text="Name name"
+    <WebView
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:layout_width="320dp"
+        android:layout_height="240dp"
+        android:layout_gravity="center"
+        android:id="@+id/stretch_info_gif"
         android:transitionName="transitionName"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        />
+        >
+    </WebView>
+
+    <!--<ImageView-->
+        <!--android:layout_width="320dp"-->
+        <!--android:layout_height="240dp"-->
+        <!--android:id="@+id/stretch_info_name"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="Name name"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:transitionName="transitionName"-->
+        <!--android:textSize="18dp"-->
+        <!--android:textStyle="bold"-->
+        <!--/>-->
 
     <TextView
         android:layout_width="wrap_content"

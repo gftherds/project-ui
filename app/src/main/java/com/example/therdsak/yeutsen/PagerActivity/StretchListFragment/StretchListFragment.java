@@ -46,7 +46,7 @@ public class StretchListFragment extends Fragment {
     private FragmentManager fm;
 
     private int gridSize = 2;
-    private String stretchPhotoFolder = "test_photo";
+    private String stretchPhotoFolder = "stretch";
     private String jsonFileName = "stretch.json";
 
     public static StretchListFragment newInstance(){
@@ -130,7 +130,7 @@ public class StretchListFragment extends Fragment {
         Log.d(TAG, "onCreateView: ");
         AnimationSet set = new AnimationSet(true);
         Animation ani = new AlphaAnimation(0.0f,0.5f);
-        ani.setDuration(700);
+        ani.setDuration(350);
         set.addAnimation(ani);
         LayoutAnimationController con = new LayoutAnimationController(set,0.5f);
         fm = getFragmentManager();
@@ -155,12 +155,6 @@ public class StretchListFragment extends Fragment {
             mStretchPhoto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname);
-//                    FragmentManager fragmentManager = getFragmentManager();
-//                    fragmentManager.beginTransaction()
-//                            .replace(R.id.fragment_container5 ,fragment)
-//                            .addToBackStack(null)
-//                            .commit();
 
                     StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname, spath);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -168,16 +162,6 @@ public class StretchListFragment extends Fragment {
                             .replace(R.id.fragment_container2 ,fragment)
                             .addToBackStack(null)
                             .commit();
-
-//                    Intent intent = StretchInfoActivity.newIntent(getActivity(), sname);
-//                    getActivity().startActivity(intent);
-                Intent intent = new Intent(getActivity(),StretchInfoActivity.class);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),mStretchPhoto,"transitionName");
-                getActivity().startActivity(intent,options.toBundle());
-//                    Fragment fragmentStretchList = StretchInfoFragment.newInstance(sname);
-//                    fm.beginTransaction().replace(R.id.fragment_container2,fragmentStretchList).addToBackStack(null).addSharedElement(mStretchPhoto,"Photo").commit();
-
-
 
                 }
             });
@@ -217,10 +201,12 @@ public class StretchListFragment extends Fragment {
         public void onBindViewHolder(StretchHolder holder, int position) {
             try {
                 InputStream inputStream = getActivity().getAssets().open(stretchPhotoFolder + File.separator + _stretchList.get(position).get("spath"));
+                Log.d(TAG, "onBindViewHolder: " + stretchPhotoFolder + File.separator + _stretchList.get(position).get("spath"));
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 holder.bindBitmap(bitmap);
             }catch(Exception e){
                 Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.giphy, null);
+                Log.d(TAG, "onBindViewHolder: can't get inputstream");
                 holder.bindDrawable(drawable);
             }
             holder.setStretchName(_stretchList.get(position).get("sname"));

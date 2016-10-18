@@ -19,22 +19,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 
+import com.example.therdsak.yeutsen.pageractivity.CheckTime;
 import com.example.therdsak.yeutsen.pageractivity.PagerActivity;
 import com.example.therdsak.yeutsen.R;
-import com.example.therdsak.yeutsen.pageractivity.TimeCheck;
 import com.example.therdsak.yeutsen.service.YeutSenService;
 import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 import com.github.channguyen.rsv.RangeSliderView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Therdsak on 9/28/2016.
@@ -45,6 +40,8 @@ public class RegisterFragment extends Fragment {
     private boolean isChecked = true;
     private Button buttonTimeIn;
     private Button buttonTimeOut;
+    private Button buttonEnter;
+    private CheckBox checkBox_week;
 
     public static RegisterFragment newInstance() {
 
@@ -60,13 +57,10 @@ public class RegisterFragment extends Fragment {
     private static final String TAG = "MainFragment";
     private static final int FIRST_BTN = 1;
     private static final int SECOND_BTN = 2;
+    private int lengthOfAlert ;
+    private CheckTime mCheckTime;
+    private String checkDayOfWeek[] = new String[7];
 
-
-    Button buttonFirstTime;
-    Button buttonSecondTime;
-    Button buttonEnter;
-
-    CheckBox checkBox_week;
 
 
 
@@ -80,22 +74,22 @@ public class RegisterFragment extends Fragment {
     RangeSliderView TimeSeekBar;
 
     boolean flag = false;
-  //  boolean isChecked;
 
-
-    Calendar calStartTime, calEndTime;
     Date startTimeDate, endTimeDate;
 
-    List<Boolean> listBooleanDay = new ArrayList<>();
-
-    private TimeLab time = new TimeLab();
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+            Log.d(TAG, "onCreate: ");
+            lengthOfAlert = 30;
+            for (int i = 1; i <= 5; i++) {
+                checkDayOfWeek[i] = "true";
+            }
+            checkDayOfWeek[0] = "false";
+            checkDayOfWeek[6] = "false";
+        Log.d(TAG, "onCreate: " +checkDayOfWeek);
     }
 
 
@@ -103,8 +97,7 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register, container, false);
-//        calStartTime = Calendar.getInstance(); // Time1 set to Compare
-//        calEndTime = Calendar.getInstance();  // Time2 set to Compare
+        mCheckTime = CheckTime.newInstance(getActivity());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // Get Window
@@ -120,9 +113,6 @@ public class RegisterFragment extends Fragment {
         }
 
 
-
-
-
         Sunday = (ImageView) view.findViewById(R.id.sunday);
         Sunday.setOnClickListener(new View.OnClickListener() {
 
@@ -133,15 +123,13 @@ public class RegisterFragment extends Fragment {
                     checkBox_week.setChecked(!isChecked);
                     checkBox_week.setEnabled(true);
                     flag = true;
-//                    Monday.setImageResource(R.drawable.color_monday);
-//                    Tuesday.setImageResource(R.drawable.color_tuesday);
-//                    Wednesday.setImageResource(R.drawable.color_wednesday);
-//                    Thursday.setImageResource(R.drawable.color_thursday);
-//                    Friday.setImageResource(R.drawable.color_friday);
+                    checkDayOfWeek[0] = "true";
+                    Log.d(TAG, "onClick: Sun " + checkDayOfWeek[0]);
                 } else {
                     Sunday.setImageResource(R.drawable.white_sunday);
                     flag = false;
-
+                    checkDayOfWeek[0] = "false";
+                    Log.d(TAG, "onClick: Sun " + checkDayOfWeek[0]);
                 }
             }
         });
@@ -155,10 +143,13 @@ public class RegisterFragment extends Fragment {
                     checkBox_week.setChecked(!isChecked);
                     checkBox_week.setEnabled(true);
                     flag = true;
+                    checkDayOfWeek[1] = "true";
+                    Log.d(TAG, "onClick: Mon " + checkDayOfWeek[1]);
                 } else {
                     Monday.setImageResource(R.drawable.white_monday);
-
                     flag = false;
+                    checkDayOfWeek[1] = "false";
+                    Log.d(TAG, "onClick: Mon " + checkDayOfWeek[1]);
                 }
             }
         });
@@ -172,9 +163,13 @@ public class RegisterFragment extends Fragment {
                     checkBox_week.setChecked(!isChecked);
                     checkBox_week.setEnabled(true);
                     flag = true;
+                    checkDayOfWeek[2] = "true";
+                    Log.d(TAG, "onClick: Tues " + checkDayOfWeek[2]);
                 } else {
                     Tuesday.setImageResource(R.drawable.white_tuesday);
                     flag = false;
+                    checkDayOfWeek[2] = "false";
+                    Log.d(TAG, "onClick: Tues " + checkDayOfWeek[2]);
                 }
             }
         });
@@ -188,9 +183,13 @@ public class RegisterFragment extends Fragment {
                     checkBox_week.setChecked(!isChecked);
                     checkBox_week.setEnabled(true);
                     flag = true;
+                    checkDayOfWeek[3] = "true";
+                    Log.d(TAG, "onClick: Wed " + checkDayOfWeek[3]);
                 } else {
                     Wednesday.setImageResource(R.drawable.white_wednesday);
                     flag = false;
+                    checkDayOfWeek[3] = "false";
+                    Log.d(TAG, "onClick: Wed " + checkDayOfWeek[3]);
                 }
             }
         });
@@ -204,9 +203,13 @@ public class RegisterFragment extends Fragment {
                     checkBox_week.setChecked(!isChecked);
                     checkBox_week.setEnabled(true);
                     flag = true;
+                    checkDayOfWeek[4] = "true";
+                    Log.d(TAG, "onClick: Thur " + checkDayOfWeek[4]);
                 } else {
                     Thursday.setImageResource(R.drawable.white_thursday);
                     flag = false;
+                    checkDayOfWeek[4] = "false";
+                    Log.d(TAG, "onClick: Thur " + checkDayOfWeek[4]);
                 }
             }
         });
@@ -220,9 +223,13 @@ public class RegisterFragment extends Fragment {
                     checkBox_week.setChecked(!isChecked);
                     checkBox_week.setEnabled(true);
                     flag = true;
+                    checkDayOfWeek[5] = "true";
+                    Log.d(TAG, "onClick: Fri " + checkDayOfWeek[5]);
                 } else {
                     Friday.setImageResource(R.drawable.white_friday);
                     flag = false;
+                    checkDayOfWeek[5] = "false";
+                    Log.d(TAG, "onClick: Fri " + checkDayOfWeek[5]);
                 }
             }
         });
@@ -236,10 +243,13 @@ public class RegisterFragment extends Fragment {
                     checkBox_week.setChecked(!isChecked);
                     checkBox_week.setEnabled(true);
                     flag = true;
+                    checkDayOfWeek[6] = "true";
+                    Log.d(TAG, "onClick: Sat " + checkDayOfWeek[6]);
                 } else {
                     Saturday.setImageResource(R.drawable.white_saturday);
-
                     flag = false;
+                    checkDayOfWeek[6] = "false";
+                    Log.d(TAG, "onClick: Sat " + checkDayOfWeek[6]);
                 }
             }
         });
@@ -258,11 +268,11 @@ public class RegisterFragment extends Fragment {
                     Thursday.setImageResource(R.drawable.color_thursday);
                     Friday.setImageResource(R.drawable.color_friday);
 
-                }else{
+                } else {
+
                 }
             }
         });
-
 
 
         buttonTimeIn = (Button) view.findViewById(R.id.button_time_in);
@@ -290,133 +300,119 @@ public class RegisterFragment extends Fragment {
         });
 
 
-
-
         buttonEnter = (Button) view.findViewById(R.id.enter_working);
         buttonEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
-                Intent i = new Intent(getActivity(), PagerActivity.class);
-                startActivity(i);
-                getActivity().finish();
+
+
+                StringBuffer result = new StringBuffer();
+                result.append(checkDayOfWeek[0]);
+                result.append(",").append(checkDayOfWeek[1]);
+                result.append(",").append(checkDayOfWeek[2]);
+                result.append(",").append(checkDayOfWeek[3]);
+                result.append(",").append(checkDayOfWeek[4]);
+                result.append(",").append(checkDayOfWeek[5]);
+                result.append(",").append(checkDayOfWeek[6]);
+
+                Log.d(TAG, "onClick: Result " + result);
+//                Set Value in SharedPref.
+                YeutSenPreference.setDayOfWeek(getActivity(), result.toString());
+                YeutSenPreference.setDateTimeIn(getActivity(), startTimeDate.getTime());
+                YeutSenPreference.setDateTimeOut(getActivity(), endTimeDate.getTime());
+                YeutSenPreference.setLengthTimeAlert(getActivity(), lengthOfAlert);
+
+                Log.d(TAG, "onClick: setDateTimeIn " + new Date(YeutSenPreference.getDateTimeIn(getActivity())));
+                Log.d(TAG, "onClick: setDateTimeOut " + new Date(YeutSenPreference.getDateTimeOut(getActivity())));
+                Log.d(TAG, "onClick: setLength " + new Date(YeutSenPreference.getLengthTimeAlert(getActivity())));
+
+               mCheckTime.setDayOfWeek();
+                if (!mCheckTime.isDayOfWeekFunction(Calendar.getInstance().get(Calendar.DAY_OF_WEEK))) {
+                    mCheckTime.setTimeToAlertNextDay(); //set another day
+                } else {
+                    YeutSenService.setServiceAlarm(getActivity(), 1);
+                }
+
+
+                new AsyncTask<Integer, Long, Boolean>() {
+                    ProgressDialog pd = new ProgressDialog(getActivity());
+                    Intent myIntent = new Intent(getActivity(), PagerActivity.class);
+
+                    @Override
+                    protected Boolean doInBackground(Integer... params) {
+                        pd.setTitle("Loading Activity");
+                        pd.setMessage("Please Wait ...");
+                        pd.setMax(params[0]);
+                        pd.setIndeterminate(false);
+                        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+                        publishProgress(0L);
+
+                        long start = System.currentTimeMillis();
+                        long waitTime = params[0] * 1000;
+                        try {
+                            while (System.currentTimeMillis() - start < waitTime) {
+                                Thread.sleep(200);
+                                publishProgress(System.currentTimeMillis() - start);
+                            }
+                        } catch (Exception e) {
+                            return false;
+                        }
+
+                        return true;
+                    }
+
+                    @Override
+                    protected void onProgressUpdate(Long... values) {
+                        if (values[0] == 0) {
+                            pd.show();
+                        } else {
+                            pd.setProgress((int) (values[0] / 1000));
+                        }
+                    }
+
+                    @Override
+                    protected void onPostExecute(Boolean result) {
+                        pd.dismiss();
+                        startActivity(myIntent);
+                        getActivity().finish();
+                    }
+                }.execute(2);
+
             }
         });
 
-//                listBooleanDay.add(Sunday.isChecked());
-//                listBooleanDay.add(Monday.isChecked());
-//                listBooleanDay.add(Tuesday.isChecked());
-//                listBooleanDay.add(Wednesday.isChecked());
-//                listBooleanDay.add(Thursday.isChecked());
-//                listBooleanDay.add(Friday.isChecked());
-//                listBooleanDay.add(Saturday.isChecked());
-//
-
-//                StringBuffer result = new StringBuffer();
-//                result.append(Sunday.isChecked());
-//                result.append(",").append(Monday.isChecked());
-//                result.append(",").append(Tuesday.isChecked());
-//                result.append(",").append(Wednesday.isChecked());
-//                result.append(",").append(Thursday.isChecked());
-//                result.append(",").append(Friday.isChecked());
-//                result.append(",").append(Saturday.isChecked());
-
-             //   Log.d(TAG, "onClick: " +result);
-                //Set Value in SharedPref.
-             //   YeutSenPreference.setDayOfWeek(getActivity(),result.toString());
-//                YeutSenPreference.setDateTimeIn(getActivity(), startTimeDate.getTime());
-//                YeutSenPreference.setDateTimeOut(getActivity(), endTimeDate.getTime());
-//
-//                Log.d(TAG, "onClick: Name Activity " + getActivity());
-//                Log.d(TAG, "onClick: setDateTimeIn" + new Date(YeutSenPreference.getDateTimeIn(getActivity())));
-//
-//                TimeCheck.newInstance(getContext()).setDayOfWeek();
-//                if(!TimeCheck.newInstance(getActivity()).isDayOfWeekFunction(Calendar.getInstance().get(Calendar.DAY_OF_WEEK))) {
-//                    TimeCheck.newInstance(getContext()).setTimeToAlertNextDay(); //set another day
-//                }else{
-//                    YeutSenService.setServiceAlarm(getActivity(),1);
-//                }
-
-
-//                int selected_id = radioGroup.getCheckedRadioButtonId();
-//                radioButton = (RadioButton) getActivity().findViewById(selected_id);
-//
-//                new AsyncTask<Integer, Long, Boolean>()
-//                {
-//                    ProgressDialog pd = new ProgressDialog(getActivity());
-//                    Intent myIntent = new Intent(getActivity(), PagerActivity.class);
-//
-//                    @Override
-//                    protected Boolean doInBackground(Integer... params)
-//                    {
-//                        pd.setTitle("Loading Activity");
-//                        pd.setMessage("Please Wait ...");
-//                        pd.setMax(params[0]);
-//                        pd.setIndeterminate(false);
-//                        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-//
-//                        publishProgress(0L);
-//
-//                        long start = System.currentTimeMillis();
-//                        long waitTime = params[0] * 1000;
-//                        try
-//                        {
-//                            while (System.currentTimeMillis() - start < waitTime)
-//                            {
-//                                Thread.sleep(200);
-//                                publishProgress(System.currentTimeMillis() - start);
-//                            }
-//                        }
-//                        catch (Exception e)
-//                        {
-//                            return false;
-//                        }
-//
-//                        return true;
-//                    }
-//
-//                    @Override
-//                    protected void onProgressUpdate(Long... values)
-//                    {
-//                        if (values[0] == 0)
-//                        {
-//                            pd.show();
-//                        }
-//                        else
-//                        {
-//                            pd.setProgress((int) (values[0] / 1000));
-//                        }
-//                    }
-//
-//                    @Override
-//                    protected void onPostExecute(Boolean result) {
-//                        pd.dismiss();
-//                        startActivity(myIntent);
-//                        getActivity().finish();
-//
-//
-                        TimeSeekBar = (RangeSliderView) view.findViewById(R.id.SeekBar_time_alert);
-                        TimeSeekBar.setRangeCount(3);
+        TimeSeekBar = (RangeSliderView) view.findViewById(R.id.SeekBar_time_alert);
+        TimeSeekBar.setRangeCount(3);
 //                        //      TimeSeekBar.setFilledColor(R.color.primary_dark);
 //                        //      TimeSeekBar.setEmptyColor(R.color.colorAccent);
 //                    TimeSeekBar.setMinimumHeight(5);
-                        TimeSeekBar.setBarHeightPercent(0.1f);
-                        TimeSeekBar.setSlotRadiusPercent(0.1f);
-                        TimeSeekBar.setSliderRadiusPercent(0.1f);
-                        TimeSeekBar.setOnSlideListener(new RangeSliderView.OnSlideListener() {
-                            @Override
-                            public void onSlide(int index) {
-                                Log.d(TAG, "onClick: ");
-                                TimeSeekBar.setTag(index);
-                                Log.d(TAG, "onSlide1: " + index);
+        TimeSeekBar.setBarHeightPercent(0.1f);
+        TimeSeekBar.setSlotRadiusPercent(0.1f);
+        TimeSeekBar.setSliderRadiusPercent(0.1f);
+        TimeSeekBar.setOnSlideListener(new RangeSliderView.OnSlideListener() {
+            @Override
+            public void onSlide(int index) {
+                Log.d(TAG, "onClick: ");
+                TimeSeekBar.setTag(index);
+                switch (index) {
+                    case 0:
+                        lengthOfAlert = 30;
+                        break;
+                    case 1:
+                        lengthOfAlert = 45;
+                        break;
+                    case 2:
+                        lengthOfAlert = 60;
+                        break;
+                }
+                Log.d(TAG, "onSlide: length " + lengthOfAlert);
+                Log.d(TAG, "onSlide1: " + index);
 //                            }
 //                               };
-                                 }
-                        });
-
-
-
-
+            }
+        });
 
 
         return view;
@@ -442,19 +438,17 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            Date date = (Date) data.getSerializableExtra(TimeDialogFragment.EXTRA_TIME);
 
-            time.setTimeDate(date);
             switch (requestCode) {
                 case FIRST_BTN:
                     startTimeDate = (Date) data.getSerializableExtra(EXTRA_TIME);
-                    Log.d(TAG, "onActivityResult: Cal1 " + startTimeDate ) ;
-                    buttonFirstTime.setText(getFormattedTime(startTimeDate));
+                    Log.d(TAG, "onActivityResult: Cal1 " + startTimeDate);
+                    buttonTimeIn.setText(getFormattedTime(startTimeDate));
                     break;
                 case SECOND_BTN:
                     endTimeDate = (Date) data.getSerializableExtra(EXTRA_TIME);
-                    Log.d(TAG, "onActivityResult: Cal2 "+ endTimeDate );
-                    buttonSecondTime.setText(getFormattedTime(endTimeDate));
+                    Log.d(TAG, "onActivityResult: Cal2 " + endTimeDate);
+                    buttonTimeOut.setText(getFormattedTime(endTimeDate));
                     break;
             }
         }

@@ -14,11 +14,10 @@ import com.example.therdsak.yeutsen.pageractivity.showfragment.ShowStretchingFra
 /**
  * Created by Therdsak on 10/6/2016.
  */
-public abstract class SingleFragmentActivity extends AppCompatActivity implements ShowStretchingFragment.CallBack {
+public abstract class SingleFragmentActivity extends AppCompatActivity implements VisibleFragment.Callback,ShowStretchingFragment.CallBack {
     private static final String TAG = "SingleFragmentActivity";
     public boolean REQUEST_BOOLEAN_ACTIVITY = true;
-    private Fragment fragment;
-    private FragmentManager fm;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,30 +36,37 @@ public abstract class SingleFragmentActivity extends AppCompatActivity implement
         }
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        Log.d(TAG, "onStart: ");
-//        REQUEST_BOOLEAN_ACTIVITY = true;
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
+        REQUEST_BOOLEAN_ACTIVITY = true;
+    }
 
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        Log.d(TAG, "onStop: ");
-//        REQUEST_BOOLEAN_ACTIVITY = false;
-//    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: ");
+        REQUEST_BOOLEAN_ACTIVITY = false;
+    }
 
-//    @Override
-//    public void getDialog() {
-//        Log.d(TAG, "getDialog: ");
-//        if (REQUEST_BOOLEAN_ACTIVITY) {
-//            Log.d(TAG, "getDialog: isTrue");
-//            YeutSenDialogFragment yeutSenDialogFragment = new YeutSenDialogFragment();
-//            yeutSenDialogFragment.show(getSupportFragmentManager(), "test");
-//        }
-//    }
-//
+    @Override
+    public void getDialog() {
+        Log.d(TAG, "getDialog: ");
+        if (REQUEST_BOOLEAN_ACTIVITY) {
+            Log.d(TAG, "getDialog: isTrue");
+            YeutSenDialogFragment yeutSenDialogFragment = new YeutSenDialogFragment();
+            yeutSenDialogFragment.show(getSupportFragmentManager(), "test");
+        }
+    }
+
+    @Override
+    public void refreshPage() {
+        if(REQUEST_BOOLEAN_ACTIVITY){
+            FragmentManager fm = getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.fragment_container2,onCreateFragment()).commit();
+        }
+    }
 
     protected abstract Fragment onCreateFragment();
 }

@@ -13,13 +13,10 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.therdsak.yeutsen.pageractivity.PagerActivity;
-import com.example.therdsak.yeutsen.pageractivity.TimeCheck;
 import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -98,8 +95,7 @@ public class YeutSenService extends IntentService {
         Notification notification = builder.build();
 //        notification.flags |= Notification.FLAG_INSISTENT;
 
-//        NotificationManagerCompat nmc = NotificationManagerCompat.from(this);
-//        nmc.notify(0, notification);
+
 
 
         sendBackgroundNotification(0, notification);

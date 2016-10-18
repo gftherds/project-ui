@@ -76,11 +76,11 @@ public class YeutSenPreference {
         mySharedPref(context).edit().putBoolean(PREF_BTN_ON_START,b).apply();
     }
 
-    public static boolean isBtnOnStop(Context context){
+    public static boolean isButton(Context context){
         return mySharedPref(context).getBoolean(PREF_BTN_ON_STOP,false);
     }
 
-    public static void setBtnOnStop(Context context,boolean b){
+    public static void setCheckButton(Context context, boolean b){
         mySharedPref(context).edit().putBoolean(PREF_BTN_ON_STOP,b).apply();
     }
 

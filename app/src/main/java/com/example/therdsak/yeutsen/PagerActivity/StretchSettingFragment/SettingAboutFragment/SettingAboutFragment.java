@@ -12,11 +12,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.pageractivity.VisibleFragment;
 
 /**
  * Created by Therdsak on 10/5/2016.
  */
-public class SettingAboutFragment extends Fragment {
+public class SettingAboutFragment extends VisibleFragment {
 
     TextView textViewAbout;
     FragmentManager fm;

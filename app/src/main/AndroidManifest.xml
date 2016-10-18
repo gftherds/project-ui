@@ -33,8 +33,6 @@
 
         </activity>
 
-        <activity android:name=".pageractivity.stretchlistfragment.StretchInfoActivity">
-        </activity>
         <service android:name=".service.YeutSenService"/>
 
         <!--<activity android:name=".pageractivity.showfragment.ShowListStretchActivity">-->

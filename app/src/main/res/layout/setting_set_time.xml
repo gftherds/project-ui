@@ -40,13 +40,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:textSize="18dp"
-                    android:text="Set working in day ON - OFF"/>
+                    android:text="Set working in day"/>
                 <TextView
+                    android:id="@+id/txt_time_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:textSize="16dp"
-                    android:text="9.00 - 11.00"/>
+                    android:textSize="16dp"/>
                 <!--<TextView-->
                     <!--android:layout_width="wrap_content"-->
                     <!--android:layout_height="wrap_content"-->
@@ -84,79 +84,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
+
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="18dp"
-                        android:text="Monday"
-                        android:layout_marginLeft="30dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="18dp"
-                        android:text="Tuesday"
-                        android:layout_marginLeft="28dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="18dp"
-                        android:text="Wednesday"
-                        android:layout_marginLeft="28dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thursday"
-                        android:layout_marginLeft="30dp"
-                        android:textSize="18dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Friday"
-                        android:layout_marginLeft="28dp"
-                        android:textSize="18dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Saturday"
-                        android:layout_marginLeft="28dp"
-                        android:textSize="18dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sunday"
-                        android:layout_marginLeft="30dp"
-                        android:textSize="18dp"/>
-                </LinearLayout>
+                        android:id="@+id/txt_set_day"
+                        android:textSize="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
 
                 </LinearLayout>
@@ -179,30 +115,15 @@
                 android:src="@drawable/alarm_show"/>
 
             <TextView
+                android:id="@+id/txt_length_Alert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="30 minutes"
                 android:layout_marginLeft="30dp"
                 android:textSize="18dp"/>
 
         </LinearLayout>
 
    </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <RelativeLayout
@@ -224,7 +145,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="wrap_content"
-                android:text="@string/Solve"
+                android:text="@string/Edit"
                 android:layout_margin="10dp"
                 android:textColor="@color/white"
 

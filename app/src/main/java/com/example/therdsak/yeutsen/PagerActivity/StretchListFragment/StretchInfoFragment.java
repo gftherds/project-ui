@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.PagerActivity.StretchListFragment;
+package com.example.therdsak.yeutsen.pageractivity.stretchlistfragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.pageractivity.VisibleFragment;
 
 import java.io.File;
 
@@ -22,7 +23,7 @@ import java.io.File;
  * Created by Noppharat on 10/7/2016.
  */
 
-public class StretchInfoFragment extends Fragment {
+public class StretchInfoFragment extends VisibleFragment {
     private Toolbar stretchToolbar;
     private ImageView stretchPhoto;
     private TextView stretchName;
@@ -58,17 +59,16 @@ public class StretchInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.stretch_info_fragment, container, false);
 
-        stretchWebView = (WebView) view.findViewById(R.id.stretch_info_webview);
-        toolbarInfo = (Toolbar) view.findViewById(R.id.toolbar_notification);
+        stretchWebView = (WebView) view.findViewById(R.id.stretch_info_gif);
+        stretchToolbar = (Toolbar) view.findViewById(R.id.toolbar_notification);
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbarInfo);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(stretchToolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Item");
 
-        stretchPhoto = (ImageView) view.findViewById(R.id.stretch_info_gif);
-        stretchName = (TextView) view.findViewById(R.id.stretch_info_name);
+        stretchName = (TextView) view.findViewById(R.id.stretch_info);
         stretchName.setText(stretchNameString);
         stretchInfo = (TextView) view.findViewById(R.id.stretch_info);
-        stretchToolbar = (Toolbar) view.findViewById(R.id.toolbar_notification);
+//        stretchToolbar = (Toolbar) view.findViewById(R.id.toolbar_notification);
         stretchToolbar.setTitle(stretchNameString);
 
         stretchWebView.loadUrl(assetPath + File.separator + stretchPhotoFolder + File.separator + stretchFileName);

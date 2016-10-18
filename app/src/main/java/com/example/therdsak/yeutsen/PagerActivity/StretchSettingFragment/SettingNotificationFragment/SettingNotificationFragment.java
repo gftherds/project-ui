@@ -16,13 +16,14 @@ import android.widget.RadioButton;
 import android.widget.Switch;
 
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.pageractivity.VisibleFragment;
 
 import java.util.List;
 
 /**
  * Created by Therdsak on 10/5/2016.
  */
-public class SettingNotificationFragment extends Fragment{
+public class SettingNotificationFragment extends VisibleFragment{
 
     private static final String KEY_URL = "SettingNotificationFragment";
     private Toolbar toolbarNotification;

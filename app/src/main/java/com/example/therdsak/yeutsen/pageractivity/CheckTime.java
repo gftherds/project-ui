@@ -16,10 +16,10 @@ import java.util.List;
  * Created by Nutdanai on 10/15/2016.
  */
 
-public class TimeCheck {
-    private static final String TAG = "TimeCheck";
+public class CheckTime {
+    private static final String TAG = "CheckTime";
     private static final int REQUEST_CODE_INT_ONE = 1;
-    private static TimeCheck instance;
+    private static CheckTime instance;
     private String stringBufDayOfWeek;
     private String[] stringIsDayOfWeek;
     private List<Boolean> isDayOfWeek;
@@ -34,13 +34,13 @@ public class TimeCheck {
     Date timeCurrent, timeIn, timeOut;
     Calendar calCurrent, calTimeIn, calTimeOut;
 
-    public TimeCheck(Context ctx) {
+    public CheckTime(Context ctx) {
         this.context = ctx.getApplicationContext();
     }
 
-    public static TimeCheck newInstance(Context context) {
+    public static CheckTime newInstance(Context context) {
         if (instance == null) {
-            instance = new TimeCheck(context);
+            instance = new CheckTime(context);
         }
         return instance;
     }
@@ -66,6 +66,9 @@ public class TimeCheck {
 
     public boolean isDayOfWeekFunction(int i) {
         Log.d(TAG, "isDayOfWeekFunction: " + i + " list: " + isDayOfWeek);
+        if(isDayOfWeek == null){
+            setDayOfWeek();
+        }
         return isDayOfWeek.get(i - 1);
     }
 
@@ -120,10 +123,10 @@ public class TimeCheck {
                 checkTimeAfterTimeOne();
             } else {
                 Log.d(TAG, "onCreate: Before " + timeCurrent.before(timeIn));
-                YeutSenPreference.setBtnOnStop(context, false);
+                YeutSenPreference.setCheckButton(context, false);
             }
         } else {
-            YeutSenPreference.setBtnOnStop(context, false);
+            YeutSenPreference.setCheckButton(context, false);
             setTimeToAlertNextDay();
         }
     }
@@ -134,23 +137,23 @@ public class TimeCheck {
             Log.d(TAG, "checkTimeAfterTimeOne: Before or Equals " + timeCurrent.before(timeOut) + " , " + timeCurrent.equals(timeOut));
 
             if (YeutSenPreference.getDateToAlert(context) > YeutSenPreference.getDateTimeOut(context)) {
-                YeutSenPreference.setBtnOnStop(context, false);
+                YeutSenPreference.setCheckButton(context, false);
             } else {
                 Log.d(TAG, "checkTimeAfterTimeOne: " + YeutSenPreference.isBtnOnStart(context));
                 if (!YeutSenPreference.isBtnOnStart(context)) {
                     YeutSenPreference.setBtnOnStart(context, true);
-                    YeutSenPreference.setBtnOnStop(context, false);
+                    YeutSenPreference.setCheckButton(context, false);
                     tempLengthOfTime = 1;
-                    calTimeFinish();
+                    calTimeFinish(tempLengthOfTime);
                     YeutSenService.setServiceAlarm(context, 2);
                 } else {
-                    YeutSenPreference.setBtnOnStop(context, true);
+                    YeutSenPreference.setCheckButton(context, true);
                     Log.d(TAG, "checkTimeAfterTimeOne: else ");
                     // Do somethings
                 }
             }
         } else {
-            YeutSenPreference.setBtnOnStop(context, false);
+            YeutSenPreference.setCheckButton(context, false);
             setTimeToAlertNextDay();
             // setTimeIn next times
         }
@@ -183,9 +186,9 @@ public class TimeCheck {
         Log.d(TAG, "checkTimeAfterTimeOne: After" + calTimeIn.getTime());
     }
 
-    public void calTimeFinish() {
+    public void calTimeFinish(int i) {
         getTime(Calendar.HOUR, Calendar.MINUTE, Calendar.SECOND);
-        minuteEdit = minuteEdit + tempLengthOfTime;
+        minuteEdit = minuteEdit + i;
         calCurrent.set(Calendar.HOUR, hourEdit);
         calCurrent.set(Calendar.MINUTE, minuteEdit);
         calCurrent.set(Calendar.SECOND, secondEdit);

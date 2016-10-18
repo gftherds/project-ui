@@ -10,11 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.pageractivity.VisibleFragment;
 
 /**
  * Created by Therdsak on 10/10/2016.
  */
-public class SettingAboutUsFragment extends Fragment {
+public class SettingAboutUsFragment extends VisibleFragment {
     Toolbar toolbarAboutUs;
 
     public static SettingAboutUsFragment newInstance() {

@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * Created by Therdsak on 10/6/2016.
  */
-public class PagerFragment extends Fragment {
+public class PagerFragment extends VisibleFragment {
 
 
 
@@ -102,6 +102,7 @@ public class PagerFragment extends Fragment {
 
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(3);
 
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);

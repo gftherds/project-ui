@@ -6,17 +6,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationManagerCompat;
-import android.text.format.DateFormat;
 import android.util.Log;
 
-import com.example.therdsak.yeutsen.pageractivity.TimeCheck;
-import com.example.therdsak.yeutsen.pageractivity.showfragment.ShowStretchingFragment;
+import com.example.therdsak.yeutsen.pageractivity.CheckTime;
 import com.example.therdsak.yeutsen.service.YeutSenService;
 import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
-
-import java.sql.Time;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by Nutdanai on 10/12/2016.
@@ -32,7 +26,7 @@ public class YeutSenNotificationBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i(TAG, "Notification calling");
-        TimeCheck.newInstance(context).getLoopTime();
+        CheckTime.newInstance(context).getLoopTime();
         if (getResultCode() != Activity.RESULT_OK) {
             Log.d(TAG, "onReceive: Cancel");
             context.stopService(intent);
