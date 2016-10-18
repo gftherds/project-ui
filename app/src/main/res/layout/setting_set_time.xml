@@ -40,25 +40,25 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:textSize="18dp"
-                    android:text="set time morning on - off"/>
+                    android:text="Set working in day ON - OFF"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:textSize="16dp"
                     android:text="9.00 - 11.00"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:layout_marginLeft="30dp"
-                    android:text="set time afternoon on - off  "/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="30dp"
-                    android:text="13.00 - 17.00"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="18dp"-->
+                    <!--android:layout_marginLeft="30dp"-->
+                    <!--android:text="set time afternoon on - off  "/>-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="16dp"-->
+                    <!--android:layout_marginLeft="30dp"-->
+                    <!--android:text="13.00 - 17.00"/>-->
 
 
 

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -31,12 +32,13 @@ import java.util.List;
  */
 public class SettingNotificationFragment extends Fragment{
 
-    Toolbar toolbarNotification;
+    private static final String KEY_URL = "SettingNotificationFragment";
+    private Toolbar toolbarNotification;
     private NotificationSounds mNotificationSounds;
-    Switch mSwitch;
-    RecyclerView mRecyclerView;
-    public int mSelectedItem = -1;
-
+    private Switch mSwitch;
+    private RecyclerView mRecyclerView;
+    private RadioButton lastChecked = null;
+    private  int lastCheckedPos = 0;
 
     public static SettingNotificationFragment newInstance() {
 
@@ -46,14 +48,23 @@ public class SettingNotificationFragment extends Fragment{
         fragment.setArguments(args);
         return fragment;
     }
+
+
     private static final String TAG = "Notification" ;
+    String mUrl;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mNotificationSounds = new NotificationSounds(getActivity());
 
+//        if(getArguments() != null) {
+//            mUrl = getArguments().getString(KEY_URL);
+//            Log.d(TAG, "Get URL : " + mUrl);
+//        }
     }
+
+
 
     @Nullable
     @Override
@@ -74,6 +85,10 @@ public class SettingNotificationFragment extends Fragment{
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked == true){
                     mRecyclerView.setAdapter(new SoundAdapter(mNotificationSounds.getSounds()));
+                    Log.d(TAG, "onCheckedChanged: ");
+//                    if(mUrl != null) {
+//                        new DownloadFile().execute(mUrl);
+//                    }
                 }else{
                     mRecyclerView.setAdapter(null);
                 }
@@ -82,20 +97,26 @@ public class SettingNotificationFragment extends Fragment{
         mRecyclerView = (RecyclerView) view.findViewById(R.id.notification_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
+//        if(mUrl != null) {
+//            new DownloadFile().execute(mUrl);
+//        }
 
 
         return view;
 
     }
 
-    private  class SoundAdapter extends RecyclerView.Adapter<SoundHolder> {
+    private   class SoundAdapter extends RecyclerView.Adapter<SoundHolder> {
 
         private List<Sound> mSounds;
 
         public SoundAdapter(List<Sound> sounds) {
             mSounds = sounds;
-            notifyItemRangeChanged(0,mSounds.size());
+
+            Log.d(TAG, "SoundAdapter: " + mSounds);
+
+            Log.d(TAG, "SoundAdapter: " + mSounds.size());
+
         }
 
         @Override
@@ -108,14 +129,14 @@ public class SettingNotificationFragment extends Fragment{
         public void onBindViewHolder(final SoundHolder holder, final int position) {
             Sound sound = mSounds.get(position);
             holder.bindSound(sound);
-            holder.mButton.setChecked(position == mSelectedItem);
+            holder.mButton.setChecked(mSounds.get(position).isSelected());
+            holder.mButton.setTag(new Integer(position));
 
-
-
+            if(position == 0 && mSounds.get(0).isSelected() && holder.mButton.isChecked()){
+                lastChecked = holder.mButton;
+                lastCheckedPos = 0;
+            }
         }
-
-
-
 
         @Override
         public int getItemCount() {
@@ -131,8 +152,6 @@ public class SettingNotificationFragment extends Fragment{
             super(inflater.inflate(R.layout.list_item_sound, container, false));
             mButton = (RadioButton) itemView.findViewById(R.id.List_item_sound_button);
             mButton.setOnClickListener(this);
-
-
         }
 
         public void bindSound(Sound sound){
@@ -143,11 +162,20 @@ public class SettingNotificationFragment extends Fragment{
 
         @Override
         public void onClick(View view) {
-
             mNotificationSounds.play(mSound);
-            mSelectedItem = getAdapterPosition();
- //           notifyItemRangeChanged(0, mSound.size());
+            RadioButton rd = (RadioButton) view;
+            int clickedPos = ((Integer)rd.getTag()).intValue();
 
+            if(rd.isChecked()){
+                if(lastChecked != null){
+                    lastChecked.setChecked(false);
+
+                }
+                lastChecked = rd;
+                lastCheckedPos = clickedPos;
+            }
+            else
+                lastChecked = null;
         }
     }
 
@@ -157,6 +185,7 @@ public class SettingNotificationFragment extends Fragment{
         mNotificationSounds.release();
 
     }
+
 }
 
 

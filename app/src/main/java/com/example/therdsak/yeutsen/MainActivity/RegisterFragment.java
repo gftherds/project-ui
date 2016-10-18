@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.therdsak.yeutsen.PagerActivity.PagerActivity;
 import com.example.therdsak.yeutsen.R;
+import com.github.channguyen.rsv.RangeSliderView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -71,7 +72,7 @@ public class RegisterFragment extends Fragment {
     ImageView Thursday;
     ImageView Friday;
     ImageView Saturday;
-    SeekBar TimeSeekBar;
+    RangeSliderView TimeSeekBar;
 
     boolean flag = false;
 
@@ -288,17 +289,17 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        buttonFourTime = (TextView) view.findViewById(R.id.button6);
-        buttonFourTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = getFragmentManager();
-                TimeDialogFragment dialogFragment = TimeDialogFragment.newInstance(time.getTimeDate());
-                dialogFragment.setTargetFragment(RegisterFragment.this, FORTH_BTN);
-                dialogFragment.show(fm, DIALOG_TIME);
-                Log.d(TAG, "Time 4: ");
-            }
-        });
+//        buttonFourTime = (TextView) view.findViewById(R.id.button6);
+//        buttonFourTime.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                FragmentManager fm = getFragmentManager();
+//                TimeDialogFragment dialogFragment = TimeDialogFragment.newInstance(time.getTimeDate());
+//                dialogFragment.setTargetFragment(RegisterFragment.this, FORTH_BTN);
+//                dialogFragment.show(fm, DIALOG_TIME);
+//                Log.d(TAG, "Time 4: ");
+//            }
+//        });
 
         buttonEnter = (Button) view.findViewById(R.id.enter_working);
         buttonEnter.setOnClickListener(new View.OnClickListener() {
@@ -313,44 +314,41 @@ public class RegisterFragment extends Fragment {
 
 
 
-        TimeSeekBar = (SeekBar) view.findViewById(R.id.SeekBar_time_alert);
-        TimeSeekBar.setProgress(50);
-        TimeSeekBar.setEnabled(false);
-        TimeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
+        TimeSeekBar = (RangeSliderView) view.findViewById(R.id.SeekBar_time_alert);
+        TimeSeekBar.setRangeCount(3);
+  //      TimeSeekBar.setFilledColor(R.color.primary_dark);
+  //      TimeSeekBar.setEmptyColor(R.color.colorAccent);
+//        TimeSeekBar.setMinimumHeight(5);
+        TimeSeekBar.setBarHeightPercent(0.1f);
+        TimeSeekBar.setSlotRadiusPercent(0.1f);
+        TimeSeekBar.setSliderRadiusPercent(0.1f);
+        TimeSeekBar.setOnSlideListener(new RangeSliderView.OnSlideListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int position, boolean b) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
+            public void onSlide(int index) {
+                Log.d(TAG, "onClick: ");
+                TimeSeekBar.setTag(index);
+                Log.d(TAG, "onSlide1: " + index);
             }
         });
 
 
 
-        checkBox_time_alert = (CheckBox) view.findViewById(R.id.checkbox_time_alert);
-        checkBox_time_alert.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(!flag){
-                    TimeSeekBar.setEnabled(true);
-                    flag = true;
-                }else {
-                    TimeSeekBar.setEnabled(false);
-                    flag = false;
-                }
 
-
-            }
-        });
+//        checkBox_time_alert = (CheckBox) view.findViewById(R.id.checkbox_time_alert);
+//        checkBox_time_alert.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                if(!flag){
+//                    TimeSeekBar.setEnabled(true);
+//                    flag = true;
+//                }else {
+//                    TimeSeekBar.setEnabled(false);
+//                    flag = false;
+//                }
+//
+//
+//            }
+//        });
 
 
 
