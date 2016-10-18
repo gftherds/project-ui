@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.pageractivity;
+package com.example.therdsak.yeutsen.PagerActivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,12 +17,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 
+import com.example.therdsak.yeutsen.MainActivity.TutorialFragment;
+import com.example.therdsak.yeutsen.PagerActivity.ListFragment.ListStretchingFragment;
+import com.example.therdsak.yeutsen.PagerActivity.ShowFragment.ShowStretchingFragment;
+import com.example.therdsak.yeutsen.PagerActivity.StretchListFragment.StretchListFragment;
+import com.example.therdsak.yeutsen.PagerActivity.SummaryFragment.SummaryStretchingFragment;
 import com.example.therdsak.yeutsen.R;
-import com.example.therdsak.yeutsen.mainactivity.TutorialFragment;
-import com.example.therdsak.yeutsen.pageractivity.showfragment.ShowStretchingFragment;
-import com.example.therdsak.yeutsen.pageractivity.stretchlistfragment.StretchListFragment;
-import com.example.therdsak.yeutsen.pageractivity.summaryfragment.SummaryStretchingFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,20 +32,25 @@ import java.util.List;
 /**
  * Created by Therdsak on 10/6/2016.
  */
-public class PagerFragment extends VisibleFragment {
-    private static final String TAG = "PagerFragment";
+public class PagerFragment extends Fragment {
+
+
+
+   public static PagerFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        PagerFragment fragment = new PagerFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
+    private static final String TAG = "PagerActivity";
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private AppBarLayout appBarLayout;
-    boolean checkTemp ;
-
-    public boolean isCheckTemp(boolean ct) {
-        checkTemp = ct;
-        Log.d(TAG, "isCheckTemp: "+ ct + " : " +checkTemp);
-        return checkTemp;
-    }
-
     FragmentManager fm;
 
     private int[] tabIcons = {
@@ -77,13 +84,8 @@ public class PagerFragment extends VisibleFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: ");
-    }
-    public static PagerFragment newInstance() {
-        Bundle args = new Bundle();
-        PagerFragment fragment = new PagerFragment();
-        fragment.setArguments(args);
-        return fragment;
+
+
     }
 
 
@@ -99,8 +101,6 @@ public class PagerFragment extends VisibleFragment {
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-
-
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         viewPager.setOffscreenPageLimit(3);
@@ -108,7 +108,6 @@ public class PagerFragment extends VisibleFragment {
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-
 
         setHasOptionsMenu(true);
 
@@ -138,6 +137,7 @@ public class PagerFragment extends VisibleFragment {
 //                        getSupportActionBar().setTitle("ListItem");
                         break;
                     case 2:
+
                         tabLayout.getTabAt(0).setIcon(R.drawable.home_unselected);
                         tabLayout.getTabAt(1).setIcon(R.drawable.list_unselected);
                         tabLayout.getTabAt(2).setIcon(R.drawable.summary_selected);
@@ -164,6 +164,8 @@ public class PagerFragment extends VisibleFragment {
         tabLayout.getTabAt(0).setIcon(R.drawable.home_white);
         tabLayout.getTabAt(1).setIcon(R.drawable.list_color);
         tabLayout.getTabAt(2).setIcon(R.drawable.summary_color);
+
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -215,7 +217,6 @@ public class PagerFragment extends VisibleFragment {
 
             Log.d(TAG, "onCreateOptionsMenu: ");
 
-
         }
 
     @Override
@@ -244,7 +245,5 @@ public class PagerFragment extends VisibleFragment {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
 

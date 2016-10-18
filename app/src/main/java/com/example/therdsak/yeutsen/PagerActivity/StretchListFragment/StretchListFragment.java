@@ -1,4 +1,4 @@
-package com.example.therdsak.yeutsen.pageractivity.stretchlistfragment;
+package com.example.therdsak.yeutsen.PagerActivity.StretchListFragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -46,7 +46,7 @@ public class StretchListFragment extends Fragment {
     private StretchAdapter mStretchAdapter;
 
     private int gridSize = 2;
-    private String stretchPhotoFolder = "test_photo";
+    private String stretchPhotoFolder = "stretch";
     private String jsonFileName = "stretch.json";
 
     public static StretchListFragment newInstance(){
@@ -134,7 +134,6 @@ public class StretchListFragment extends Fragment {
         mRecyclerView.setLayoutAnimation(con);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), gridSize));
         mRecyclerView.setAdapter(mStretchAdapter);
-
         return view;
     }
 
@@ -142,6 +141,7 @@ public class StretchListFragment extends Fragment {
         private ImageView mStretchPhoto;
         private TextView mStretchName;
         private String sname;
+        private String spath;
 
         public StretchHolder(View itemView) {
             super(itemView);
@@ -150,7 +150,15 @@ public class StretchListFragment extends Fragment {
             mStretchPhoto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+//                    StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname);
+//                    FragmentManager fragmentManager = getFragmentManager();
+//                    fragmentManager.beginTransaction()
+//                            .replace(R.id.fragment_container5 ,fragment)
+//                            .addToBackStack(null)
+//                            .commit();
 
+                    Intent intent = StretchInfoActivity.newIntent(getActivity(), sname , spath);
+                    getActivity().startActivity(intent);
                     StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     fragmentManager.beginTransaction()
@@ -175,8 +183,9 @@ public class StretchListFragment extends Fragment {
             mStretchName.setText(stringName);
         }
 
-        protected void setSName(String sname){
+        protected void setStretch(String sname, String spath){
             this.sname = sname;
+            this.spath = spath;
         }
     }
 
@@ -204,7 +213,7 @@ public class StretchListFragment extends Fragment {
                 holder.bindDrawable(drawable);
             }
             holder.setStretchName(_stretchList.get(position).get("sname"));
-            holder.setSName(_stretchList.get(position).get("sname"));
+            holder.setStretch(_stretchList.get(position).get("sname"), _stretchList.get(position).get("spath"));
         }
 
         @Override

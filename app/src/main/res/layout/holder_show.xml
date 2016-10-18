@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="10dp"
     android:paddingBottom="10dp"
     style="?android:listSeparatorTextViewStyle">
 
     <ImageView
+        android:layout_marginTop="2dp"
         android:id="@+id/show_holder_image_view"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@android:color/darker_gray"
+        android:layout_width="85dp"
+        android:layout_height="65dp"
+        android:padding="5dp"
+
         android:scaleType="centerInside"
         />
 
@@ -26,7 +29,7 @@
         android:layout_alignParentEnd="true"
         tools:text="NAME"
         android:textSize="32sp"
-        android:padding="4dp"
+        android:paddingLeft="10dp"
         />
 
     <TextView
@@ -38,6 +41,6 @@
         android:layout_toEndOf="@+id/show_holder_image_view"
         tools:text="DETAIL"
         android:textSize="24sp"
-        android:padding="4dp"/>
+        android:paddingLeft="10dp"/>
 
 </RelativeLayout>
