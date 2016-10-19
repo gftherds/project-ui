@@ -22,6 +22,15 @@
         android:layout_marginTop="95dp"
         android:id="@+id/random_stretch_gif"/>
 
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/random_stretch_gif"
+        android:id="@+id/main_stretch_name"
+        android:textSize="25dp"
+        android:textAlignment="center"/>
+
 
 
     <Button

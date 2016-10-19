@@ -2,7 +2,6 @@ package com.example.therdsak.yeutsen.pageractivity.stretchlistfragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,7 +12,6 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.therdsak.yeutsen.R;
 import com.example.therdsak.yeutsen.pageractivity.VisibleFragment;
 
@@ -26,22 +24,23 @@ import java.io.File;
 public class StretchInfoFragment extends VisibleFragment {
     private Toolbar stretchToolbar;
     private ImageView stretchPhoto;
-    private TextView stretchName;
     private TextView stretchInfo;
     private WebView stretchWebView;
 
     private String stretchNameString;
     private String stretchFileName;
+    private String stretchInfoString;
     private String assetPath = "file:///android_asset";
     private String stretchPhotoFolder = "stretch";
 
     private static final String TAG = "StretchInfoFragment";
 
-    public static StretchInfoFragment newInstance(String sname, String spath){
+    public static StretchInfoFragment newInstance(String sname, String spath, String sinfo){
         Bundle args = new Bundle();
         StretchInfoFragment fragment = new StretchInfoFragment();
         args.putString("sname", sname);
         args.putString("spath", spath);
+        args.putString("sinfo", sinfo);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,7 +50,7 @@ public class StretchInfoFragment extends VisibleFragment {
         super.onCreate(savedInstanceState);
         stretchNameString = getArguments().getString("sname");
         stretchFileName = getArguments().getString("spath");
-
+        stretchInfoString = getArguments().getString("sinfo");
     }
 
     @Nullable
@@ -65,9 +64,8 @@ public class StretchInfoFragment extends VisibleFragment {
         ((AppCompatActivity)getActivity()).setSupportActionBar(stretchToolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Item");
 
-        stretchName = (TextView) view.findViewById(R.id.stretch_info);
-        stretchName.setText(stretchNameString);
         stretchInfo = (TextView) view.findViewById(R.id.stretch_info);
+        stretchInfo.setText(stretchInfoString);
 //        stretchToolbar = (Toolbar) view.findViewById(R.id.toolbar_notification);
         stretchToolbar.setTitle(stretchNameString);
 

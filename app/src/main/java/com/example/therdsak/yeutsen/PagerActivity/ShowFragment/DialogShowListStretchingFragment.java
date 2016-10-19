@@ -134,7 +134,7 @@ public class DialogShowListStretchingFragment extends DialogFragment {
         public StretchHolder(View itemView) {
             super(itemView);
 
-            mName = (TextView) itemView.findViewById(R.id.show_holder_title_text_view);
+//            mName = (TextView) itemView.findViewById(R.id.show_holder_title_text_view);
             mDetail = (TextView) itemView.findViewById(R.id.show_holder_detail_text_view);
             mShow = (ImageView) itemView.findViewById(R.id.show_holder_image_view);
         }

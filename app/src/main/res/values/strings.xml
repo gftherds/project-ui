@@ -5,17 +5,17 @@
     <string name="begin">GOT IT</string>
 
 
-    <string name="slide_1_title">Hello Food!</string>
-    <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
+    <string name="slide_1_title">Set up to this application</string>
+    <string name="slide_1_desc">set up time in and out to working in day , working day and time alert before to use this application  because to alert to target  </string>
 
-    <string name="slide_2_title">Movie Tickets</string>
-    <string name="slide_2_desc">Book movie tickets for your family and friends!</string>
+    <string name="slide_2_title">Main  application</string>
+    <string name="slide_2_desc">show many stance to stretch for user to use be example stance in application and have button timer in to alert show dialog to application</string>
 
-    <string name="slide_3_title">Great Discounts</string>
-    <string name="slide_3_desc">Best discounts on every single service we offer!</string>
+    <string name="slide_3_title">Detail application</string>
+    <string name="slide_3_desc">detail many stance  stretch to allow users to see each gesture in order to work this application</string>
 
-    <string name="slide_4_title">World Travel</string>
-    <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
+    <string name="slide_4_title">Summary application</string>
+    <string name="slide_4_desc">It is concluded that the information presented many times in stretch</string>
 
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
@@ -80,9 +80,7 @@
     <string name="Topic">Detail</string>
     <string name="Topic_Detail">     Yuetsen is an application that helps you to stretch in the working time. The purpose is to prevent user sitting in front of a computer for a long time that can cause eye problems and office syndrome. This application will alert and show gesture to a user to follow how to stretch and the user can change gesture. This taking a little time to stretch for a good health.</string>
     <string name="benefit">Benefit</string>
-    <string name="Topic_Benefit">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
     <string name="origin">Origin</string>
-    <string name="Topic_origin">asdasdkkbkbibkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</string>
     <string name="credit">Credit</string>
     <string name="Topic_credit">Augmentis Company Thailand</string>
     <string name="btn_finish">Finish</string>

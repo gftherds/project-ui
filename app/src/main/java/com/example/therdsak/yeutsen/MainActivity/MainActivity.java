@@ -1,5 +1,6 @@
 package com.example.therdsak.yeutsen.mainactivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 
 import com.example.therdsak.yeutsen.R;
+import com.example.therdsak.yeutsen.pageractivity.PagerActivity;
 import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,8 +51,13 @@ public class MainActivity extends AppCompatActivity {
                     fm.beginTransaction().replace(R.id.fragment_container, f1).commit();
                     YeutSenPreference.setTutorailOn(MainActivity.this,true);
                 }else{
-                    Fragment f = RegisterFragment.newInstance();
-                    fm.beginTransaction().replace(R.id.fragment_container, f).commit();
+                    if(!YeutSenPreference.isButtonSave(MainActivity.this)) {
+                        Fragment f = RegisterFragment.newInstance();
+                        fm.beginTransaction().replace(R.id.fragment_container, f).commit();
+                    }else{
+                        Intent myIntent = new Intent(MainActivity.this, PagerActivity.class);
+                        startActivity(myIntent);
+                    }
                 }
             }
         }, 5000);

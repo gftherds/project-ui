@@ -66,10 +66,12 @@ public class StretchListFragment extends Fragment {
                 JSONObject jsonObjectInside = jsonArray.getJSONObject(i);
                 String stretchName = jsonObjectInside.getString("sname");
                 String stretchPath = jsonObjectInside.getString("spath");
+                String stretchInfo = jsonObjectInside.getString("sinfo");
 
                 hashMapList = new HashMap<>();
                 hashMapList.put("sname", stretchName);
                 hashMapList.put("spath", stretchPath);
+                hashMapList.put("sinfo", stretchInfo);
 
                 stretchList.add(hashMapList);
             }
@@ -147,6 +149,7 @@ public class StretchListFragment extends Fragment {
         private TextView mStretchName;
         private String sname;
         private String spath;
+        private String sinfo;
 
         public StretchHolder(View itemView) {
             super(itemView);
@@ -156,7 +159,7 @@ public class StretchListFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                    StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname, spath);
+                    StretchInfoFragment fragment = StretchInfoFragment.newInstance(sname, spath, sinfo);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     fragmentManager.beginTransaction()
                             .replace(R.id.fragment_container2 ,fragment)
@@ -178,9 +181,10 @@ public class StretchListFragment extends Fragment {
             mStretchName.setText(stringName);
         }
 
-        protected void setStretch(String sname, String spath){
+        protected void setStretch(String sname, String spath, String sinfo){
             this.sname = sname;
             this.spath = spath;
+            this.sinfo = sinfo;
         }
     }
 
@@ -210,7 +214,7 @@ public class StretchListFragment extends Fragment {
                 holder.bindDrawable(drawable);
             }
             holder.setStretchName(_stretchList.get(position).get("sname"));
-            holder.setStretch(_stretchList.get(position).get("sname"), _stretchList.get(position).get("spath"));
+            holder.setStretch(_stretchList.get(position).get("sname"), _stretchList.get(position).get("spath"), _stretchList.get(position).get("sinfo"));
         }
 
         @Override

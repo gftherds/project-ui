@@ -14,13 +14,13 @@
         <ImageView
             android:layout_width="@dimen/img_width_height"
             android:layout_height="@dimen/img_width_height"
-            android:src="@drawable/ic_travel" />
+            android:src="@drawable/fourpage" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/slide_4_title"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/slide_title"
             android:textStyle="bold" />
 

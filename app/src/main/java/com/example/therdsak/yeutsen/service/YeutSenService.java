@@ -80,9 +80,9 @@ public class YeutSenService extends IntentService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 
-        builder.setTicker("Ticker!");
-        builder.setContentTitle("Time Up !! ");
-        builder.setContentText("Time = " + new SimpleDateFormat(" hh:mm:ss a").format(YeutSenPreference.getDateToAlert(this)));
+        builder.setTicker("Time Up !!! ");
+        builder.setContentTitle("Time Up !!! ");
+        builder.setContentText(" :---- Stretch Sy ----: ");
         builder.setSmallIcon(android.R.drawable.ic_notification_overlay);
 //        Ringtone ringtone = RingtoneManager.getRingtone(this,soundUri);
 //        ringtone.play();

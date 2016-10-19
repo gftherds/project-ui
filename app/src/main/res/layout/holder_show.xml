@@ -18,29 +18,31 @@
         android:scaleType="centerInside"
         />
 
-    <TextView
-        android:id="@+id/show_holder_title_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/show_holder_image_view"
-        android:layout_toEndOf="@+id/show_holder_image_view"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        tools:text="NAME"
-        android:textSize="32sp"
-        android:paddingLeft="10dp"
-        />
+    <!--<TextView-->
+        <!--android:id="@+id/show_holder_title_text_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toRightOf="@+id/show_holder_image_view"-->
+        <!--android:layout_toEndOf="@+id/show_holder_image_view"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--tools:text="NAME"-->
+        <!--android:textSize="32sp"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--/>-->
 
     <TextView
+        android:layout_marginTop="20dp"
         android:id="@+id/show_holder_detail_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/show_holder_title_text_view"
         android:layout_toRightOf="@+id/show_holder_image_view"
         android:layout_toEndOf="@+id/show_holder_image_view"
         tools:text="DETAIL"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:paddingLeft="10dp"/>
+
+    <!--android:layout_below="@+id/show_holder_title_text_view"-->
 
 </RelativeLayout>

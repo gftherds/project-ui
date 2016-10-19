@@ -143,7 +143,7 @@ public class DialogShowStretchingFragment extends DialogFragment {
 
         public StretchHolder(final View itemView) {
             super(itemView);
-            mName = (TextView) itemView.findViewById(R.id.show_holder_title_text_view);
+//            mName = (TextView) itemView.findViewById(R.id.show_holder_title_text_view);
             mDetail = (TextView) itemView.findViewById(R.id.show_holder_detail_text_view);
             mShow = (ImageView) itemView.findViewById(R.id.show_holder_image_view);
 
@@ -178,9 +178,9 @@ public class DialogShowStretchingFragment extends DialogFragment {
             mDetail.setText(stringDetail);
         }
 
-        protected void setStretchName(String stretchName){
-            mName.setText(stretchName);
-        }
+//        protected void setStretchName(String stretchName){
+//            mName.setText(stretchName);
+//        }
 
         protected void setPosition(int bposition){
             position = bposition;
@@ -215,7 +215,7 @@ public class DialogShowStretchingFragment extends DialogFragment {
                 Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.giphy, null);
                 holder.bindDrawable(drawable);
             }
-            holder.setStretchName(_stretchShowList.get(position).get("sname"));
+//            holder.setStretchName(_stretchShowList.get(position).get("sname"));
             holder.setStretchDetail(_stretchShowList.get(position).get("sname"));
 
             Log.d(TAG, "onBindViewHolder: " + _stretchShowList.get(position).get("isselect"));

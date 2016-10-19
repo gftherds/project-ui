@@ -27,6 +27,7 @@ import com.example.therdsak.yeutsen.service.YeutSenService;
 import com.example.therdsak.yeutsen.sharedpreference.YeutSenPreference;
 import com.github.channguyen.rsv.RangeSliderView;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,34 +36,21 @@ import java.util.Date;
  * Created by Therdsak on 9/28/2016.
  */
 public class RegisterFragment extends Fragment {
-
-
-    private boolean isChecked = true;
-    private Button buttonTimeIn;
-    private Button buttonTimeOut;
-    private Button buttonEnter;
-    private CheckBox checkBox_week;
-
-    public static RegisterFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        RegisterFragment fragment = new RegisterFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     private static final String EXTRA_TIME = "TimeDialogFragment";
     private static final String DIALOG_TIME = "MainFragment";
     private static final String TAG = "MainFragment";
     private static final int FIRST_BTN = 1;
     private static final int SECOND_BTN = 2;
-    private int lengthOfAlert ;
+    private int lengthOfAlert;
     private CheckTime mCheckTime;
     private String checkDayOfWeek[] = new String[7];
+    private String sTimeIn;
+    private String sTimeOut;
 
-
-
+    private Button buttonTimeIn;
+    private Button buttonTimeOut;
+    private Button buttonEnter;
+    private Calendar calTimeIn, calTimeOut;
 
     ImageView Sunday;
     ImageView Monday;
@@ -73,23 +61,47 @@ public class RegisterFragment extends Fragment {
     ImageView Saturday;
     RangeSliderView TimeSeekBar;
 
-    boolean flag = false;
+    boolean flag[] = new boolean[7];
 
     Date startTimeDate, endTimeDate;
+
+
+
+    public static RegisterFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        RegisterFragment fragment = new RegisterFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            Log.d(TAG, "onCreate: ");
-            lengthOfAlert = 30;
-            for (int i = 1; i <= 5; i++) {
-                checkDayOfWeek[i] = "true";
-            }
-            checkDayOfWeek[0] = "false";
-            checkDayOfWeek[6] = "false";
-        Log.d(TAG, "onCreate: " +checkDayOfWeek);
+
+    }
+
+    private void checkDayOfWeek() {
+
+
+        if (checkDayOfWeek[0].equals("false")
+                && checkDayOfWeek[1].equals("false")
+                && checkDayOfWeek[2].equals("false")
+                && checkDayOfWeek[3].equals("false")
+                && checkDayOfWeek[4].equals("false")
+                && checkDayOfWeek[5].equals("false")
+                && checkDayOfWeek[6].equals("false")) {
+            buttonEnter.setEnabled(false);
+            buttonEnter.setBackgroundColor(getResources().getColor(R.color.grey));
+        } else {
+            buttonEnter.setEnabled(true);
+            buttonEnter.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        }
+
     }
 
 
@@ -97,7 +109,27 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register, container, false);
+        Sunday = (ImageView) view.findViewById(R.id.sunday);
+        Monday = (ImageView) view.findViewById(R.id.monday);
+        Tuesday = (ImageView) view.findViewById(R.id.tuesday);
+        Wednesday = (ImageView) view.findViewById(R.id.wednesday);
+        Thursday = (ImageView) view.findViewById(R.id.thursday);
+        Friday = (ImageView) view.findViewById(R.id.friday);
+        Saturday = (ImageView) view.findViewById(R.id.saturday);
+
+
         mCheckTime = CheckTime.newInstance(getActivity());
+
+        if (YeutSenPreference.getDayOfWeek(getActivity()) == null) {
+            for (int i = 1; i <= 5; i++) {
+                checkDayOfWeek[i] = "true";
+                flag[i] = true;
+            }
+            checkDayOfWeek[0] = "false";
+            checkDayOfWeek[6] = "false";
+            flag[0] = false;
+            flag[6] = false;
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // Get Window
@@ -113,169 +145,170 @@ public class RegisterFragment extends Fragment {
         }
 
 
-        Sunday = (ImageView) view.findViewById(R.id.sunday);
         Sunday.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                if (!flag) {
+                if (!flag[0]) {
                     Sunday.setImageResource(R.drawable.color_sunday);
-                    checkBox_week.setChecked(!isChecked);
-                    checkBox_week.setEnabled(true);
-                    flag = true;
+                    flag[0] = true;
                     checkDayOfWeek[0] = "true";
                     Log.d(TAG, "onClick: Sun " + checkDayOfWeek[0]);
                 } else {
                     Sunday.setImageResource(R.drawable.white_sunday);
-                    flag = false;
+                    flag[0] = false;
                     checkDayOfWeek[0] = "false";
                     Log.d(TAG, "onClick: Sun " + checkDayOfWeek[0]);
                 }
+                checkDayOfWeek();
             }
         });
 
-        Monday = (ImageView) view.findViewById(R.id.monday);
+
         Monday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!flag) {
+                if (!flag[1]) {
                     Monday.setImageResource(R.drawable.color_monday);
-                    checkBox_week.setChecked(!isChecked);
-                    checkBox_week.setEnabled(true);
-                    flag = true;
+                    flag[1] = true;
                     checkDayOfWeek[1] = "true";
                     Log.d(TAG, "onClick: Mon " + checkDayOfWeek[1]);
                 } else {
                     Monday.setImageResource(R.drawable.white_monday);
-                    flag = false;
+                    flag[1] = false;
                     checkDayOfWeek[1] = "false";
                     Log.d(TAG, "onClick: Mon " + checkDayOfWeek[1]);
                 }
+                checkDayOfWeek();
             }
         });
 
-        Tuesday = (ImageView) view.findViewById(R.id.tuesday);
+
         Tuesday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!flag) {
+                if (!flag[2]) {
                     Tuesday.setImageResource(R.drawable.color_tuesday);
-                    checkBox_week.setChecked(!isChecked);
-                    checkBox_week.setEnabled(true);
-                    flag = true;
+                    flag[2] = true;
                     checkDayOfWeek[2] = "true";
                     Log.d(TAG, "onClick: Tues " + checkDayOfWeek[2]);
                 } else {
                     Tuesday.setImageResource(R.drawable.white_tuesday);
-                    flag = false;
+                    flag[2] = false;
                     checkDayOfWeek[2] = "false";
                     Log.d(TAG, "onClick: Tues " + checkDayOfWeek[2]);
                 }
+                checkDayOfWeek();
             }
         });
 
-        Wednesday = (ImageView) view.findViewById(R.id.wednesday);
+
         Wednesday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!flag) {
+                if (!flag[3]) {
                     Wednesday.setImageResource(R.drawable.color_wednesday);
-                    checkBox_week.setChecked(!isChecked);
-                    checkBox_week.setEnabled(true);
-                    flag = true;
+                    flag[3] = true;
                     checkDayOfWeek[3] = "true";
                     Log.d(TAG, "onClick: Wed " + checkDayOfWeek[3]);
                 } else {
                     Wednesday.setImageResource(R.drawable.white_wednesday);
-                    flag = false;
+                    flag[3] = false;
                     checkDayOfWeek[3] = "false";
                     Log.d(TAG, "onClick: Wed " + checkDayOfWeek[3]);
                 }
+                checkDayOfWeek();
             }
         });
 
-        Thursday = (ImageView) view.findViewById(R.id.thursday);
+
         Thursday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!flag) {
+                if (!flag[4]) {
                     Thursday.setImageResource(R.drawable.color_thursday);
-                    checkBox_week.setChecked(!isChecked);
-                    checkBox_week.setEnabled(true);
-                    flag = true;
+                    flag[4] = true;
                     checkDayOfWeek[4] = "true";
                     Log.d(TAG, "onClick: Thur " + checkDayOfWeek[4]);
                 } else {
                     Thursday.setImageResource(R.drawable.white_thursday);
-                    flag = false;
+                    flag[4] = false;
                     checkDayOfWeek[4] = "false";
                     Log.d(TAG, "onClick: Thur " + checkDayOfWeek[4]);
                 }
+                checkDayOfWeek();
             }
         });
 
-        Friday = (ImageView) view.findViewById(R.id.friday);
+
         Friday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!flag) {
+                if (!flag[5]) {
                     Friday.setImageResource(R.drawable.color_friday);
-                    checkBox_week.setChecked(!isChecked);
-                    checkBox_week.setEnabled(true);
-                    flag = true;
+                    flag[5] = true;
                     checkDayOfWeek[5] = "true";
                     Log.d(TAG, "onClick: Fri " + checkDayOfWeek[5]);
                 } else {
                     Friday.setImageResource(R.drawable.white_friday);
-                    flag = false;
+                    flag[5] = false;
                     checkDayOfWeek[5] = "false";
                     Log.d(TAG, "onClick: Fri " + checkDayOfWeek[5]);
                 }
+                checkDayOfWeek();
             }
         });
 
-        Saturday = (ImageView) view.findViewById(R.id.saturday);
+
         Saturday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!flag) {
+                if (!flag[6]) {
                     Saturday.setImageResource(R.drawable.color_saturday);
-                    checkBox_week.setChecked(!isChecked);
-                    checkBox_week.setEnabled(true);
-                    flag = true;
+                    flag[6] = true;
                     checkDayOfWeek[6] = "true";
                     Log.d(TAG, "onClick: Sat " + checkDayOfWeek[6]);
                 } else {
                     Saturday.setImageResource(R.drawable.white_saturday);
-                    flag = false;
+                    flag[6] = false;
                     checkDayOfWeek[6] = "false";
                     Log.d(TAG, "onClick: Sat " + checkDayOfWeek[6]);
                 }
+                checkDayOfWeek();
             }
         });
 
+//
+//        checkBox_week = (CheckBox) view.findViewById(R.id.check_week);
+//        checkBox_week.setChecked(isChecked);
+//        checkBox_week.setEnabled(false);
+//        checkBox_week.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                if (isChecked == true) {
+//                    Monday.setImageResource(R.drawable.color_monday);
+//                    Tuesday.setImageResource(R.drawable.color_tuesday);
+//                    Wednesday.setImageResource(R.drawable.color_wednesday);
+//                    Thursday.setImageResource(R.drawable.color_thursday);
+//                    Friday.setImageResource(R.drawable.color_friday);
+//
+//                } else {
+//
+//                }
+//            }
+//        });
 
-        checkBox_week = (CheckBox) view.findViewById(R.id.check_week);
-        checkBox_week.setChecked(isChecked);
-        checkBox_week.setEnabled(false);
-        checkBox_week.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked == true) {
-                    Monday.setImageResource(R.drawable.color_monday);
-                    Tuesday.setImageResource(R.drawable.color_tuesday);
-                    Wednesday.setImageResource(R.drawable.color_wednesday);
-                    Thursday.setImageResource(R.drawable.color_thursday);
-                    Friday.setImageResource(R.drawable.color_friday);
+        calTimeIn = Calendar.getInstance();
+        calTimeIn.set(calTimeIn.get(Calendar.YEAR), calTimeIn.get(Calendar.MONTH), calTimeIn.get(Calendar.DATE), 8, 00, 00);
+        startTimeDate = calTimeIn.getTime();
 
-                } else {
-
-                }
-            }
-        });
+        calTimeOut = Calendar.getInstance();
+        calTimeOut.set(calTimeOut.get(Calendar.YEAR), calTimeOut.get(Calendar.MONTH), calTimeOut.get(Calendar.DATE), 17, 00, 00);
+        endTimeDate = calTimeOut.getTime();
 
 
         buttonTimeIn = (Button) view.findViewById(R.id.button_time_in);
+        sTimeIn = (YeutSenPreference.getDateTimeIn(getActivity()) == 0) ? getFormattedTime(startTimeDate) : getFormattedTime(new Date(YeutSenPreference.getDateTimeIn(getActivity())));
+        buttonTimeIn.setText(sTimeIn);
         buttonTimeIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -288,6 +321,8 @@ public class RegisterFragment extends Fragment {
         });
 
         buttonTimeOut = (Button) view.findViewById(R.id.button_time_out);
+        sTimeOut = (YeutSenPreference.getDateTimeOut(getActivity()) == 0) ? getFormattedTime(endTimeDate) : getFormattedTime(new Date(YeutSenPreference.getDateTimeOut(getActivity())));
+        buttonTimeOut.setText(sTimeOut);
         buttonTimeOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -317,17 +352,21 @@ public class RegisterFragment extends Fragment {
                 result.append(",").append(checkDayOfWeek[6]);
 
                 Log.d(TAG, "onClick: Result " + result);
+
+
 //                Set Value in SharedPref.
+                YeutSenPreference.setButtonSave(getActivity(),true);
                 YeutSenPreference.setDayOfWeek(getActivity(), result.toString());
                 YeutSenPreference.setDateTimeIn(getActivity(), startTimeDate.getTime());
                 YeutSenPreference.setDateTimeOut(getActivity(), endTimeDate.getTime());
                 YeutSenPreference.setLengthTimeAlert(getActivity(), lengthOfAlert);
 
+
                 Log.d(TAG, "onClick: setDateTimeIn " + new Date(YeutSenPreference.getDateTimeIn(getActivity())));
                 Log.d(TAG, "onClick: setDateTimeOut " + new Date(YeutSenPreference.getDateTimeOut(getActivity())));
-                Log.d(TAG, "onClick: setLength " + new Date(YeutSenPreference.getLengthTimeAlert(getActivity())));
+                Log.d(TAG, "onClick: setLength " + YeutSenPreference.getLengthTimeAlert(getActivity()));
 
-               mCheckTime.setDayOfWeek();
+                mCheckTime.setDayOfWeek();
                 if (!mCheckTime.isDayOfWeekFunction(Calendar.getInstance().get(Calendar.DAY_OF_WEEK))) {
                     mCheckTime.setTimeToAlertNextDay(); //set another day
                 } else {
@@ -421,13 +460,96 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Monday.setImageResource(R.drawable.color_monday);
-        Tuesday.setImageResource(R.drawable.color_tuesday);
-        Wednesday.setImageResource(R.drawable.color_wednesday);
-        Thursday.setImageResource(R.drawable.color_thursday);
-        Friday.setImageResource(R.drawable.color_friday);
-        checkBox_week.setChecked(isChecked);
-        checkBox_week.setEnabled(false);
+        if (YeutSenPreference.getDayOfWeek(getActivity()) != null) {
+            for (int i = 0; i <= 6; i++) {
+                if (mCheckTime.isDayOfWeekFunction(i + 1)) {
+                    switch (i) {
+                        case 0:
+                            Sunday.setImageResource(R.drawable.color_sunday);
+                            break;
+                        case 1:
+                            Monday.setImageResource(R.drawable.color_monday);
+                            break;
+                        case 2:
+                            Tuesday.setImageResource(R.drawable.color_tuesday);
+                            break;
+                        case 3:
+                            Wednesday.setImageResource(R.drawable.color_wednesday);
+                            break;
+                        case 4:
+                            Thursday.setImageResource(R.drawable.color_thursday);
+                            break;
+                        case 5:
+                            Friday.setImageResource(R.drawable.color_friday);
+                            break;
+                        case 6:
+                            Saturday.setImageResource(R.drawable.color_saturday);
+                            break;
+                    }
+                    flag[i] = true;
+                } else {
+                    switch (i) {
+                        case 0:
+                            Sunday.setImageResource(R.drawable.white_sunday);
+                            break;
+                        case 1:
+                            Monday.setImageResource(R.drawable.white_monday);
+                            break;
+                        case 2:
+                            Tuesday.setImageResource(R.drawable.white_tuesday);
+                            break;
+                        case 3:
+                            Wednesday.setImageResource(R.drawable.white_wednesday);
+                            break;
+                        case 4:
+                            Thursday.setImageResource(R.drawable.white_thursday);
+                            break;
+                        case 5:
+                            Friday.setImageResource(R.drawable.white_friday);
+                            break;
+                        case 6:
+                            Saturday.setImageResource(R.drawable.white_saturday);
+                            break;
+                    }
+                    flag[i] = false;
+                }
+            }
+        }else{
+            Monday.setImageResource(R.drawable.color_monday);
+            Tuesday.setImageResource(R.drawable.color_tuesday);
+            Wednesday.setImageResource(R.drawable.color_wednesday);
+            Thursday.setImageResource(R.drawable.color_thursday);
+            Friday.setImageResource(R.drawable.color_friday);
+        }
+
+        if (YeutSenPreference.getLengthTimeAlert(getActivity()) == 0) {
+            lengthOfAlert = 30;
+        } else {
+            Log.d(TAG, "onViewCreated: " + YeutSenPreference.getLengthTimeAlert(getActivity()));
+            switch (YeutSenPreference.getLengthTimeAlert(getActivity())) {
+                case 30:
+                    Log.d(TAG, "onViewCreated: " + 0);
+                    TimeSeekBar.setTag(0);
+                    TimeSeekBar.setInitialIndex(0);
+                    TimeSeekBar.setBottom(0);
+                    break;
+                case 45:
+                    Log.d(TAG, "onViewCreated: " + 1);
+                    TimeSeekBar.setTag(1);
+                    TimeSeekBar.setInitialIndex(1);
+                    TimeSeekBar.setBottom(1);
+                    break;
+                case 60:
+                    Log.d(TAG, "onViewCreated: " + 2);
+                    TimeSeekBar.setTag(2);
+                    TimeSeekBar.setInitialIndex(2);
+                    TimeSeekBar.setBottom(2);
+                    break;
+            }
+        }
+
+        Log.d(TAG, "onCreate: " + checkDayOfWeek);
+
 
     }
 

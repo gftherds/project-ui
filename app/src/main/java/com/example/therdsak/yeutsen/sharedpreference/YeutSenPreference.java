@@ -17,6 +17,7 @@ public class YeutSenPreference {
     private static final String PREF_END_TIME = "PREF_END_TIME";
     private static final String PREF_BTN_ON_START = "PREF_BTN_ON_START";
     private static final String PREF_BTN_ON_STOP = "PREF_BTN_ON_STOP";
+    private static final String PREF_BTN_SAVE = "PREF_BTN_SAVE";
 
     public static SharedPreferences mySharedPref(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
@@ -82,6 +83,14 @@ public class YeutSenPreference {
 
     public static void setCheckButton(Context context, boolean b){
         mySharedPref(context).edit().putBoolean(PREF_BTN_ON_STOP,b).apply();
+    }
+
+    public static boolean isButtonSave(Context context){
+        return mySharedPref(context).getBoolean(PREF_BTN_SAVE,false);
+    }
+
+    public static void setButtonSave(Context context, boolean b){
+        mySharedPref(context).edit().putBoolean(PREF_BTN_SAVE,b).apply();
     }
 
 

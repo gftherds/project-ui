@@ -45,6 +45,7 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
     private static final int FIRST_BTN = 1;
 
     private TextView mTextView;
+    private TextView stretchName;
     private Button addButton;
     private Button btnFinished;
     private WebView randomStretch;
@@ -146,6 +147,9 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
         View view = inflater.inflate(R.layout.fragment_one,container,false);
         mTextView = (TextView) view.findViewById(R.id.txt_show_welcome);
 
+        stretchName = (TextView) view.findViewById(R.id.main_stretch_name);
+        stretchName.setText(stretchList.get(randInt).get("sname"));
+
         randomStretch = (WebView) view.findViewById(R.id.random_stretch_gif);
         randomStretch.loadUrl(assetPath + File.separator + stretchPhotoFolder + File.separator + stretchList.get(randInt).get("spath"));
         randomStretch.setOnTouchListener(new View.OnTouchListener() {
@@ -213,6 +217,7 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
         if(requestCode == FIRST_BTN){
             int backposition = data.getIntExtra("position", 0);
             randomStretch.loadUrl(assetPath + File.separator + stretchPhotoFolder + File.separator + stretchList.get(backposition).get("spath"));
+            stretchName.setText(stretchList.get(backposition).get("sname"));
             randInt = backposition;
         }
     }
@@ -245,7 +250,7 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
 
         switch (view.getId()) {
             case R.id.show_stretching_button:
-                setColorBtn(! YeutSenPreference.isButton(getActivity()));
+                setColorBtn(false);
                 stretchLog = new StretchLog();
                 stretchLog.setUserid("0");
                 stretchLog.setStretchid(randInt);
