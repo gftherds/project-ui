@@ -45,7 +45,7 @@ public class DialogShowStretchingFragment extends DialogFragment {
     private RecyclerView mRecyclerView;
     private StretchAdapter mAdapter;
     private String jsonFilename = "stretch.json";
-    private String stretchPhotoFolder = "stretch";
+    private String stretchPhotoFolder = "stretches";
     private ArrayList<HashMap<String, String>> stretchShowList;
     protected int position;
 

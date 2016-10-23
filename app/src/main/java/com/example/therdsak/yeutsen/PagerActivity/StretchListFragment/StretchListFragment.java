@@ -46,7 +46,7 @@ public class StretchListFragment extends Fragment {
     private FragmentManager fm;
 
     private int gridSize = 2;
-    private String stretchPhotoFolder = "stretch";
+    private String stretchPhotoFolder = "stretches";
     private String jsonFileName = "stretch.json";
 
     public static StretchListFragment newInstance(){
@@ -205,7 +205,7 @@ public class StretchListFragment extends Fragment {
         public void onBindViewHolder(StretchHolder holder, int position) {
             try {
                 InputStream inputStream = getActivity().getAssets().open(stretchPhotoFolder + File.separator + _stretchList.get(position).get("spath"));
-                Log.d(TAG, "onBindViewHolder: " + stretchPhotoFolder + File.separator + _stretchList.get(position).get("spath"));
+                Log.d(TAG, "onBindViewHolder: " + stretchPhotoFolder + File.separator + "thumbnail_" + _stretchList.get(position).get("spath") + ".png");
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 holder.bindBitmap(bitmap);
             }catch(Exception e){

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/time_setting_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--android:background="#515151"-->
+    <!--&gt;-->
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/time_setting_toolbar"
+        android:background="@color/primary"
+        android:elevation="2dp"
+        android:title="">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="bottom|right"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/alarm_toolbar"
+                android:elevation="4dp"
+                />
+        </LinearLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set working time"
+        android:textSize="30dp"
+        android:background="@color/primary_dark"
+        android:padding="10dp"
+        android:textColor="#ffffff"
+        android:elevation="4dp"/>
+
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/start_time_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="START TIME - 08:00 AM"
+            android:textColor="#ffffff"
+            android:background="@color/accent"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+
+        <LinearLayout
+            android:id="@+id/start_time_linear"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:orientation="vertical">
+
+            <TimePicker
+                android:id="@+id/start_time_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                ></TimePicker>
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_below="@id/start_time_label"
+            android:id="@+id/finish_time_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FINISH TIME - 17:00 PM"
+            android:textColor="#ffffff"
+            android:background="@color/accent"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/finish_time_linear">
+
+            <TimePicker
+                android:id="@+id/finish_time_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                ></TimePicker>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/time_next_button"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="Next"
+            android:background="@color/accent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"/>
+
+
+
+
+    </RelativeLayout>
+
+
+    <!--</ScrollView>-->
+
+
+
+</LinearLayout>

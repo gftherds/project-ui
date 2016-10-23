@@ -31,7 +31,7 @@ public class StretchInfoFragment extends VisibleFragment {
     private String stretchFileName;
     private String stretchInfoString;
     private String assetPath = "file:///android_asset";
-    private String stretchPhotoFolder = "stretch";
+    private String stretchPhotoFolder = "stretches";
 
     private static final String TAG = "StretchInfoFragment";
 
@@ -69,7 +69,7 @@ public class StretchInfoFragment extends VisibleFragment {
 //        stretchToolbar = (Toolbar) view.findViewById(R.id.toolbar_notification);
         stretchToolbar.setTitle(stretchNameString);
 
-        stretchWebView.loadUrl(assetPath + File.separator + stretchPhotoFolder + File.separator + stretchFileName);
+        stretchWebView.loadUrl(assetPath + File.separator + stretchPhotoFolder + File.separator + stretchFileName + ".gif");
         Log.d(TAG, "onCreateView: " + assetPath + File.separator + stretchFileName);
 
         return view;

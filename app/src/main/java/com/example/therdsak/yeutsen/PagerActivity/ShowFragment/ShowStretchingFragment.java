@@ -55,7 +55,7 @@ public class ShowStretchingFragment extends Fragment implements View.OnClickList
     private int seconds;
     private String output;
     private String assetPath = "file:///android_asset";
-    private String stretchPhotoFolder = "stretch";
+    private String stretchPhotoFolder = "stretches";
     private String jsonFileName = "stretch.json";
     private StretchLog stretchLog;
 
